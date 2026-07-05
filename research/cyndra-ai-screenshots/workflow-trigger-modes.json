@@ -1,0 +1,1589 @@
+[
+  {
+    "tabText": "Run manually",
+    "count": 1,
+    "clicked": true,
+    "error": null,
+    "file": "/Users/jarvispilares/Documents/GitHub/augmentic/research/cyndra-ai-screenshots/41-workflows-trigger-manual.png",
+    "text": "Cyndra Amp Dev's Workspace New chat Agents Integrations Workflows New Skills Knowledge New Schedules More Credits Choose plan 200 ≈ $50.00 Signed in Choose a different template 1 Choose 2 Set up Build your own Describe repeatable work in plain language. Your agent figures out the steps and runs it for you. How it runs TRIGGER Manual Runs when you click Run AGENT Executive assistant Runs the workflow and does the work DELIVER Run log Saved to the run log for you Executive assistant runs this whenever you click Run, and saves the result to the run log. Name Instructions Describe the outcome, the apps to check, and where the result should go. When it runs Run manually On a schedule When an app does something When called by a webhook Run manually You start it with the Run button. Back Create workflow",
+    "controls": [
+      {
+        "aria": null,
+        "disabled": false,
+        "href": "https://app.cyndra.ai/dashboard",
+        "i": 0,
+        "placeholder": null,
+        "rect": {
+          "h": 42,
+          "w": 183,
+          "x": 8,
+          "y": 7
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Cyndra Amp Dev's Workspace",
+        "type": null
+      },
+      {
+        "aria": "Collapse sidebar",
+        "disabled": false,
+        "href": null,
+        "i": 1,
+        "placeholder": null,
+        "rect": {
+          "h": 28,
+          "w": 28,
+          "x": 199,
+          "y": 14
+        },
+        "role": null,
+        "tag": "button",
+        "text": "Collapse sidebar",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 2,
+        "placeholder": null,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 64
+        },
+        "role": null,
+        "tag": "button",
+        "text": "New chat",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": "https://app.cyndra.ai/dashboard",
+        "i": 3,
+        "placeholder": null,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 104
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Agents",
+        "type": null
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": "https://app.cyndra.ai/dashboard/integrations",
+        "i": 4,
+        "placeholder": null,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 142
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Integrations",
+        "type": null
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": "https://app.cyndra.ai/dashboard/workflows",
+        "i": 5,
+        "placeholder": null,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 180
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Workflows New",
+        "type": null
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": "https://app.cyndra.ai/dashboard/skills",
+        "i": 6,
+        "placeholder": null,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 218
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Skills",
+        "type": null
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": "https://app.cyndra.ai/dashboard/knowledge",
+        "i": 7,
+        "placeholder": null,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 256
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Knowledge New",
+        "type": null
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": "https://app.cyndra.ai/dashboard/scheduled-tasks",
+        "i": 8,
+        "placeholder": null,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 294
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Schedules",
+        "type": null
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 9,
+        "placeholder": null,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 332
+        },
+        "role": null,
+        "tag": "button",
+        "text": "More",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": "https://app.cyndra.ai/dashboard/billing",
+        "i": 10,
+        "placeholder": null,
+        "rect": {
+          "h": 62,
+          "w": 215,
+          "x": 12,
+          "y": 524
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Credits Choose plan 200 ≈ $50.00",
+        "type": null
+      },
+      {
+        "aria": "Open user menu",
+        "disabled": false,
+        "href": null,
+        "i": 12,
+        "placeholder": null,
+        "rect": {
+          "h": 28,
+          "w": 28,
+          "x": 195,
+          "y": 598
+        },
+        "role": null,
+        "tag": "button",
+        "text": "Open user menu",
+        "type": null
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 13,
+        "placeholder": null,
+        "rect": {
+          "h": 16,
+          "w": 170,
+          "x": 272,
+          "y": -240
+        },
+        "role": null,
+        "tag": "button",
+        "text": "Choose a different template",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 14,
+        "placeholder": "Weekly sales summary",
+        "rect": {
+          "h": 32,
+          "w": 846,
+          "x": 297,
+          "y": 208
+        },
+        "role": null,
+        "tag": "input",
+        "text": "Weekly sales summary",
+        "type": null
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 15,
+        "placeholder": "Summarize new leads and save the result here.",
+        "rect": {
+          "h": 70,
+          "w": 846,
+          "x": 297,
+          "y": 282
+        },
+        "role": null,
+        "tag": "textarea",
+        "text": "Summarize new leads and save the result here.",
+        "type": null
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 16,
+        "placeholder": null,
+        "rect": {
+          "h": 28,
+          "w": 116,
+          "x": 296,
+          "y": 417
+        },
+        "role": "tab",
+        "tag": "button",
+        "text": "Run manually",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 17,
+        "placeholder": null,
+        "rect": {
+          "h": 28,
+          "w": 120,
+          "x": 418,
+          "y": 417
+        },
+        "role": "tab",
+        "tag": "button",
+        "text": "On a schedule",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 18,
+        "placeholder": null,
+        "rect": {
+          "h": 28,
+          "w": 206,
+          "x": 544,
+          "y": 417
+        },
+        "role": "tab",
+        "tag": "button",
+        "text": "When an app does something",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 19,
+        "placeholder": null,
+        "rect": {
+          "h": 28,
+          "w": 190,
+          "x": 755,
+          "y": 417
+        },
+        "role": "tab",
+        "tag": "button",
+        "text": "When called by a webhook",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 20,
+        "placeholder": null,
+        "rect": {
+          "h": 36,
+          "w": 68,
+          "x": 906,
+          "y": 546
+        },
+        "role": null,
+        "tag": "button",
+        "text": "Back",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": true,
+        "href": null,
+        "i": 21,
+        "placeholder": null,
+        "rect": {
+          "h": 36,
+          "w": 162,
+          "x": 982,
+          "y": 546
+        },
+        "role": null,
+        "tag": "button",
+        "text": "Create workflow",
+        "type": "button"
+      }
+    ]
+  },
+  {
+    "tabText": "On a schedule",
+    "count": 1,
+    "clicked": true,
+    "error": null,
+    "file": "/Users/jarvispilares/Documents/GitHub/augmentic/research/cyndra-ai-screenshots/42-workflows-trigger-schedule.png",
+    "text": "Cyndra Amp Dev's Workspace New chat Agents Integrations Workflows New Skills Knowledge New Schedules More Credits Choose plan 200 ≈ $50.00 Signed in Choose a different template 1 Choose 2 Set up Build your own Describe repeatable work in plain language. Your agent figures out the steps and runs it for you. How it runs TRIGGER On a schedule Every day at 9:00 AM AGENT Executive assistant Runs the workflow and does the work DELIVER Run log Saved to the run log for you Executive assistant runs this every day at 9:00 AM and saves the result to the run log. Name Instructions Describe the outcome, the apps to check, and where the result should go. When it runs Run manually On a schedule When an app does something When called by a webhook On a schedule Runs automatically, on repeat. Schedule Repeats Hourly Daily Weekly Monthly Minutes Custom Time (Australia/Melbourne) Daily at 7:00 PM NEXT FEW RUNS Today · 7:00 PM in 3h Tomorrow · 7:00 PM tomorrow Tue, Jul 7 · 7:00 PM in 2d Wed, Jul 8 · 7:00 PM in 3d Thu, Jul 9 · 7:00 PM in 4d Back Create workflow",
+    "controls": [
+      {
+        "aria": null,
+        "disabled": false,
+        "href": "https://app.cyndra.ai/dashboard",
+        "i": 0,
+        "placeholder": null,
+        "rect": {
+          "h": 42,
+          "w": 183,
+          "x": 8,
+          "y": 7
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Cyndra Amp Dev's Workspace",
+        "type": null
+      },
+      {
+        "aria": "Collapse sidebar",
+        "disabled": false,
+        "href": null,
+        "i": 1,
+        "placeholder": null,
+        "rect": {
+          "h": 28,
+          "w": 28,
+          "x": 199,
+          "y": 14
+        },
+        "role": null,
+        "tag": "button",
+        "text": "Collapse sidebar",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 2,
+        "placeholder": null,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 64
+        },
+        "role": null,
+        "tag": "button",
+        "text": "New chat",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": "https://app.cyndra.ai/dashboard",
+        "i": 3,
+        "placeholder": null,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 104
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Agents",
+        "type": null
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": "https://app.cyndra.ai/dashboard/integrations",
+        "i": 4,
+        "placeholder": null,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 142
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Integrations",
+        "type": null
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": "https://app.cyndra.ai/dashboard/workflows",
+        "i": 5,
+        "placeholder": null,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 180
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Workflows New",
+        "type": null
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": "https://app.cyndra.ai/dashboard/skills",
+        "i": 6,
+        "placeholder": null,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 218
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Skills",
+        "type": null
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": "https://app.cyndra.ai/dashboard/knowledge",
+        "i": 7,
+        "placeholder": null,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 256
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Knowledge New",
+        "type": null
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": "https://app.cyndra.ai/dashboard/scheduled-tasks",
+        "i": 8,
+        "placeholder": null,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 294
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Schedules",
+        "type": null
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 9,
+        "placeholder": null,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 332
+        },
+        "role": null,
+        "tag": "button",
+        "text": "More",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": "https://app.cyndra.ai/dashboard/billing",
+        "i": 10,
+        "placeholder": null,
+        "rect": {
+          "h": 62,
+          "w": 215,
+          "x": 12,
+          "y": 524
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Credits Choose plan 200 ≈ $50.00",
+        "type": null
+      },
+      {
+        "aria": "Open user menu",
+        "disabled": false,
+        "href": null,
+        "i": 12,
+        "placeholder": null,
+        "rect": {
+          "h": 28,
+          "w": 28,
+          "x": 195,
+          "y": 598
+        },
+        "role": null,
+        "tag": "button",
+        "text": "Open user menu",
+        "type": null
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 13,
+        "placeholder": null,
+        "rect": {
+          "h": 16,
+          "w": 170,
+          "x": 272,
+          "y": -240
+        },
+        "role": null,
+        "tag": "button",
+        "text": "Choose a different template",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 14,
+        "placeholder": "Weekly sales summary",
+        "rect": {
+          "h": 32,
+          "w": 846,
+          "x": 297,
+          "y": 208
+        },
+        "role": null,
+        "tag": "input",
+        "text": "Weekly sales summary",
+        "type": null
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 15,
+        "placeholder": "Summarize new leads and save the result here.",
+        "rect": {
+          "h": 70,
+          "w": 846,
+          "x": 297,
+          "y": 282
+        },
+        "role": null,
+        "tag": "textarea",
+        "text": "Summarize new leads and save the result here.",
+        "type": null
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 16,
+        "placeholder": null,
+        "rect": {
+          "h": 28,
+          "w": 116,
+          "x": 296,
+          "y": 417
+        },
+        "role": "tab",
+        "tag": "button",
+        "text": "Run manually",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 17,
+        "placeholder": null,
+        "rect": {
+          "h": 28,
+          "w": 120,
+          "x": 418,
+          "y": 417
+        },
+        "role": "tab",
+        "tag": "button",
+        "text": "On a schedule",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 18,
+        "placeholder": null,
+        "rect": {
+          "h": 28,
+          "w": 206,
+          "x": 544,
+          "y": 417
+        },
+        "role": "tab",
+        "tag": "button",
+        "text": "When an app does something",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 19,
+        "placeholder": null,
+        "rect": {
+          "h": 28,
+          "w": 190,
+          "x": 755,
+          "y": 417
+        },
+        "role": "tab",
+        "tag": "button",
+        "text": "When called by a webhook",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 20,
+        "placeholder": null,
+        "rect": {
+          "h": 28,
+          "w": 79,
+          "x": 350,
+          "y": 566
+        },
+        "role": "tab",
+        "tag": "button",
+        "text": "Hourly",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 21,
+        "placeholder": null,
+        "rect": {
+          "h": 28,
+          "w": 70,
+          "x": 435,
+          "y": 566
+        },
+        "role": "tab",
+        "tag": "button",
+        "text": "Daily",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 22,
+        "placeholder": null,
+        "rect": {
+          "h": 28,
+          "w": 83,
+          "x": 510,
+          "y": 566
+        },
+        "role": "tab",
+        "tag": "button",
+        "text": "Weekly",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 23,
+        "placeholder": null,
+        "rect": {
+          "h": 28,
+          "w": 88,
+          "x": 600,
+          "y": 566
+        },
+        "role": "tab",
+        "tag": "button",
+        "text": "Monthly",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 24,
+        "placeholder": null,
+        "rect": {
+          "h": 28,
+          "w": 87,
+          "x": 693,
+          "y": 566
+        },
+        "role": "tab",
+        "tag": "button",
+        "text": "Minutes",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 25,
+        "placeholder": null,
+        "rect": {
+          "h": 28,
+          "w": 86,
+          "x": 786,
+          "y": 566
+        },
+        "role": "tab",
+        "tag": "button",
+        "text": "Custom",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 27,
+        "placeholder": null,
+        "rect": {
+          "h": 36,
+          "w": 68,
+          "x": 906,
+          "y": 816
+        },
+        "role": null,
+        "tag": "button",
+        "text": "Back",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": true,
+        "href": null,
+        "i": 28,
+        "placeholder": null,
+        "rect": {
+          "h": 36,
+          "w": 162,
+          "x": 982,
+          "y": 816
+        },
+        "role": null,
+        "tag": "button",
+        "text": "Create workflow",
+        "type": "button"
+      }
+    ]
+  },
+  {
+    "tabText": "When an app does something",
+    "count": 1,
+    "clicked": true,
+    "error": null,
+    "file": "/Users/jarvispilares/Documents/GitHub/augmentic/research/cyndra-ai-screenshots/43-workflows-trigger-app-event.png",
+    "text": "Cyndra Amp Dev's Workspace New chat Agents Integrations Workflows New Skills Knowledge New Schedules More Credits Choose plan 200 ≈ $50.00 Signed in Choose a different template 1 Choose 2 Set up Build your own Describe repeatable work in plain language. Your agent figures out the steps and runs it for you. How it runs TRIGGER App event Runs when a connected app has an event AGENT Executive assistant Runs the workflow and does the work DELIVER Run log Saved to the run log for you When a connected app has a new event, Executive assistant runs this and saves the result to the run log. Name Instructions Describe the outcome, the apps to check, and where the result should go. When it runs Run manually On a schedule When an app does something When called by a webhook When an app does something A new email, file, ticket, and so on. Which app? Connect an app first to use this trigger. Event Pick an event Back Create workflow",
+    "controls": [
+      {
+        "aria": null,
+        "disabled": false,
+        "href": "https://app.cyndra.ai/dashboard",
+        "i": 0,
+        "placeholder": null,
+        "rect": {
+          "h": 42,
+          "w": 183,
+          "x": 8,
+          "y": 7
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Cyndra Amp Dev's Workspace",
+        "type": null
+      },
+      {
+        "aria": "Collapse sidebar",
+        "disabled": false,
+        "href": null,
+        "i": 1,
+        "placeholder": null,
+        "rect": {
+          "h": 28,
+          "w": 28,
+          "x": 199,
+          "y": 14
+        },
+        "role": null,
+        "tag": "button",
+        "text": "Collapse sidebar",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 2,
+        "placeholder": null,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 64
+        },
+        "role": null,
+        "tag": "button",
+        "text": "New chat",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": "https://app.cyndra.ai/dashboard",
+        "i": 3,
+        "placeholder": null,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 104
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Agents",
+        "type": null
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": "https://app.cyndra.ai/dashboard/integrations",
+        "i": 4,
+        "placeholder": null,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 142
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Integrations",
+        "type": null
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": "https://app.cyndra.ai/dashboard/workflows",
+        "i": 5,
+        "placeholder": null,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 180
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Workflows New",
+        "type": null
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": "https://app.cyndra.ai/dashboard/skills",
+        "i": 6,
+        "placeholder": null,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 218
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Skills",
+        "type": null
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": "https://app.cyndra.ai/dashboard/knowledge",
+        "i": 7,
+        "placeholder": null,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 256
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Knowledge New",
+        "type": null
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": "https://app.cyndra.ai/dashboard/scheduled-tasks",
+        "i": 8,
+        "placeholder": null,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 294
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Schedules",
+        "type": null
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 9,
+        "placeholder": null,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 332
+        },
+        "role": null,
+        "tag": "button",
+        "text": "More",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": "https://app.cyndra.ai/dashboard/billing",
+        "i": 10,
+        "placeholder": null,
+        "rect": {
+          "h": 62,
+          "w": 215,
+          "x": 12,
+          "y": 524
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Credits Choose plan 200 ≈ $50.00",
+        "type": null
+      },
+      {
+        "aria": "Open user menu",
+        "disabled": false,
+        "href": null,
+        "i": 12,
+        "placeholder": null,
+        "rect": {
+          "h": 28,
+          "w": 28,
+          "x": 195,
+          "y": 598
+        },
+        "role": null,
+        "tag": "button",
+        "text": "Open user menu",
+        "type": null
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 13,
+        "placeholder": null,
+        "rect": {
+          "h": 16,
+          "w": 170,
+          "x": 272,
+          "y": -367
+        },
+        "role": null,
+        "tag": "button",
+        "text": "Choose a different template",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 14,
+        "placeholder": "Weekly sales summary",
+        "rect": {
+          "h": 32,
+          "w": 846,
+          "x": 297,
+          "y": 96
+        },
+        "role": null,
+        "tag": "input",
+        "text": "Weekly sales summary",
+        "type": null
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 15,
+        "placeholder": "Summarize new leads and save the result here.",
+        "rect": {
+          "h": 70,
+          "w": 846,
+          "x": 297,
+          "y": 170
+        },
+        "role": null,
+        "tag": "textarea",
+        "text": "Summarize new leads and save the result here.",
+        "type": null
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 16,
+        "placeholder": null,
+        "rect": {
+          "h": 28,
+          "w": 116,
+          "x": 296,
+          "y": 305
+        },
+        "role": "tab",
+        "tag": "button",
+        "text": "Run manually",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 17,
+        "placeholder": null,
+        "rect": {
+          "h": 28,
+          "w": 120,
+          "x": 418,
+          "y": 305
+        },
+        "role": "tab",
+        "tag": "button",
+        "text": "On a schedule",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 18,
+        "placeholder": null,
+        "rect": {
+          "h": 28,
+          "w": 206,
+          "x": 544,
+          "y": 305
+        },
+        "role": "tab",
+        "tag": "button",
+        "text": "When an app does something",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 19,
+        "placeholder": null,
+        "rect": {
+          "h": 28,
+          "w": 190,
+          "x": 755,
+          "y": 305
+        },
+        "role": "tab",
+        "tag": "button",
+        "text": "When called by a webhook",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": true,
+        "href": null,
+        "i": 20,
+        "placeholder": null,
+        "rect": {
+          "h": 32,
+          "w": 848,
+          "x": 296,
+          "y": 507
+        },
+        "role": "combobox",
+        "tag": "button",
+        "text": "Pick an event",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 22,
+        "placeholder": null,
+        "rect": {
+          "h": 36,
+          "w": 68,
+          "x": 906,
+          "y": 559
+        },
+        "role": null,
+        "tag": "button",
+        "text": "Back",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": true,
+        "href": null,
+        "i": 23,
+        "placeholder": null,
+        "rect": {
+          "h": 36,
+          "w": 162,
+          "x": 982,
+          "y": 559
+        },
+        "role": null,
+        "tag": "button",
+        "text": "Create workflow",
+        "type": "button"
+      }
+    ]
+  },
+  {
+    "tabText": "When called by a webhook",
+    "count": 1,
+    "clicked": true,
+    "error": null,
+    "file": "/Users/jarvispilares/Documents/GitHub/augmentic/research/cyndra-ai-screenshots/44-workflows-trigger-webhook.png",
+    "text": "Cyndra Amp Dev's Workspace New chat Agents Integrations Workflows New Skills Knowledge New Schedules More Credits Choose plan 200 ≈ $50.00 Signed in Choose a different template 1 Choose 2 Set up Build your own Describe repeatable work in plain language. Your agent figures out the steps and runs it for you. How it runs TRIGGER Webhook Runs when called by a webhook AGENT Executive assistant Runs the workflow and does the work DELIVER Run log Saved to the run log for you When called by a webhook, Executive assistant runs this and saves the result to the run log. Name Instructions Describe the outcome, the apps to check, and where the result should go. When it runs Run manually On a schedule When an app does something When called by a webhook When called by a webhook Another tool calls a URL to start it. A signed webhook URL will be created when this workflow is saved. Back Create workflow",
+    "controls": [
+      {
+        "aria": null,
+        "disabled": false,
+        "href": "https://app.cyndra.ai/dashboard",
+        "i": 0,
+        "placeholder": null,
+        "rect": {
+          "h": 42,
+          "w": 183,
+          "x": 8,
+          "y": 7
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Cyndra Amp Dev's Workspace",
+        "type": null
+      },
+      {
+        "aria": "Collapse sidebar",
+        "disabled": false,
+        "href": null,
+        "i": 1,
+        "placeholder": null,
+        "rect": {
+          "h": 28,
+          "w": 28,
+          "x": 199,
+          "y": 14
+        },
+        "role": null,
+        "tag": "button",
+        "text": "Collapse sidebar",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 2,
+        "placeholder": null,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 64
+        },
+        "role": null,
+        "tag": "button",
+        "text": "New chat",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": "https://app.cyndra.ai/dashboard",
+        "i": 3,
+        "placeholder": null,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 104
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Agents",
+        "type": null
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": "https://app.cyndra.ai/dashboard/integrations",
+        "i": 4,
+        "placeholder": null,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 142
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Integrations",
+        "type": null
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": "https://app.cyndra.ai/dashboard/workflows",
+        "i": 5,
+        "placeholder": null,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 180
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Workflows New",
+        "type": null
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": "https://app.cyndra.ai/dashboard/skills",
+        "i": 6,
+        "placeholder": null,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 218
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Skills",
+        "type": null
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": "https://app.cyndra.ai/dashboard/knowledge",
+        "i": 7,
+        "placeholder": null,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 256
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Knowledge New",
+        "type": null
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": "https://app.cyndra.ai/dashboard/scheduled-tasks",
+        "i": 8,
+        "placeholder": null,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 294
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Schedules",
+        "type": null
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 9,
+        "placeholder": null,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 332
+        },
+        "role": null,
+        "tag": "button",
+        "text": "More",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": "https://app.cyndra.ai/dashboard/billing",
+        "i": 10,
+        "placeholder": null,
+        "rect": {
+          "h": 62,
+          "w": 215,
+          "x": 12,
+          "y": 524
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Credits Choose plan 200 ≈ $50.00",
+        "type": null
+      },
+      {
+        "aria": "Open user menu",
+        "disabled": false,
+        "href": null,
+        "i": 12,
+        "placeholder": null,
+        "rect": {
+          "h": 28,
+          "w": 28,
+          "x": 195,
+          "y": 598
+        },
+        "role": null,
+        "tag": "button",
+        "text": "Open user menu",
+        "type": null
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 13,
+        "placeholder": null,
+        "rect": {
+          "h": 16,
+          "w": 170,
+          "x": 272,
+          "y": -302
+        },
+        "role": null,
+        "tag": "button",
+        "text": "Choose a different template",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 14,
+        "placeholder": "Weekly sales summary",
+        "rect": {
+          "h": 32,
+          "w": 846,
+          "x": 297,
+          "y": 146
+        },
+        "role": null,
+        "tag": "input",
+        "text": "Weekly sales summary",
+        "type": null
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 15,
+        "placeholder": "Summarize new leads and save the result here.",
+        "rect": {
+          "h": 70,
+          "w": 846,
+          "x": 297,
+          "y": 220
+        },
+        "role": null,
+        "tag": "textarea",
+        "text": "Summarize new leads and save the result here.",
+        "type": null
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 16,
+        "placeholder": null,
+        "rect": {
+          "h": 28,
+          "w": 116,
+          "x": 296,
+          "y": 355
+        },
+        "role": "tab",
+        "tag": "button",
+        "text": "Run manually",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 17,
+        "placeholder": null,
+        "rect": {
+          "h": 28,
+          "w": 120,
+          "x": 418,
+          "y": 355
+        },
+        "role": "tab",
+        "tag": "button",
+        "text": "On a schedule",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 18,
+        "placeholder": null,
+        "rect": {
+          "h": 28,
+          "w": 206,
+          "x": 544,
+          "y": 355
+        },
+        "role": "tab",
+        "tag": "button",
+        "text": "When an app does something",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 19,
+        "placeholder": null,
+        "rect": {
+          "h": 28,
+          "w": 190,
+          "x": 755,
+          "y": 355
+        },
+        "role": "tab",
+        "tag": "button",
+        "text": "When called by a webhook",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": false,
+        "href": null,
+        "i": 20,
+        "placeholder": null,
+        "rect": {
+          "h": 36,
+          "w": 68,
+          "x": 906,
+          "y": 546
+        },
+        "role": null,
+        "tag": "button",
+        "text": "Back",
+        "type": "button"
+      },
+      {
+        "aria": null,
+        "disabled": true,
+        "href": null,
+        "i": 21,
+        "placeholder": null,
+        "rect": {
+          "h": 36,
+          "w": 162,
+          "x": 982,
+          "y": 546
+        },
+        "role": null,
+        "tag": "button",
+        "text": "Create workflow",
+        "type": "button"
+      }
+    ]
+  }
+]

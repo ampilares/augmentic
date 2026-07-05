@@ -1,0 +1,414 @@
+[
+  {
+    "key": "07-skills-recheck",
+    "file": "/Users/jarvispilares/Documents/GitHub/augmentic/research/cyndra-ai-screenshots/07-skills-recheck.png",
+    "status": {
+      "bodyText": "Cyndra Amp Dev's Workspace New chat Agents Integrations Workflows New Skills Knowledge New Schedules More Credits Choose plan 200 ≈ $50.00 Signed in Skill library Browse skills available in your library, then enable the right ones for each agent. Knowledge base New skill All skills 67 Custom skills 0 67 skills All 67 Build & Research 1 Productivity 6 Creative & Media 3 Marketing & Ads 57 Google Ads Toolkit 27 skills covering Search, Shopping, PMax, YouTube, Demand Gen, bidding, budgets, and creative, with maturity-calibrated analysis and Google Ads Editor-ready outputs. 27 skills included Install Meta Ads Toolkit 28 skills for full Meta Ads execution, from campaign creation and audience management to automated rules, A/B testing, CAPI events, and creative strategy. 28 skills included Install Featured 6 Humanizer Humanize text: strip AI-isms and add real voice. Creative Enable for agent Presentation Generator Use when creating, improving, outlining, prompting, generating, reviewing, or exporting executive presentations, pitch decks, sales decks, strategy decks, product decks, board decks, slide images, or polished 16:9 business slides. Produces Cyndra-style white, black, gray, and restrained-purple presentation systems with strong narrative, rich UI/diagram visuals, image-generation prompts, and QA gates. Creative Enable for agent Growth Agent Find qualified social conversations, draft personalized replies, and use connected social browser sessions for approved social-growth workflows. Social Media Enable for agent Launch Meta Ads Campaign Takes a campaign brief and launches a complete Meta Ads campaign (campaign → ad set → creative → ad), enforcing naming conventions, running a pre-launch checklist, and producing a human-approved Launch Draft before any creation happens. Meta Ads Enable for agent Google Ads Performance Analysis Reviews account and campaign performance metrics with period-over-period comparison. Produces performance dashboards and trend analysis. Not",
+      "controls": [
+        {
+          "href": "https://app.cyndra.ai/dashboard",
+          "i": 0,
+          "tag": "a",
+          "text": "Cyndra Amp Dev's Workspace"
+        },
+        {
+          "href": null,
+          "i": 1,
+          "tag": "button",
+          "text": "Collapse sidebar"
+        },
+        {
+          "href": null,
+          "i": 2,
+          "tag": "button",
+          "text": "New chat"
+        },
+        {
+          "href": "https://app.cyndra.ai/dashboard",
+          "i": 3,
+          "tag": "a",
+          "text": "Agents"
+        },
+        {
+          "href": "https://app.cyndra.ai/dashboard/integrations",
+          "i": 4,
+          "tag": "a",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://app.cyndra.ai/dashboard/workflows",
+          "i": 5,
+          "tag": "a",
+          "text": "Workflows New"
+        },
+        {
+          "href": "https://app.cyndra.ai/dashboard/skills",
+          "i": 6,
+          "tag": "a",
+          "text": "Skills"
+        },
+        {
+          "href": "https://app.cyndra.ai/dashboard/knowledge",
+          "i": 7,
+          "tag": "a",
+          "text": "Knowledge New"
+        },
+        {
+          "href": "https://app.cyndra.ai/dashboard/scheduled-tasks",
+          "i": 8,
+          "tag": "a",
+          "text": "Schedules"
+        },
+        {
+          "href": null,
+          "i": 9,
+          "tag": "button",
+          "text": "More"
+        },
+        {
+          "href": "https://app.cyndra.ai/dashboard/billing",
+          "i": 10,
+          "tag": "a",
+          "text": "Credits Choose plan 200 ≈ $50.00"
+        },
+        {
+          "href": null,
+          "i": 11,
+          "tag": "button",
+          "text": ""
+        },
+        {
+          "href": null,
+          "i": 12,
+          "tag": "button",
+          "text": "Open user menu"
+        },
+        {
+          "href": null,
+          "i": 13,
+          "tag": "button",
+          "text": "Knowledge base"
+        },
+        {
+          "href": null,
+          "i": 14,
+          "tag": "button",
+          "text": "New skill"
+        },
+        {
+          "href": null,
+          "i": 15,
+          "tag": "input",
+          "text": "Search skills…"
+        },
+        {
+          "href": null,
+          "i": 16,
+          "tag": "button",
+          "text": "All skills 67"
+        },
+        {
+          "href": null,
+          "i": 17,
+          "tag": "button",
+          "text": "Custom skills 0"
+        },
+        {
+          "href": null,
+          "i": 18,
+          "tag": "button",
+          "text": "All 67"
+        },
+        {
+          "href": null,
+          "i": 19,
+          "tag": "button",
+          "text": "Build & Research 1"
+        },
+        {
+          "href": null,
+          "i": 20,
+          "tag": "button",
+          "text": "Productivity 6"
+        },
+        {
+          "href": null,
+          "i": 21,
+          "tag": "button",
+          "text": "Creative & Media 3"
+        },
+        {
+          "href": null,
+          "i": 22,
+          "tag": "button",
+          "text": "Marketing & Ads 57"
+        },
+        {
+          "href": null,
+          "i": 23,
+          "tag": "button",
+          "text": "Install"
+        },
+        {
+          "href": null,
+          "i": 24,
+          "tag": "button",
+          "text": "Install"
+        },
+        {
+          "href": null,
+          "i": 25,
+          "tag": "button",
+          "text": "Enable for agent"
+        },
+        {
+          "href": null,
+          "i": 26,
+          "tag": "button",
+          "text": "Enable for agent"
+        },
+        {
+          "href": null,
+          "i": 27,
+          "tag": "button",
+          "text": "Enable for agent"
+        },
+        {
+          "href": null,
+          "i": 28,
+          "tag": "button",
+          "text": "Enable for agent"
+        },
+        {
+          "href": null,
+          "i": 29,
+          "tag": "button",
+          "text": "Enable for agent"
+        },
+        {
+          "href": null,
+          "i": 30,
+          "tag": "button",
+          "text": "Enable for agent"
+        },
+        {
+          "href": null,
+          "i": 31,
+          "tag": "button",
+          "text": "Enable for agent"
+        },
+        {
+          "href": null,
+          "i": 32,
+          "tag": "button",
+          "text": "Enable for agent"
+        },
+        {
+          "href": null,
+          "i": 33,
+          "tag": "button",
+          "text": "Enable for agent"
+        },
+        {
+          "href": null,
+          "i": 34,
+          "tag": "button",
+          "text": "Enable for agent"
+        },
+        {
+          "href": null,
+          "i": 35,
+          "tag": "button",
+          "text": "Enable for agent"
+        },
+        {
+          "href": null,
+          "i": 36,
+          "tag": "button",
+          "text": "Enable for agent"
+        },
+        {
+          "href": null,
+          "i": 37,
+          "tag": "button",
+          "text": "Enable for agent"
+        },
+        {
+          "href": null,
+          "i": 38,
+          "tag": "button",
+          "text": "Enable for agent"
+        },
+        {
+          "href": null,
+          "i": 39,
+          "tag": "button",
+          "text": "Enable for agent"
+        },
+        {
+          "href": null,
+          "i": 40,
+          "tag": "button",
+          "text": "Enable for agent"
+        },
+        {
+          "href": null,
+          "i": 41,
+          "tag": "button",
+          "text": "Enable for agent"
+        },
+        {
+          "href": null,
+          "i": 42,
+          "tag": "button",
+          "text": "Enable for agent"
+        },
+        {
+          "href": null,
+          "i": 43,
+          "tag": "button",
+          "text": "Enable for agent"
+        },
+        {
+          "href": null,
+          "i": 44,
+          "tag": "button",
+          "text": "Enable for agent"
+        },
+        {
+          "href": null,
+          "i": 45,
+          "tag": "button",
+          "text": "Enable for agent"
+        },
+        {
+          "href": null,
+          "i": 46,
+          "tag": "button",
+          "text": "Enable for agent"
+        },
+        {
+          "href": null,
+          "i": 47,
+          "tag": "button",
+          "text": "Enable for agent"
+        },
+        {
+          "href": null,
+          "i": 48,
+          "tag": "button",
+          "text": "Enable for agent"
+        },
+        {
+          "href": null,
+          "i": 49,
+          "tag": "button",
+          "text": "Enable for agent"
+        },
+        {
+          "href": null,
+          "i": 50,
+          "tag": "button",
+          "text": "Show all 57"
+        }
+      ],
+      "title": "Cyndra",
+      "url": "https://app.cyndra.ai/dashboard/skills"
+    }
+  },
+  {
+    "key": "09-schedules-recheck",
+    "file": "/Users/jarvispilares/Documents/GitHub/augmentic/research/cyndra-ai-screenshots/09-schedules-recheck.png",
+    "status": {
+      "bodyText": "Cyndra Amp Dev's Workspace New chat Agents Integrations Workflows New Skills Knowledge New Schedules More Credits Choose plan 200 ≈ $50.00 Signed in Scheduled tasks See the work your agents have scheduled. How scheduling works No scheduled tasks yet Schedule an agent to run on its own: a daily summary, a weekly report, a routine check-in. Just ask your agent in chat and it sets one up for you.",
+      "controls": [
+        {
+          "href": "https://app.cyndra.ai/dashboard",
+          "i": 0,
+          "tag": "a",
+          "text": "Cyndra Amp Dev's Workspace"
+        },
+        {
+          "href": null,
+          "i": 1,
+          "tag": "button",
+          "text": "Collapse sidebar"
+        },
+        {
+          "href": null,
+          "i": 2,
+          "tag": "button",
+          "text": "New chat"
+        },
+        {
+          "href": "https://app.cyndra.ai/dashboard",
+          "i": 3,
+          "tag": "a",
+          "text": "Agents"
+        },
+        {
+          "href": "https://app.cyndra.ai/dashboard/integrations",
+          "i": 4,
+          "tag": "a",
+          "text": "Integrations"
+        },
+        {
+          "href": "https://app.cyndra.ai/dashboard/workflows",
+          "i": 5,
+          "tag": "a",
+          "text": "Workflows New"
+        },
+        {
+          "href": "https://app.cyndra.ai/dashboard/skills",
+          "i": 6,
+          "tag": "a",
+          "text": "Skills"
+        },
+        {
+          "href": "https://app.cyndra.ai/dashboard/knowledge",
+          "i": 7,
+          "tag": "a",
+          "text": "Knowledge New"
+        },
+        {
+          "href": "https://app.cyndra.ai/dashboard/scheduled-tasks",
+          "i": 8,
+          "tag": "a",
+          "text": "Schedules"
+        },
+        {
+          "href": null,
+          "i": 9,
+          "tag": "button",
+          "text": "More"
+        },
+        {
+          "href": "https://app.cyndra.ai/dashboard/billing",
+          "i": 10,
+          "tag": "a",
+          "text": "Credits Choose plan 200 ≈ $50.00"
+        },
+        {
+          "href": null,
+          "i": 11,
+          "tag": "button",
+          "text": ""
+        },
+        {
+          "href": null,
+          "i": 12,
+          "tag": "button",
+          "text": "Open user menu"
+        },
+        {
+          "href": null,
+          "i": 13,
+          "tag": "button",
+          "text": "How scheduling works"
+        }
+      ],
+      "title": "Cyndra",
+      "url": "https://app.cyndra.ai/dashboard/scheduled-tasks"
+    }
+  }
+]

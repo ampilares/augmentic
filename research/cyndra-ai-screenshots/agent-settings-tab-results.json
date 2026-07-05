@@ -1,0 +1,875 @@
+[
+  {
+    "key": "25-agent-settings-general",
+    "text": "General",
+    "count": 1,
+    "clicked": true,
+    "error": null,
+    "file": "/Users/jarvispilares/Documents/GitHub/augmentic/research/cyndra-ai-screenshots/25-agent-settings-general.png",
+    "status": {
+      "bodyText": "Cyndra Amp Dev's Workspace New chat Agents Integrations Workflows New Skills Knowledge New Schedules More Credits Choose plan 200 ≈ $50.00 Signed in Agents / Executive assistant Executive assistant Running You are a sharp, proactive executive assistant. Handle a broad range of day-to-day work: triaging email and drafting replies, scheduling and coordinating meetings, researching topics and summarizing what you find, writing and editing content, and answering questions. When a request is ambiguous, ask a brief clarifying question first. Keep replies clear and concise, and take initiative on next steps. First conversation setup: The first time the user talks to you, before getting into regular work, run a short and friendly setup interview. Ask one question at a time and keep it conversational. Ask what their typical week looks like, which kinds of email matter most and which can be ignored, how they like meetings scheduled, and what they want handled without being asked. Save the preferences you learn to memory and apply them from then on. Then offer to set up the following recurring routines using your scheduling ability, and create the ones the user confirms: - Morning briefing (Every weekday morning): Your day at a glance: meetings, important email, and follow-ups. - Afternoon inbox sweep (Every weekday afternoon): Flags emails that still need a reply and drafts responses. When setup is done, summarize what you configured and suggest the first task you can take on right away. 0 messages·0 credits·Active 9m ago Chat with Executive assistant Pause Restart Chat channels Connected apps Agent skills Memory Who can use it Settings Activity Settings Name, personality, and how it checks before acting. General Behavior Accounts Advanced Basic details The simple things most people change: name, role, and tone. Name Saves when you press Enter or click away How it should talk Saves automatically when you click away Spend cap Set a limit so this agent can't overspend. The limit applies to your workspace credit balance. Limit credit spend No limit set. This agent can use the full workspace balance.",
+      "buttons": [
+        {
+          "i": 0,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Collapse sidebar",
+          "type": "button"
+        },
+        {
+          "i": 1,
+          "placeholder": null,
+          "tag": "button",
+          "text": "New chat",
+          "type": "button"
+        },
+        {
+          "i": 2,
+          "placeholder": null,
+          "tag": "button",
+          "text": "More",
+          "type": "button"
+        },
+        {
+          "i": 3,
+          "placeholder": null,
+          "tag": "button",
+          "text": "",
+          "type": "button"
+        },
+        {
+          "i": 4,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Open user menu",
+          "type": null
+        },
+        {
+          "i": 5,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Change avatar",
+          "type": "button"
+        },
+        {
+          "i": 6,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Pause",
+          "type": "button"
+        },
+        {
+          "i": 7,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Restart",
+          "type": "button"
+        },
+        {
+          "i": 8,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Chat channels",
+          "type": "button"
+        },
+        {
+          "i": 9,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Connected apps",
+          "type": "button"
+        },
+        {
+          "i": 10,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Agent skills",
+          "type": "button"
+        },
+        {
+          "i": 11,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Memory",
+          "type": "button"
+        },
+        {
+          "i": 12,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Who can use it",
+          "type": "button"
+        },
+        {
+          "i": 13,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Settings",
+          "type": "button"
+        },
+        {
+          "i": 14,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Activity",
+          "type": "button"
+        },
+        {
+          "i": 15,
+          "placeholder": null,
+          "tag": "button",
+          "text": "General",
+          "type": "button"
+        },
+        {
+          "i": 16,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Behavior",
+          "type": "button"
+        },
+        {
+          "i": 17,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Accounts",
+          "type": "button"
+        },
+        {
+          "i": 18,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Advanced",
+          "type": "button"
+        }
+      ],
+      "fields": [
+        {
+          "i": 0,
+          "placeholder": "Agent name",
+          "tag": "input",
+          "text": "Executive assistant",
+          "type": null
+        },
+        {
+          "i": 1,
+          "placeholder": "Describe what this agent does, how it should sound, and what it should avoid…",
+          "tag": "textarea",
+          "text": "You are a sharp, proactive executive assistant. Handle a broad range of day-to-day work: triaging email and drafting replies, scheduling and coordinating meetings, researching topics and summarizing what you find, writing and editing content, and ans",
+          "type": null
+        },
+        {
+          "i": 2,
+          "placeholder": null,
+          "tag": "input",
+          "text": "on",
+          "type": "checkbox"
+        }
+      ],
+      "headings": [
+        {
+          "i": 0,
+          "placeholder": null,
+          "tag": "h1",
+          "text": "Executive assistant",
+          "type": null
+        },
+        {
+          "i": 1,
+          "placeholder": null,
+          "tag": "h2",
+          "text": "Settings",
+          "type": null
+        },
+        {
+          "i": 2,
+          "placeholder": null,
+          "tag": "h3",
+          "text": "Basic details",
+          "type": null
+        },
+        {
+          "i": 3,
+          "placeholder": null,
+          "tag": "h3",
+          "text": "Spend cap",
+          "type": null
+        }
+      ]
+    }
+  },
+  {
+    "key": "26-agent-settings-behavior",
+    "text": "Behavior",
+    "count": 1,
+    "clicked": true,
+    "error": null,
+    "file": "/Users/jarvispilares/Documents/GitHub/augmentic/research/cyndra-ai-screenshots/26-agent-settings-behavior.png",
+    "status": {
+      "bodyText": "Cyndra Amp Dev's Workspace New chat Agents Integrations Workflows New Skills Knowledge New Schedules More Credits Choose plan 200 ≈ $50.00 Signed in Agents / Executive assistant Executive assistant Running You are a sharp, proactive executive assistant. Handle a broad range of day-to-day work: triaging email and drafting replies, scheduling and coordinating meetings, researching topics and summarizing what you find, writing and editing content, and answering questions. When a request is ambiguous, ask a brief clarifying question first. Keep replies clear and concise, and take initiative on next steps. First conversation setup: The first time the user talks to you, before getting into regular work, run a short and friendly setup interview. Ask one question at a time and keep it conversational. Ask what their typical week looks like, which kinds of email matter most and which can be ignored, how they like meetings scheduled, and what they want handled without being asked. Save the preferences you learn to memory and apply them from then on. Then offer to set up the following recurring routines using your scheduling ability, and create the ones the user confirms: - Morning briefing (Every weekday morning): Your day at a glance: meetings, important email, and follow-ups. - Afternoon inbox sweep (Every weekday afternoon): Flags emails that still need a reply and drafts responses. When setup is done, summarize what you configured and suggest the first task you can take on right away. 0 messages·0 credits·Active 9m ago Chat with Executive assistant Pause Restart Chat channels Connected apps Agent skills Memory Who can use it Settings Activity Settings Name, personality, and how it checks before acting. General Behavior Accounts Advanced How much it can do alone Choose when the agent should ask before doing something for you. Always asks first Your agent checks with you before doing anything Asks when unsure Your agent acts on familiar tasks and checks in only for anything new Works independently Your agent gets things done on its own without checking in Who can see it Choose who sees this agent in your company account. Teammates with access can still chat with this age",
+      "buttons": [
+        {
+          "i": 0,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Collapse sidebar",
+          "type": "button"
+        },
+        {
+          "i": 1,
+          "placeholder": null,
+          "tag": "button",
+          "text": "New chat",
+          "type": "button"
+        },
+        {
+          "i": 2,
+          "placeholder": null,
+          "tag": "button",
+          "text": "More",
+          "type": "button"
+        },
+        {
+          "i": 3,
+          "placeholder": null,
+          "tag": "button",
+          "text": "",
+          "type": "button"
+        },
+        {
+          "i": 4,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Open user menu",
+          "type": null
+        },
+        {
+          "i": 5,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Change avatar",
+          "type": "button"
+        },
+        {
+          "i": 6,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Pause",
+          "type": "button"
+        },
+        {
+          "i": 7,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Restart",
+          "type": "button"
+        },
+        {
+          "i": 8,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Chat channels",
+          "type": "button"
+        },
+        {
+          "i": 9,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Connected apps",
+          "type": "button"
+        },
+        {
+          "i": 10,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Agent skills",
+          "type": "button"
+        },
+        {
+          "i": 11,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Memory",
+          "type": "button"
+        },
+        {
+          "i": 12,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Who can use it",
+          "type": "button"
+        },
+        {
+          "i": 13,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Settings",
+          "type": "button"
+        },
+        {
+          "i": 14,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Activity",
+          "type": "button"
+        },
+        {
+          "i": 15,
+          "placeholder": null,
+          "tag": "button",
+          "text": "General",
+          "type": "button"
+        },
+        {
+          "i": 16,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Behavior",
+          "type": "button"
+        },
+        {
+          "i": 17,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Accounts",
+          "type": "button"
+        },
+        {
+          "i": 18,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Advanced",
+          "type": "button"
+        },
+        {
+          "i": 19,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Always asks first Your agent checks with you before doing anything",
+          "type": "button"
+        },
+        {
+          "i": 20,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Asks when unsure Your agent acts on familiar tasks and checks in only for anything new",
+          "type": "button"
+        },
+        {
+          "i": 21,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Works independently Your agent gets things done on its own without checking in",
+          "type": "button"
+        },
+        {
+          "i": 22,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Who can use it",
+          "type": "button"
+        },
+        {
+          "i": 23,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Team Everyone in your company account sees this agent",
+          "type": "button"
+        },
+        {
+          "i": 24,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Just me Hidden from other teammate lists",
+          "type": "button"
+        }
+      ],
+      "fields": [
+        {
+          "i": 0,
+          "placeholder": null,
+          "tag": "input",
+          "text": "on",
+          "type": "checkbox"
+        }
+      ],
+      "headings": [
+        {
+          "i": 0,
+          "placeholder": null,
+          "tag": "h1",
+          "text": "Executive assistant",
+          "type": null
+        },
+        {
+          "i": 1,
+          "placeholder": null,
+          "tag": "h2",
+          "text": "Settings",
+          "type": null
+        },
+        {
+          "i": 2,
+          "placeholder": null,
+          "tag": "h3",
+          "text": "How much it can do alone",
+          "type": null
+        },
+        {
+          "i": 3,
+          "placeholder": null,
+          "tag": "h3",
+          "text": "Who can see it",
+          "type": null
+        },
+        {
+          "i": 4,
+          "placeholder": null,
+          "tag": "h3",
+          "text": "Knowledge Base",
+          "type": null
+        }
+      ]
+    }
+  },
+  {
+    "key": "27-agent-settings-accounts",
+    "text": "Accounts",
+    "count": 1,
+    "clicked": true,
+    "error": null,
+    "file": "/Users/jarvispilares/Documents/GitHub/augmentic/research/cyndra-ai-screenshots/27-agent-settings-accounts.png",
+    "status": {
+      "bodyText": "Cyndra Amp Dev's Workspace New chat Agents Integrations Workflows New Skills Knowledge New Schedules More Credits Choose plan 200 ≈ $50.00 Signed in Agents / Executive assistant Executive assistant Running You are a sharp, proactive executive assistant. Handle a broad range of day-to-day work: triaging email and drafting replies, scheduling and coordinating meetings, researching topics and summarizing what you find, writing and editing content, and answering questions. When a request is ambiguous, ask a brief clarifying question first. Keep replies clear and concise, and take initiative on next steps. First conversation setup: The first time the user talks to you, before getting into regular work, run a short and friendly setup interview. Ask one question at a time and keep it conversational. Ask what their typical week looks like, which kinds of email matter most and which can be ignored, how they like meetings scheduled, and what they want handled without being asked. Save the preferences you learn to memory and apply them from then on. Then offer to set up the following recurring routines using your scheduling ability, and create the ones the user confirms: - Morning briefing (Every weekday morning): Your day at a glance: meetings, important email, and follow-ups. - Afternoon inbox sweep (Every weekday afternoon): Flags emails that still need a reply and drafts responses. When setup is done, summarize what you configured and suggest the first task you can take on right away. 0 messages·0 credits·Active 9m ago Chat with Executive assistant Pause Restart Chat channels Connected apps Agent skills Memory Who can use it Settings Activity Settings Name, personality, and how it checks before acting. General Behavior Accounts Advanced Browser accounts Let your agent open X or another website while already signed in. Use a spare account, not your personal login. Use a spare account Sign in with a backup account in your browser, export the saved login, and paste it here. We keep it private and never show it again. CONNECTED ACCOUNTS No accounts connected yet No accounts connected yet Connect a spare account so the agent can open that website for you. Connect an account",
+      "buttons": [
+        {
+          "i": 0,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Collapse sidebar",
+          "type": "button"
+        },
+        {
+          "i": 1,
+          "placeholder": null,
+          "tag": "button",
+          "text": "New chat",
+          "type": "button"
+        },
+        {
+          "i": 2,
+          "placeholder": null,
+          "tag": "button",
+          "text": "More",
+          "type": "button"
+        },
+        {
+          "i": 3,
+          "placeholder": null,
+          "tag": "button",
+          "text": "",
+          "type": "button"
+        },
+        {
+          "i": 4,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Open user menu",
+          "type": null
+        },
+        {
+          "i": 5,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Change avatar",
+          "type": "button"
+        },
+        {
+          "i": 6,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Pause",
+          "type": "button"
+        },
+        {
+          "i": 7,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Restart",
+          "type": "button"
+        },
+        {
+          "i": 8,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Chat channels",
+          "type": "button"
+        },
+        {
+          "i": 9,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Connected apps",
+          "type": "button"
+        },
+        {
+          "i": 10,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Agent skills",
+          "type": "button"
+        },
+        {
+          "i": 11,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Memory",
+          "type": "button"
+        },
+        {
+          "i": 12,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Who can use it",
+          "type": "button"
+        },
+        {
+          "i": 13,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Settings",
+          "type": "button"
+        },
+        {
+          "i": 14,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Activity",
+          "type": "button"
+        },
+        {
+          "i": 15,
+          "placeholder": null,
+          "tag": "button",
+          "text": "General",
+          "type": "button"
+        },
+        {
+          "i": 16,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Behavior",
+          "type": "button"
+        },
+        {
+          "i": 17,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Accounts",
+          "type": "button"
+        },
+        {
+          "i": 18,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Advanced",
+          "type": "button"
+        },
+        {
+          "i": 19,
+          "placeholder": null,
+          "tag": "button",
+          "text": "X / Twitter",
+          "type": "button"
+        },
+        {
+          "i": 20,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Custom",
+          "type": "button"
+        },
+        {
+          "i": 21,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Connect account",
+          "type": "button"
+        }
+      ],
+      "fields": [
+        {
+          "i": 0,
+          "placeholder": "Nickname, e.g. Brand X account",
+          "tag": "input",
+          "text": "Nickname, e.g. Brand X account",
+          "type": null
+        },
+        {
+          "i": 1,
+          "placeholder": "@handle (optional)",
+          "tag": "input",
+          "text": "@handle (optional)",
+          "type": null
+        },
+        {
+          "i": 2,
+          "placeholder": null,
+          "tag": "input",
+          "text": "",
+          "type": "file"
+        },
+        {
+          "i": 3,
+          "placeholder": "Paste the JSON file for X / Twitter here.",
+          "tag": "textarea",
+          "text": "Paste the JSON file for X / Twitter here.",
+          "type": null
+        }
+      ],
+      "headings": [
+        {
+          "i": 0,
+          "placeholder": null,
+          "tag": "h1",
+          "text": "Executive assistant",
+          "type": null
+        },
+        {
+          "i": 1,
+          "placeholder": null,
+          "tag": "h2",
+          "text": "Settings",
+          "type": null
+        },
+        {
+          "i": 2,
+          "placeholder": null,
+          "tag": "h3",
+          "text": "Browser accounts",
+          "type": null
+        }
+      ]
+    }
+  },
+  {
+    "key": "28-agent-settings-advanced",
+    "text": "Advanced",
+    "count": 1,
+    "clicked": true,
+    "error": null,
+    "file": "/Users/jarvispilares/Documents/GitHub/augmentic/research/cyndra-ai-screenshots/28-agent-settings-advanced.png",
+    "status": {
+      "bodyText": "Cyndra Amp Dev's Workspace New chat Agents Integrations Workflows New Skills Knowledge New Schedules More Credits Choose plan 200 ≈ $50.00 Signed in Agents / Executive assistant Executive assistant Running You are a sharp, proactive executive assistant. Handle a broad range of day-to-day work: triaging email and drafting replies, scheduling and coordinating meetings, researching topics and summarizing what you find, writing and editing content, and answering questions. When a request is ambiguous, ask a brief clarifying question first. Keep replies clear and concise, and take initiative on next steps. First conversation setup: The first time the user talks to you, before getting into regular work, run a short and friendly setup interview. Ask one question at a time and keep it conversational. Ask what their typical week looks like, which kinds of email matter most and which can be ignored, how they like meetings scheduled, and what they want handled without being asked. Save the preferences you learn to memory and apply them from then on. Then offer to set up the following recurring routines using your scheduling ability, and create the ones the user confirms: - Morning briefing (Every weekday morning): Your day at a glance: meetings, important email, and follow-ups. - Afternoon inbox sweep (Every weekday afternoon): Flags emails that still need a reply and drafts responses. When setup is done, summarize what you configured and suggest the first task you can take on right away. 0 messages·0 credits·Active 9m ago Chat with Executive assistant Pause Restart Chat channels Connected apps Agent skills Memory Who can use it Settings Activity Settings Name, personality, and how it checks before acting. General Behavior Accounts Advanced Environment variables Encrypted credentials, like an API token, that your agent's skills and tools use to do their work. These are different from browser accounts, which you connect with a saved login. Add a variable only when a skill or setup guide tells you the exact name to use. What are environment variables? They are private values a skill or setup guide may ask for, such as an API token. Add one only when you are told the exact na",
+      "buttons": [
+        {
+          "i": 0,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Collapse sidebar",
+          "type": "button"
+        },
+        {
+          "i": 1,
+          "placeholder": null,
+          "tag": "button",
+          "text": "New chat",
+          "type": "button"
+        },
+        {
+          "i": 2,
+          "placeholder": null,
+          "tag": "button",
+          "text": "More",
+          "type": "button"
+        },
+        {
+          "i": 3,
+          "placeholder": null,
+          "tag": "button",
+          "text": "",
+          "type": "button"
+        },
+        {
+          "i": 4,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Open user menu",
+          "type": null
+        },
+        {
+          "i": 5,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Change avatar",
+          "type": "button"
+        },
+        {
+          "i": 6,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Pause",
+          "type": "button"
+        },
+        {
+          "i": 7,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Restart",
+          "type": "button"
+        },
+        {
+          "i": 8,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Chat channels",
+          "type": "button"
+        },
+        {
+          "i": 9,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Connected apps",
+          "type": "button"
+        },
+        {
+          "i": 10,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Agent skills",
+          "type": "button"
+        },
+        {
+          "i": 11,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Memory",
+          "type": "button"
+        },
+        {
+          "i": 12,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Who can use it",
+          "type": "button"
+        },
+        {
+          "i": 13,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Settings",
+          "type": "button"
+        },
+        {
+          "i": 14,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Activity",
+          "type": "button"
+        },
+        {
+          "i": 15,
+          "placeholder": null,
+          "tag": "button",
+          "text": "General",
+          "type": "button"
+        },
+        {
+          "i": 16,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Behavior",
+          "type": "button"
+        },
+        {
+          "i": 17,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Accounts",
+          "type": "button"
+        },
+        {
+          "i": 18,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Advanced",
+          "type": "button"
+        },
+        {
+          "i": 19,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Show value",
+          "type": "button"
+        },
+        {
+          "i": 20,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Add variable",
+          "type": "button"
+        },
+        {
+          "i": 21,
+          "placeholder": null,
+          "tag": "button",
+          "text": "Delete agent",
+          "type": "button"
+        }
+      ],
+      "fields": [
+        {
+          "i": 0,
+          "placeholder": "MY_SERVICE_API_TOKEN",
+          "tag": "input",
+          "text": "MY_SERVICE_API_TOKEN",
+          "type": null
+        },
+        {
+          "i": 1,
+          "placeholder": "Paste the secret value",
+          "tag": "input",
+          "text": "Paste the secret value",
+          "type": "password"
+        }
+      ],
+      "headings": [
+        {
+          "i": 0,
+          "placeholder": null,
+          "tag": "h1",
+          "text": "Executive assistant",
+          "type": null
+        },
+        {
+          "i": 1,
+          "placeholder": null,
+          "tag": "h2",
+          "text": "Settings",
+          "type": null
+        },
+        {
+          "i": 2,
+          "placeholder": null,
+          "tag": "h3",
+          "text": "Environment variables",
+          "type": null
+        },
+        {
+          "i": 3,
+          "placeholder": null,
+          "tag": "h3",
+          "text": "Created",
+          "type": null
+        },
+        {
+          "i": 4,
+          "placeholder": null,
+          "tag": "h3",
+          "text": "Delete this agent",
+          "type": null
+        }
+      ]
+    }
+  }
+]

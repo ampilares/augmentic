@@ -1,0 +1,4681 @@
+[
+  {
+    "key": "18-agent-tab-chat-channels",
+    "text": "Chat channels",
+    "clicked": true,
+    "count": 1,
+    "error": null,
+    "file": "/Users/jarvispilares/Documents/GitHub/augmentic/research/cyndra-ai-screenshots/18-agent-tab-chat-channels.png",
+    "summary": {
+      "buttons": [
+        {
+          "aria": "Collapse sidebar",
+          "href": null,
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 28,
+            "x": 199,
+            "y": 14
+          },
+          "role": null,
+          "tag": "button",
+          "text": "Collapse sidebar",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 1,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 64
+          },
+          "role": null,
+          "tag": "button",
+          "text": "New chat",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 2,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 332
+          },
+          "role": null,
+          "tag": "button",
+          "text": "More",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 3,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 28,
+            "x": 159,
+            "y": 598
+          },
+          "role": null,
+          "tag": "button",
+          "text": "",
+          "type": "button"
+        },
+        {
+          "aria": "Open user menu",
+          "href": null,
+          "i": 4,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 28,
+            "x": 195,
+            "y": 598
+          },
+          "role": null,
+          "tag": "button",
+          "text": "Open user menu",
+          "type": null
+        },
+        {
+          "aria": "Change avatar",
+          "href": null,
+          "i": 5,
+          "placeholder": null,
+          "rect": {
+            "h": 56,
+            "w": 56,
+            "x": 292,
+            "y": 92
+          },
+          "role": null,
+          "tag": "button",
+          "text": "Change",
+          "type": "button"
+        },
+        {
+          "aria": "Pause agent",
+          "href": null,
+          "i": 6,
+          "placeholder": null,
+          "rect": {
+            "h": 32,
+            "w": 84,
+            "x": 965,
+            "y": 92
+          },
+          "role": null,
+          "tag": "button",
+          "text": "Pause",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 7,
+          "placeholder": null,
+          "rect": {
+            "h": 32,
+            "w": 92,
+            "x": 1056,
+            "y": 92
+          },
+          "role": null,
+          "tag": "button",
+          "text": "Restart",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 8,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 134,
+            "x": 289,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Chat channels",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 9,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 146,
+            "x": 429,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Connected apps",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 10,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 107,
+            "x": 581,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Agent skills",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 11,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 88,
+            "x": 694,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Memory",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 12,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 124,
+            "x": 788,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Who can use it",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 13,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 89,
+            "x": 919,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Settings",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 14,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 85,
+            "x": 1014,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Activity",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 15,
+          "placeholder": null,
+          "rect": {
+            "h": 32,
+            "w": 87,
+            "x": 500,
+            "y": 471
+          },
+          "role": null,
+          "tag": "button",
+          "text": "Slack",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 16,
+          "placeholder": null,
+          "rect": {
+            "h": 32,
+            "w": 118,
+            "x": 596,
+            "y": 471
+          },
+          "role": null,
+          "tag": "button",
+          "text": "WhatsApp",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 17,
+          "placeholder": null,
+          "rect": {
+            "h": 32,
+            "w": 110,
+            "x": 721,
+            "y": 471
+          },
+          "role": null,
+          "tag": "button",
+          "text": "Telegram",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 18,
+          "placeholder": null,
+          "rect": {
+            "h": 32,
+            "w": 100,
+            "x": 840,
+            "y": 471
+          },
+          "role": null,
+          "tag": "button",
+          "text": "Discord",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 19,
+          "placeholder": null,
+          "rect": {
+            "h": 32,
+            "w": 159,
+            "x": 641,
+            "y": 511
+          },
+          "role": null,
+          "tag": "button",
+          "text": "Microsoft Teams",
+          "type": "button"
+        }
+      ],
+      "cards": [],
+      "fields": [],
+      "h1": [
+        {
+          "aria": null,
+          "href": null,
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 32,
+            "w": 212,
+            "x": 364,
+            "y": 92
+          },
+          "role": null,
+          "tag": "h1",
+          "text": "Executive assistant",
+          "type": null
+        }
+      ],
+      "h2": [
+        {
+          "aria": null,
+          "href": null,
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 24,
+            "w": 285,
+            "x": 297,
+            "y": 301
+          },
+          "role": null,
+          "tag": "h2",
+          "text": "Chat channels",
+          "type": null
+        }
+      ],
+      "headings": [
+        {
+          "aria": null,
+          "href": null,
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 32,
+            "w": 212,
+            "x": 364,
+            "y": 92
+          },
+          "role": null,
+          "tag": "h1",
+          "text": "Executive assistant",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 1,
+          "placeholder": null,
+          "rect": {
+            "h": 24,
+            "w": 285,
+            "x": 297,
+            "y": 301
+          },
+          "role": null,
+          "tag": "h2",
+          "text": "Chat channels",
+          "type": null
+        }
+      ],
+      "navLinks": [
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard",
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 42,
+            "w": 183,
+            "x": 8,
+            "y": 7
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Cyndra Amp Dev's Workspace",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard",
+          "i": 1,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 104
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Agents",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/integrations",
+          "i": 2,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 142
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Integrations",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/workflows",
+          "i": 3,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 180
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Workflows New",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/skills",
+          "i": 4,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 218
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Skills",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/knowledge",
+          "i": 5,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 256
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Knowledge New",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/scheduled-tasks",
+          "i": 6,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 294
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Schedules",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/billing",
+          "i": 7,
+          "placeholder": null,
+          "rect": {
+            "h": 62,
+            "w": 215,
+            "x": 12,
+            "y": 524
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Credits Choose plan 200 ≈ $50.00",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard",
+          "i": 8,
+          "placeholder": null,
+          "rect": {
+            "h": 24,
+            "w": 73,
+            "x": 268,
+            "y": 32
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Agents",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/agents/jn7efshq32eqhsk857acvgeyrs89wzx3/chat",
+          "i": 9,
+          "placeholder": null,
+          "rect": {
+            "h": 32,
+            "w": 238,
+            "x": 722,
+            "y": 92
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Chat with Executive assistant",
+          "type": null
+        }
+      ],
+      "tabs": [
+        {
+          "aria": null,
+          "href": null,
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 134,
+            "x": 289,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Chat channels",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 1,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 146,
+            "x": 429,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Connected apps",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 2,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 107,
+            "x": 581,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Agent skills",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 3,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 88,
+            "x": 694,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Memory",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 4,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 124,
+            "x": 788,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Who can use it",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 5,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 89,
+            "x": 919,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Settings",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 6,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 85,
+            "x": 1014,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Activity",
+          "type": "button"
+        }
+      ],
+      "title": "Cyndra",
+      "url": "https://app.cyndra.ai/dashboard/agents/jn7efshq32eqhsk857acvgeyrs89wzx3"
+    }
+  },
+  {
+    "key": "19-agent-tab-connected-apps",
+    "text": "Connected apps",
+    "clicked": true,
+    "count": 1,
+    "error": null,
+    "file": "/Users/jarvispilares/Documents/GitHub/augmentic/research/cyndra-ai-screenshots/19-agent-tab-connected-apps.png",
+    "summary": {
+      "buttons": [
+        {
+          "aria": "Collapse sidebar",
+          "href": null,
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 28,
+            "x": 199,
+            "y": 14
+          },
+          "role": null,
+          "tag": "button",
+          "text": "Collapse sidebar",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 1,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 64
+          },
+          "role": null,
+          "tag": "button",
+          "text": "New chat",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 2,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 332
+          },
+          "role": null,
+          "tag": "button",
+          "text": "More",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 3,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 28,
+            "x": 159,
+            "y": 598
+          },
+          "role": null,
+          "tag": "button",
+          "text": "",
+          "type": "button"
+        },
+        {
+          "aria": "Open user menu",
+          "href": null,
+          "i": 4,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 28,
+            "x": 195,
+            "y": 598
+          },
+          "role": null,
+          "tag": "button",
+          "text": "Open user menu",
+          "type": null
+        },
+        {
+          "aria": "Change avatar",
+          "href": null,
+          "i": 5,
+          "placeholder": null,
+          "rect": {
+            "h": 56,
+            "w": 56,
+            "x": 292,
+            "y": 92
+          },
+          "role": null,
+          "tag": "button",
+          "text": "Change",
+          "type": "button"
+        },
+        {
+          "aria": "Pause agent",
+          "href": null,
+          "i": 6,
+          "placeholder": null,
+          "rect": {
+            "h": 32,
+            "w": 84,
+            "x": 965,
+            "y": 92
+          },
+          "role": null,
+          "tag": "button",
+          "text": "Pause",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 7,
+          "placeholder": null,
+          "rect": {
+            "h": 32,
+            "w": 92,
+            "x": 1056,
+            "y": 92
+          },
+          "role": null,
+          "tag": "button",
+          "text": "Restart",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 8,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 134,
+            "x": 289,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Chat channels",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 9,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 146,
+            "x": 429,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Connected apps",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 10,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 107,
+            "x": 581,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Agent skills",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 11,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 88,
+            "x": 694,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Memory",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 12,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 124,
+            "x": 788,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Who can use it",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 13,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 89,
+            "x": 919,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Settings",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 14,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 85,
+            "x": 1014,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Activity",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 15,
+          "placeholder": null,
+          "rect": {
+            "h": 32,
+            "w": 127,
+            "x": 1016,
+            "y": 301
+          },
+          "role": null,
+          "tag": "button",
+          "text": "Connect app",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 16,
+          "placeholder": null,
+          "rect": {
+            "h": 32,
+            "w": 109,
+            "x": 665,
+            "y": 437
+          },
+          "role": null,
+          "tag": "button",
+          "text": "Connect app",
+          "type": "button"
+        }
+      ],
+      "cards": [],
+      "fields": [],
+      "h1": [
+        {
+          "aria": null,
+          "href": null,
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 32,
+            "w": 212,
+            "x": 364,
+            "y": 92
+          },
+          "role": null,
+          "tag": "h1",
+          "text": "Executive assistant",
+          "type": null
+        }
+      ],
+      "h2": [
+        {
+          "aria": null,
+          "href": null,
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 24,
+            "w": 293,
+            "x": 297,
+            "y": 301
+          },
+          "role": null,
+          "tag": "h2",
+          "text": "Connected apps",
+          "type": null
+        }
+      ],
+      "headings": [
+        {
+          "aria": null,
+          "href": null,
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 32,
+            "w": 212,
+            "x": 364,
+            "y": 92
+          },
+          "role": null,
+          "tag": "h1",
+          "text": "Executive assistant",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 1,
+          "placeholder": null,
+          "rect": {
+            "h": 24,
+            "w": 293,
+            "x": 297,
+            "y": 301
+          },
+          "role": null,
+          "tag": "h2",
+          "text": "Connected apps",
+          "type": null
+        }
+      ],
+      "navLinks": [
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard",
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 42,
+            "w": 183,
+            "x": 8,
+            "y": 7
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Cyndra Amp Dev's Workspace",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard",
+          "i": 1,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 104
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Agents",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/integrations",
+          "i": 2,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 142
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Integrations",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/workflows",
+          "i": 3,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 180
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Workflows New",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/skills",
+          "i": 4,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 218
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Skills",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/knowledge",
+          "i": 5,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 256
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Knowledge New",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/scheduled-tasks",
+          "i": 6,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 294
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Schedules",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/billing",
+          "i": 7,
+          "placeholder": null,
+          "rect": {
+            "h": 62,
+            "w": 215,
+            "x": 12,
+            "y": 524
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Credits Choose plan 200 ≈ $50.00",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard",
+          "i": 8,
+          "placeholder": null,
+          "rect": {
+            "h": 24,
+            "w": 73,
+            "x": 268,
+            "y": 32
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Agents",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/agents/jn7efshq32eqhsk857acvgeyrs89wzx3/chat",
+          "i": 9,
+          "placeholder": null,
+          "rect": {
+            "h": 32,
+            "w": 238,
+            "x": 722,
+            "y": 92
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Chat with Executive assistant",
+          "type": null
+        }
+      ],
+      "tabs": [
+        {
+          "aria": null,
+          "href": null,
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 134,
+            "x": 289,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Chat channels",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 1,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 146,
+            "x": 429,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Connected apps",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 2,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 107,
+            "x": 581,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Agent skills",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 3,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 88,
+            "x": 694,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Memory",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 4,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 124,
+            "x": 788,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Who can use it",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 5,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 89,
+            "x": 919,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Settings",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 6,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 85,
+            "x": 1014,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Activity",
+          "type": "button"
+        }
+      ],
+      "title": "Cyndra",
+      "url": "https://app.cyndra.ai/dashboard/agents/jn7efshq32eqhsk857acvgeyrs89wzx3"
+    }
+  },
+  {
+    "key": "20-agent-tab-skills",
+    "text": "Agent skills",
+    "clicked": true,
+    "count": 1,
+    "error": null,
+    "file": "/Users/jarvispilares/Documents/GitHub/augmentic/research/cyndra-ai-screenshots/20-agent-tab-skills.png",
+    "summary": {
+      "buttons": [
+        {
+          "aria": "Collapse sidebar",
+          "href": null,
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 28,
+            "x": 199,
+            "y": 14
+          },
+          "role": null,
+          "tag": "button",
+          "text": "Collapse sidebar",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 1,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 64
+          },
+          "role": null,
+          "tag": "button",
+          "text": "New chat",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 2,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 332
+          },
+          "role": null,
+          "tag": "button",
+          "text": "More",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 3,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 28,
+            "x": 159,
+            "y": 598
+          },
+          "role": null,
+          "tag": "button",
+          "text": "",
+          "type": "button"
+        },
+        {
+          "aria": "Open user menu",
+          "href": null,
+          "i": 4,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 28,
+            "x": 195,
+            "y": 598
+          },
+          "role": null,
+          "tag": "button",
+          "text": "Open user menu",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 5,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 134,
+            "x": 289,
+            "y": 60
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Chat channels",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 6,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 146,
+            "x": 429,
+            "y": 60
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Connected apps",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 7,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 107,
+            "x": 581,
+            "y": 60
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Agent skills",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 8,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 88,
+            "x": 694,
+            "y": 60
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Memory",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 9,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 124,
+            "x": 788,
+            "y": 60
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Who can use it",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 10,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 89,
+            "x": 919,
+            "y": 60
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Settings",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 11,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 85,
+            "x": 1014,
+            "y": 60
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Activity",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 12,
+          "placeholder": null,
+          "rect": {
+            "h": 32,
+            "w": 118,
+            "x": 1025,
+            "y": 176
+          },
+          "role": null,
+          "tag": "button",
+          "text": "Create skill",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 13,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 173,
+            "x": 297,
+            "y": 222
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Enabled for this agent 7",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 14,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 158,
+            "x": 476,
+            "y": 222
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Available in library 67",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 15,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 124,
+            "x": 640,
+            "y": 222
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Custom skills 0",
+          "type": "button"
+        }
+      ],
+      "cards": [
+        {
+          "aria": null,
+          "href": null,
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 103,
+            "w": 417,
+            "x": 297,
+            "y": 266
+          },
+          "role": null,
+          "tag": "article",
+          "text": "Humanizer Humanize text: strip AI-isms and add real voice. Creative Enabled",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 1,
+          "placeholder": null,
+          "rect": {
+            "h": 103,
+            "w": 417,
+            "x": 726,
+            "y": 266
+          },
+          "role": null,
+          "tag": "article",
+          "text": "YouTube Content YouTube transcripts to summaries, threads, blogs. Media Enabled",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 2,
+          "placeholder": null,
+          "rect": {
+            "h": 122,
+            "w": 417,
+            "x": 297,
+            "y": 381
+          },
+          "role": null,
+          "tag": "article",
+          "text": "Cloakbrowser Use the built-in stealth browser (CloakBrowser) to navigate sites, log in, fill forms, handle JavaScript-rendered pages, and bypass Cloudflare/reCAPTCHA detection. Per",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 3,
+          "placeholder": null,
+          "rect": {
+            "h": 122,
+            "w": 417,
+            "x": 726,
+            "y": 381
+          },
+          "role": null,
+          "tag": "article",
+          "text": "Document Export Create & SEND PDF / Word / Excel / PowerPoint / OpenDocument / EPUB / calendar / contact / archive files from content (save to /output). Productivity Enabled",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 4,
+          "placeholder": null,
+          "rect": {
+            "h": 122,
+            "w": 417,
+            "x": 297,
+            "y": 515
+          },
+          "role": null,
+          "tag": "article",
+          "text": "OCR And Documents Extract text from PDFs/scans (pymupdf, marker-pdf). Productivity Enabled",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 5,
+          "placeholder": null,
+          "rect": {
+            "h": 122,
+            "w": 417,
+            "x": 726,
+            "y": 515
+          },
+          "role": null,
+          "tag": "article",
+          "text": "Yt Dlp Download public video/audio from Instagram Reels, TikTok, YouTube, X/Twitter, and 1000+ sites with the pre-installed yt-dlp CLI. Save to /output and deliver with MEDIA:. Use",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 6,
+          "placeholder": null,
+          "rect": {
+            "h": 122,
+            "w": 417,
+            "x": 297,
+            "y": 649
+          },
+          "role": null,
+          "tag": "article",
+          "text": "Last30Days Mandatory for recent community truth, buyer pain, public chatter, competitor sentiment, and ad angles across Reddit, X/Twitter, YouTube, TikTok, Instagram/Threads, HN, P",
+          "type": null
+        }
+      ],
+      "fields": [
+        {
+          "aria": null,
+          "href": null,
+          "i": 0,
+          "placeholder": "Search skills…",
+          "rect": {
+            "h": 32,
+            "w": 691,
+            "x": 321,
+            "y": 176
+          },
+          "role": null,
+          "tag": "input",
+          "text": "Search skills…",
+          "type": "search"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 1,
+          "placeholder": null,
+          "rect": {
+            "h": 1,
+            "w": 1,
+            "x": -1,
+            "y": -1
+          },
+          "role": null,
+          "tag": "input",
+          "text": "",
+          "type": "checkbox"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 2,
+          "placeholder": null,
+          "rect": {
+            "h": 1,
+            "w": 1,
+            "x": -1,
+            "y": -1
+          },
+          "role": null,
+          "tag": "input",
+          "text": "",
+          "type": "checkbox"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 3,
+          "placeholder": null,
+          "rect": {
+            "h": 1,
+            "w": 1,
+            "x": -1,
+            "y": -1
+          },
+          "role": null,
+          "tag": "input",
+          "text": "",
+          "type": "checkbox"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 4,
+          "placeholder": null,
+          "rect": {
+            "h": 1,
+            "w": 1,
+            "x": -1,
+            "y": -1
+          },
+          "role": null,
+          "tag": "input",
+          "text": "",
+          "type": "checkbox"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 5,
+          "placeholder": null,
+          "rect": {
+            "h": 1,
+            "w": 1,
+            "x": -1,
+            "y": -1
+          },
+          "role": null,
+          "tag": "input",
+          "text": "",
+          "type": "checkbox"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 6,
+          "placeholder": null,
+          "rect": {
+            "h": 1,
+            "w": 1,
+            "x": -1,
+            "y": -1
+          },
+          "role": null,
+          "tag": "input",
+          "text": "",
+          "type": "checkbox"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 7,
+          "placeholder": null,
+          "rect": {
+            "h": 1,
+            "w": 1,
+            "x": -1,
+            "y": -1
+          },
+          "role": null,
+          "tag": "input",
+          "text": "",
+          "type": "checkbox"
+        }
+      ],
+      "h1": [],
+      "h2": [
+        {
+          "aria": null,
+          "href": null,
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 24,
+            "w": 549,
+            "x": 297,
+            "y": 112
+          },
+          "role": null,
+          "tag": "h2",
+          "text": "Agent skills",
+          "type": null
+        }
+      ],
+      "headings": [
+        {
+          "aria": null,
+          "href": null,
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 24,
+            "w": 549,
+            "x": 297,
+            "y": 112
+          },
+          "role": null,
+          "tag": "h2",
+          "text": "Agent skills",
+          "type": null
+        }
+      ],
+      "navLinks": [
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard",
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 42,
+            "w": 183,
+            "x": 8,
+            "y": 7
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Cyndra Amp Dev's Workspace",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard",
+          "i": 1,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 104
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Agents",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/integrations",
+          "i": 2,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 142
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Integrations",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/workflows",
+          "i": 3,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 180
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Workflows New",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/skills",
+          "i": 4,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 218
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Skills",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/knowledge",
+          "i": 5,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 256
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Knowledge New",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/scheduled-tasks",
+          "i": 6,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 294
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Schedules",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/billing",
+          "i": 7,
+          "placeholder": null,
+          "rect": {
+            "h": 62,
+            "w": 215,
+            "x": 12,
+            "y": 524
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Credits Choose plan 200 ≈ $50.00",
+          "type": null
+        }
+      ],
+      "tabs": [
+        {
+          "aria": null,
+          "href": null,
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 134,
+            "x": 289,
+            "y": 60
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Chat channels",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 1,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 146,
+            "x": 429,
+            "y": 60
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Connected apps",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 2,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 107,
+            "x": 581,
+            "y": 60
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Agent skills",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 3,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 88,
+            "x": 694,
+            "y": 60
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Memory",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 4,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 124,
+            "x": 788,
+            "y": 60
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Who can use it",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 5,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 89,
+            "x": 919,
+            "y": 60
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Settings",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 6,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 85,
+            "x": 1014,
+            "y": 60
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Activity",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 7,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 173,
+            "x": 297,
+            "y": 222
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Enabled for this agent 7",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 8,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 158,
+            "x": 476,
+            "y": 222
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Available in library 67",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 9,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 124,
+            "x": 640,
+            "y": 222
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Custom skills 0",
+          "type": "button"
+        }
+      ],
+      "title": "Cyndra",
+      "url": "https://app.cyndra.ai/dashboard/agents/jn7efshq32eqhsk857acvgeyrs89wzx3"
+    }
+  },
+  {
+    "key": "21-agent-tab-memory",
+    "text": "Memory",
+    "clicked": true,
+    "count": 1,
+    "error": null,
+    "file": "/Users/jarvispilares/Documents/GitHub/augmentic/research/cyndra-ai-screenshots/21-agent-tab-memory.png",
+    "summary": {
+      "buttons": [
+        {
+          "aria": "Collapse sidebar",
+          "href": null,
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 28,
+            "x": 199,
+            "y": 14
+          },
+          "role": null,
+          "tag": "button",
+          "text": "Collapse sidebar",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 1,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 64
+          },
+          "role": null,
+          "tag": "button",
+          "text": "New chat",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 2,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 332
+          },
+          "role": null,
+          "tag": "button",
+          "text": "More",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 3,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 28,
+            "x": 159,
+            "y": 598
+          },
+          "role": null,
+          "tag": "button",
+          "text": "",
+          "type": "button"
+        },
+        {
+          "aria": "Open user menu",
+          "href": null,
+          "i": 4,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 28,
+            "x": 195,
+            "y": 598
+          },
+          "role": null,
+          "tag": "button",
+          "text": "Open user menu",
+          "type": null
+        },
+        {
+          "aria": "Change avatar",
+          "href": null,
+          "i": 5,
+          "placeholder": null,
+          "rect": {
+            "h": 56,
+            "w": 56,
+            "x": 292,
+            "y": 92
+          },
+          "role": null,
+          "tag": "button",
+          "text": "Change",
+          "type": "button"
+        },
+        {
+          "aria": "Pause agent",
+          "href": null,
+          "i": 6,
+          "placeholder": null,
+          "rect": {
+            "h": 32,
+            "w": 84,
+            "x": 965,
+            "y": 92
+          },
+          "role": null,
+          "tag": "button",
+          "text": "Pause",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 7,
+          "placeholder": null,
+          "rect": {
+            "h": 32,
+            "w": 92,
+            "x": 1056,
+            "y": 92
+          },
+          "role": null,
+          "tag": "button",
+          "text": "Restart",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 8,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 134,
+            "x": 289,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Chat channels",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 9,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 146,
+            "x": 429,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Connected apps",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 10,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 107,
+            "x": 581,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Agent skills",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 11,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 88,
+            "x": 694,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Memory",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 12,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 124,
+            "x": 788,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Who can use it",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 13,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 89,
+            "x": 919,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Settings",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 14,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 85,
+            "x": 1014,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Activity",
+          "type": "button"
+        }
+      ],
+      "cards": [],
+      "fields": [],
+      "h1": [
+        {
+          "aria": null,
+          "href": null,
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 32,
+            "w": 212,
+            "x": 364,
+            "y": 92
+          },
+          "role": null,
+          "tag": "h1",
+          "text": "Executive assistant",
+          "type": null
+        }
+      ],
+      "h2": [
+        {
+          "aria": null,
+          "href": null,
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 24,
+            "w": 452,
+            "x": 297,
+            "y": 301
+          },
+          "role": null,
+          "tag": "h2",
+          "text": "Memory",
+          "type": null
+        }
+      ],
+      "headings": [
+        {
+          "aria": null,
+          "href": null,
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 32,
+            "w": 212,
+            "x": 364,
+            "y": 92
+          },
+          "role": null,
+          "tag": "h1",
+          "text": "Executive assistant",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 1,
+          "placeholder": null,
+          "rect": {
+            "h": 24,
+            "w": 452,
+            "x": 297,
+            "y": 301
+          },
+          "role": null,
+          "tag": "h2",
+          "text": "Memory",
+          "type": null
+        }
+      ],
+      "navLinks": [
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard",
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 42,
+            "w": 183,
+            "x": 8,
+            "y": 7
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Cyndra Amp Dev's Workspace",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard",
+          "i": 1,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 104
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Agents",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/integrations",
+          "i": 2,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 142
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Integrations",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/workflows",
+          "i": 3,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 180
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Workflows New",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/skills",
+          "i": 4,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 218
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Skills",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/knowledge",
+          "i": 5,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 256
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Knowledge New",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/scheduled-tasks",
+          "i": 6,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 294
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Schedules",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/billing",
+          "i": 7,
+          "placeholder": null,
+          "rect": {
+            "h": 62,
+            "w": 215,
+            "x": 12,
+            "y": 524
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Credits Choose plan 200 ≈ $50.00",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard",
+          "i": 8,
+          "placeholder": null,
+          "rect": {
+            "h": 24,
+            "w": 73,
+            "x": 268,
+            "y": 32
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Agents",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/agents/jn7efshq32eqhsk857acvgeyrs89wzx3/chat",
+          "i": 9,
+          "placeholder": null,
+          "rect": {
+            "h": 32,
+            "w": 238,
+            "x": 722,
+            "y": 92
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Chat with Executive assistant",
+          "type": null
+        }
+      ],
+      "tabs": [
+        {
+          "aria": null,
+          "href": null,
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 134,
+            "x": 289,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Chat channels",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 1,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 146,
+            "x": 429,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Connected apps",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 2,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 107,
+            "x": 581,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Agent skills",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 3,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 88,
+            "x": 694,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Memory",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 4,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 124,
+            "x": 788,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Who can use it",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 5,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 89,
+            "x": 919,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Settings",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 6,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 85,
+            "x": 1014,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Activity",
+          "type": "button"
+        }
+      ],
+      "title": "Cyndra",
+      "url": "https://app.cyndra.ai/dashboard/agents/jn7efshq32eqhsk857acvgeyrs89wzx3"
+    }
+  },
+  {
+    "key": "22-agent-tab-access",
+    "text": "Who can use it",
+    "clicked": true,
+    "count": 1,
+    "error": null,
+    "file": "/Users/jarvispilares/Documents/GitHub/augmentic/research/cyndra-ai-screenshots/22-agent-tab-access.png",
+    "summary": {
+      "buttons": [
+        {
+          "aria": "Collapse sidebar",
+          "href": null,
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 28,
+            "x": 199,
+            "y": 14
+          },
+          "role": null,
+          "tag": "button",
+          "text": "Collapse sidebar",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 1,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 64
+          },
+          "role": null,
+          "tag": "button",
+          "text": "New chat",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 2,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 332
+          },
+          "role": null,
+          "tag": "button",
+          "text": "More",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 3,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 28,
+            "x": 159,
+            "y": 598
+          },
+          "role": null,
+          "tag": "button",
+          "text": "",
+          "type": "button"
+        },
+        {
+          "aria": "Open user menu",
+          "href": null,
+          "i": 4,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 28,
+            "x": 195,
+            "y": 598
+          },
+          "role": null,
+          "tag": "button",
+          "text": "Open user menu",
+          "type": null
+        },
+        {
+          "aria": "Change avatar",
+          "href": null,
+          "i": 5,
+          "placeholder": null,
+          "rect": {
+            "h": 56,
+            "w": 56,
+            "x": 292,
+            "y": -18
+          },
+          "role": null,
+          "tag": "button",
+          "text": "Change",
+          "type": "button"
+        },
+        {
+          "aria": "Pause agent",
+          "href": null,
+          "i": 6,
+          "placeholder": null,
+          "rect": {
+            "h": 32,
+            "w": 84,
+            "x": 965,
+            "y": -18
+          },
+          "role": null,
+          "tag": "button",
+          "text": "Pause",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 7,
+          "placeholder": null,
+          "rect": {
+            "h": 32,
+            "w": 92,
+            "x": 1056,
+            "y": -18
+          },
+          "role": null,
+          "tag": "button",
+          "text": "Restart",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 8,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 134,
+            "x": 289,
+            "y": 139
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Chat channels",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 9,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 146,
+            "x": 429,
+            "y": 139
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Connected apps",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 10,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 107,
+            "x": 581,
+            "y": 139
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Agent skills",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 11,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 88,
+            "x": 694,
+            "y": 139
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Memory",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 12,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 124,
+            "x": 788,
+            "y": 139
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Who can use it",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 13,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 89,
+            "x": 919,
+            "y": 139
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Settings",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 14,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 85,
+            "x": 1014,
+            "y": 139
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Activity",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 15,
+          "placeholder": null,
+          "rect": {
+            "h": 32,
+            "w": 167,
+            "x": 959,
+            "y": 272
+          },
+          "role": null,
+          "tag": "button",
+          "text": "Transfer ownership",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 16,
+          "placeholder": null,
+          "rect": {
+            "h": 32,
+            "w": 151,
+            "x": 992,
+            "y": 343
+          },
+          "role": null,
+          "tag": "button",
+          "text": "Add collaborator",
+          "type": "button"
+        }
+      ],
+      "cards": [],
+      "fields": [],
+      "h1": [
+        {
+          "aria": null,
+          "href": null,
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 32,
+            "w": 212,
+            "x": 364,
+            "y": -18
+          },
+          "role": null,
+          "tag": "h1",
+          "text": "Executive assistant",
+          "type": null
+        }
+      ],
+      "h2": [
+        {
+          "aria": null,
+          "href": null,
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 24,
+            "w": 337,
+            "x": 297,
+            "y": 191
+          },
+          "role": null,
+          "tag": "h2",
+          "text": "Who can use it",
+          "type": null
+        }
+      ],
+      "headings": [
+        {
+          "aria": null,
+          "href": null,
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 32,
+            "w": 212,
+            "x": 364,
+            "y": -18
+          },
+          "role": null,
+          "tag": "h1",
+          "text": "Executive assistant",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 1,
+          "placeholder": null,
+          "rect": {
+            "h": 24,
+            "w": 337,
+            "x": 297,
+            "y": 191
+          },
+          "role": null,
+          "tag": "h2",
+          "text": "Who can use it",
+          "type": null
+        }
+      ],
+      "navLinks": [
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard",
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 42,
+            "w": 183,
+            "x": 8,
+            "y": 7
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Cyndra Amp Dev's Workspace",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard",
+          "i": 1,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 104
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Agents",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/integrations",
+          "i": 2,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 142
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Integrations",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/workflows",
+          "i": 3,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 180
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Workflows New",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/skills",
+          "i": 4,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 218
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Skills",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/knowledge",
+          "i": 5,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 256
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Knowledge New",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/scheduled-tasks",
+          "i": 6,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 294
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Schedules",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/billing",
+          "i": 7,
+          "placeholder": null,
+          "rect": {
+            "h": 62,
+            "w": 215,
+            "x": 12,
+            "y": 524
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Credits Choose plan 200 ≈ $50.00",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/agents/jn7efshq32eqhsk857acvgeyrs89wzx3/chat",
+          "i": 8,
+          "placeholder": null,
+          "rect": {
+            "h": 32,
+            "w": 238,
+            "x": 722,
+            "y": -18
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Chat with Executive assistant",
+          "type": null
+        }
+      ],
+      "tabs": [
+        {
+          "aria": null,
+          "href": null,
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 134,
+            "x": 289,
+            "y": 139
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Chat channels",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 1,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 146,
+            "x": 429,
+            "y": 139
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Connected apps",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 2,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 107,
+            "x": 581,
+            "y": 139
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Agent skills",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 3,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 88,
+            "x": 694,
+            "y": 139
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Memory",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 4,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 124,
+            "x": 788,
+            "y": 139
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Who can use it",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 5,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 89,
+            "x": 919,
+            "y": 139
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Settings",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 6,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 85,
+            "x": 1014,
+            "y": 139
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Activity",
+          "type": "button"
+        }
+      ],
+      "title": "Cyndra",
+      "url": "https://app.cyndra.ai/dashboard/agents/jn7efshq32eqhsk857acvgeyrs89wzx3"
+    }
+  },
+  {
+    "key": "23-agent-tab-settings",
+    "text": "Settings",
+    "clicked": true,
+    "count": 1,
+    "error": null,
+    "file": "/Users/jarvispilares/Documents/GitHub/augmentic/research/cyndra-ai-screenshots/23-agent-tab-settings.png",
+    "summary": {
+      "buttons": [
+        {
+          "aria": "Collapse sidebar",
+          "href": null,
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 28,
+            "x": 199,
+            "y": 14
+          },
+          "role": null,
+          "tag": "button",
+          "text": "Collapse sidebar",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 1,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 64
+          },
+          "role": null,
+          "tag": "button",
+          "text": "New chat",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 2,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 332
+          },
+          "role": null,
+          "tag": "button",
+          "text": "More",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 3,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 28,
+            "x": 159,
+            "y": 598
+          },
+          "role": null,
+          "tag": "button",
+          "text": "",
+          "type": "button"
+        },
+        {
+          "aria": "Open user menu",
+          "href": null,
+          "i": 4,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 28,
+            "x": 195,
+            "y": 598
+          },
+          "role": null,
+          "tag": "button",
+          "text": "Open user menu",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 5,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 134,
+            "x": 289,
+            "y": 60
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Chat channels",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 6,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 146,
+            "x": 429,
+            "y": 60
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Connected apps",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 7,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 107,
+            "x": 581,
+            "y": 60
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Agent skills",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 8,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 88,
+            "x": 694,
+            "y": 60
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Memory",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 9,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 124,
+            "x": 788,
+            "y": 60
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Who can use it",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 10,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 89,
+            "x": 919,
+            "y": 60
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Settings",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 11,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 85,
+            "x": 1014,
+            "y": 60
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Activity",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 12,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 68,
+            "x": 297,
+            "y": 174
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "General",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 13,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 74,
+            "x": 371,
+            "y": 174
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Behavior",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 14,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 77,
+            "x": 450,
+            "y": 174
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Accounts",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 15,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 80,
+            "x": 533,
+            "y": 174
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Advanced",
+          "type": "button"
+        }
+      ],
+      "cards": [],
+      "fields": [
+        {
+          "aria": null,
+          "href": null,
+          "i": 0,
+          "placeholder": "Agent name",
+          "rect": {
+            "h": 32,
+            "w": 802,
+            "x": 319,
+            "y": 339
+          },
+          "role": null,
+          "tag": "input",
+          "text": "Agent name",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 1,
+          "placeholder": "Describe what this agent does, how it should sound, and what it should avoid…",
+          "rect": {
+            "h": 226,
+            "w": 802,
+            "x": 319,
+            "y": 466
+          },
+          "role": null,
+          "tag": "textarea",
+          "text": "You are a sharp, proactive executive assistant. Handle a broad range of day-to-day work: triaging email and drafting replies, scheduling and coordinating meetings, researching topi",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 2,
+          "placeholder": null,
+          "rect": {
+            "h": 1,
+            "w": 1,
+            "x": -1,
+            "y": -1
+          },
+          "role": null,
+          "tag": "input",
+          "text": "",
+          "type": "checkbox"
+        }
+      ],
+      "h1": [],
+      "h2": [
+        {
+          "aria": null,
+          "href": null,
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 24,
+            "w": 326,
+            "x": 297,
+            "y": 112
+          },
+          "role": null,
+          "tag": "h2",
+          "text": "Settings",
+          "type": null
+        }
+      ],
+      "headings": [
+        {
+          "aria": null,
+          "href": null,
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 24,
+            "w": 326,
+            "x": 297,
+            "y": 112
+          },
+          "role": null,
+          "tag": "h2",
+          "text": "Settings",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 1,
+          "placeholder": null,
+          "rect": {
+            "h": 20,
+            "w": 804,
+            "x": 318,
+            "y": 239
+          },
+          "role": null,
+          "tag": "h3",
+          "text": "Basic details",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 2,
+          "placeholder": null,
+          "rect": {
+            "h": 20,
+            "w": 804,
+            "x": 318,
+            "y": 757
+          },
+          "role": null,
+          "tag": "h3",
+          "text": "Spend cap",
+          "type": null
+        }
+      ],
+      "navLinks": [
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard",
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 42,
+            "w": 183,
+            "x": 8,
+            "y": 7
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Cyndra Amp Dev's Workspace",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard",
+          "i": 1,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 104
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Agents",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/integrations",
+          "i": 2,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 142
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Integrations",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/workflows",
+          "i": 3,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 180
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Workflows New",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/skills",
+          "i": 4,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 218
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Skills",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/knowledge",
+          "i": 5,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 256
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Knowledge New",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/scheduled-tasks",
+          "i": 6,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 294
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Schedules",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/billing",
+          "i": 7,
+          "placeholder": null,
+          "rect": {
+            "h": 62,
+            "w": 215,
+            "x": 12,
+            "y": 524
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Credits Choose plan 200 ≈ $50.00",
+          "type": null
+        }
+      ],
+      "tabs": [
+        {
+          "aria": null,
+          "href": null,
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 134,
+            "x": 289,
+            "y": 60
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Chat channels",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 1,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 146,
+            "x": 429,
+            "y": 60
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Connected apps",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 2,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 107,
+            "x": 581,
+            "y": 60
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Agent skills",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 3,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 88,
+            "x": 694,
+            "y": 60
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Memory",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 4,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 124,
+            "x": 788,
+            "y": 60
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Who can use it",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 5,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 89,
+            "x": 919,
+            "y": 60
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Settings",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 6,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 85,
+            "x": 1014,
+            "y": 60
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Activity",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 7,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 68,
+            "x": 297,
+            "y": 174
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "General",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 8,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 74,
+            "x": 371,
+            "y": 174
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Behavior",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 9,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 77,
+            "x": 450,
+            "y": 174
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Accounts",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 10,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 80,
+            "x": 533,
+            "y": 174
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Advanced",
+          "type": "button"
+        }
+      ],
+      "title": "Cyndra",
+      "url": "https://app.cyndra.ai/dashboard/agents/jn7efshq32eqhsk857acvgeyrs89wzx3"
+    }
+  },
+  {
+    "key": "24-agent-tab-activity",
+    "text": "Activity",
+    "clicked": true,
+    "count": 1,
+    "error": null,
+    "file": "/Users/jarvispilares/Documents/GitHub/augmentic/research/cyndra-ai-screenshots/24-agent-tab-activity.png",
+    "summary": {
+      "buttons": [
+        {
+          "aria": "Collapse sidebar",
+          "href": null,
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 28,
+            "x": 199,
+            "y": 14
+          },
+          "role": null,
+          "tag": "button",
+          "text": "Collapse sidebar",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 1,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 64
+          },
+          "role": null,
+          "tag": "button",
+          "text": "New chat",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 2,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 332
+          },
+          "role": null,
+          "tag": "button",
+          "text": "More",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 3,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 28,
+            "x": 159,
+            "y": 598
+          },
+          "role": null,
+          "tag": "button",
+          "text": "",
+          "type": "button"
+        },
+        {
+          "aria": "Open user menu",
+          "href": null,
+          "i": 4,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 28,
+            "x": 195,
+            "y": 598
+          },
+          "role": null,
+          "tag": "button",
+          "text": "Open user menu",
+          "type": null
+        },
+        {
+          "aria": "Change avatar",
+          "href": null,
+          "i": 5,
+          "placeholder": null,
+          "rect": {
+            "h": 56,
+            "w": 56,
+            "x": 292,
+            "y": 92
+          },
+          "role": null,
+          "tag": "button",
+          "text": "Change",
+          "type": "button"
+        },
+        {
+          "aria": "Pause agent",
+          "href": null,
+          "i": 6,
+          "placeholder": null,
+          "rect": {
+            "h": 32,
+            "w": 84,
+            "x": 965,
+            "y": 92
+          },
+          "role": null,
+          "tag": "button",
+          "text": "Pause",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 7,
+          "placeholder": null,
+          "rect": {
+            "h": 32,
+            "w": 92,
+            "x": 1056,
+            "y": 92
+          },
+          "role": null,
+          "tag": "button",
+          "text": "Restart",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 8,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 134,
+            "x": 289,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Chat channels",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 9,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 146,
+            "x": 429,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Connected apps",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 10,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 107,
+            "x": 581,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Agent skills",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 11,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 88,
+            "x": 694,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Memory",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 12,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 124,
+            "x": 788,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Who can use it",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 13,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 89,
+            "x": 919,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Settings",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 14,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 85,
+            "x": 1014,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Activity",
+          "type": "button"
+        }
+      ],
+      "cards": [],
+      "fields": [],
+      "h1": [
+        {
+          "aria": null,
+          "href": null,
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 32,
+            "w": 212,
+            "x": 364,
+            "y": 92
+          },
+          "role": null,
+          "tag": "h1",
+          "text": "Executive assistant",
+          "type": null
+        }
+      ],
+      "h2": [
+        {
+          "aria": null,
+          "href": null,
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 24,
+            "w": 299,
+            "x": 297,
+            "y": 301
+          },
+          "role": null,
+          "tag": "h2",
+          "text": "Activity",
+          "type": null
+        }
+      ],
+      "headings": [
+        {
+          "aria": null,
+          "href": null,
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 32,
+            "w": 212,
+            "x": 364,
+            "y": 92
+          },
+          "role": null,
+          "tag": "h1",
+          "text": "Executive assistant",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 1,
+          "placeholder": null,
+          "rect": {
+            "h": 24,
+            "w": 299,
+            "x": 297,
+            "y": 301
+          },
+          "role": null,
+          "tag": "h2",
+          "text": "Activity",
+          "type": null
+        }
+      ],
+      "navLinks": [
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard",
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 42,
+            "w": 183,
+            "x": 8,
+            "y": 7
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Cyndra Amp Dev's Workspace",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard",
+          "i": 1,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 104
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Agents",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/integrations",
+          "i": 2,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 142
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Integrations",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/workflows",
+          "i": 3,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 180
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Workflows New",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/skills",
+          "i": 4,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 218
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Skills",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/knowledge",
+          "i": 5,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 256
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Knowledge New",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/scheduled-tasks",
+          "i": 6,
+          "placeholder": null,
+          "rect": {
+            "h": 36,
+            "w": 223,
+            "x": 8,
+            "y": 294
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Schedules",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/billing",
+          "i": 7,
+          "placeholder": null,
+          "rect": {
+            "h": 62,
+            "w": 215,
+            "x": 12,
+            "y": 524
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Credits Choose plan 200 ≈ $50.00",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard",
+          "i": 8,
+          "placeholder": null,
+          "rect": {
+            "h": 24,
+            "w": 73,
+            "x": 268,
+            "y": 32
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Agents",
+          "type": null
+        },
+        {
+          "aria": null,
+          "href": "https://app.cyndra.ai/dashboard/agents/jn7efshq32eqhsk857acvgeyrs89wzx3/chat",
+          "i": 9,
+          "placeholder": null,
+          "rect": {
+            "h": 32,
+            "w": 238,
+            "x": 722,
+            "y": 92
+          },
+          "role": null,
+          "tag": "a",
+          "text": "Chat with Executive assistant",
+          "type": null
+        }
+      ],
+      "tabs": [
+        {
+          "aria": null,
+          "href": null,
+          "i": 0,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 134,
+            "x": 289,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Chat channels",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 1,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 146,
+            "x": 429,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Connected apps",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 2,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 107,
+            "x": 581,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Agent skills",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 3,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 88,
+            "x": 694,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Memory",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 4,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 124,
+            "x": 788,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Who can use it",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 5,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 89,
+            "x": 919,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Settings",
+          "type": "button"
+        },
+        {
+          "aria": null,
+          "href": null,
+          "i": 6,
+          "placeholder": null,
+          "rect": {
+            "h": 28,
+            "w": 85,
+            "x": 1014,
+            "y": 249
+          },
+          "role": "tab",
+          "tag": "button",
+          "text": "Activity",
+          "type": "button"
+        }
+      ],
+      "title": "Cyndra",
+      "url": "https://app.cyndra.ai/dashboard/agents/jn7efshq32eqhsk857acvgeyrs89wzx3"
+    }
+  }
+]

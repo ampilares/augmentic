@@ -1,0 +1,714 @@
+[
+  {
+    "kind": "more",
+    "file": "/Users/jarvispilares/Documents/GitHub/augmentic/research/cyndra-ai-screenshots/11-sidebar-more-menu.png",
+    "state": [
+      {
+        "aria": null,
+        "href": "https://app.cyndra.ai/dashboard",
+        "i": 0,
+        "rect": {
+          "h": 42,
+          "w": 183,
+          "x": 8,
+          "y": 7
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Cyndra Amp Dev's Workspace"
+      },
+      {
+        "aria": "Collapse sidebar",
+        "href": null,
+        "i": 1,
+        "rect": {
+          "h": 28,
+          "w": 28,
+          "x": 199,
+          "y": 14
+        },
+        "role": null,
+        "tag": "button",
+        "text": "Collapse sidebar"
+      },
+      {
+        "aria": null,
+        "href": null,
+        "i": 2,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 64
+        },
+        "role": null,
+        "tag": "button",
+        "text": "New chat"
+      },
+      {
+        "aria": null,
+        "href": "https://app.cyndra.ai/dashboard",
+        "i": 3,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 104
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Agents"
+      },
+      {
+        "aria": null,
+        "href": "https://app.cyndra.ai/dashboard/integrations",
+        "i": 4,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 142
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Integrations"
+      },
+      {
+        "aria": null,
+        "href": "https://app.cyndra.ai/dashboard/workflows",
+        "i": 5,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 180
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Workflows New"
+      },
+      {
+        "aria": null,
+        "href": "https://app.cyndra.ai/dashboard/skills",
+        "i": 6,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 218
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Skills"
+      },
+      {
+        "aria": null,
+        "href": "https://app.cyndra.ai/dashboard/knowledge",
+        "i": 7,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 256
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Knowledge New"
+      },
+      {
+        "aria": null,
+        "href": "https://app.cyndra.ai/dashboard/scheduled-tasks",
+        "i": 8,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 294
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Schedules"
+      },
+      {
+        "aria": null,
+        "href": null,
+        "i": 9,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 332
+        },
+        "role": null,
+        "tag": "button",
+        "text": "More"
+      },
+      {
+        "aria": null,
+        "href": "https://app.cyndra.ai/dashboard/billing",
+        "i": 10,
+        "rect": {
+          "h": 62,
+          "w": 215,
+          "x": 12,
+          "y": 524
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Credits Choose plan 200 ≈ $50.00"
+      },
+      {
+        "aria": null,
+        "href": null,
+        "i": 11,
+        "rect": {
+          "h": 28,
+          "w": 28,
+          "x": 159,
+          "y": 598
+        },
+        "role": null,
+        "tag": "button",
+        "text": ""
+      },
+      {
+        "aria": "Open user menu",
+        "href": null,
+        "i": 12,
+        "rect": {
+          "h": 28,
+          "w": 28,
+          "x": 195,
+          "y": 598
+        },
+        "role": null,
+        "tag": "button",
+        "text": "Open user menu"
+      },
+      {
+        "aria": null,
+        "href": "https://app.cyndra.ai/dashboard/agents/new",
+        "i": 13,
+        "rect": {
+          "h": 32,
+          "w": 115,
+          "x": 1053,
+          "y": 63
+        },
+        "role": null,
+        "tag": "a",
+        "text": "New agent"
+      },
+      {
+        "aria": null,
+        "href": "https://app.cyndra.ai/dashboard/agents/jn7efshq32eqhsk857acvgeyrs89wzx3",
+        "i": 14,
+        "rect": {
+          "h": 40,
+          "w": 40,
+          "x": 292,
+          "y": 262
+        },
+        "role": null,
+        "tag": "a",
+        "text": ""
+      },
+      {
+        "aria": null,
+        "href": "https://app.cyndra.ai/dashboard/agents/jn7efshq32eqhsk857acvgeyrs89wzx3",
+        "i": 15,
+        "rect": {
+          "h": 80,
+          "w": 692,
+          "x": 348,
+          "y": 260
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Executive assistant Private Running You are a sharp, proactive executive assistant. Handle a broad range of day-to-day work: triaging email and drafting replies"
+      },
+      {
+        "aria": "Duplicate Executive assistant",
+        "href": null,
+        "i": 16,
+        "rect": {
+          "h": 28,
+          "w": 28,
+          "x": 1056,
+          "y": 262
+        },
+        "role": null,
+        "tag": "button",
+        "text": "Duplicate Executive assistant"
+      },
+      {
+        "aria": "Restart Executive assistant",
+        "href": null,
+        "i": 17,
+        "rect": {
+          "h": 28,
+          "w": 28,
+          "x": 1088,
+          "y": 262
+        },
+        "role": null,
+        "tag": "button",
+        "text": "Restart Executive assistant"
+      },
+      {
+        "aria": "Delete Executive assistant",
+        "href": null,
+        "i": 18,
+        "rect": {
+          "h": 28,
+          "w": 28,
+          "x": 1120,
+          "y": 262
+        },
+        "role": null,
+        "tag": "button",
+        "text": "Delete Executive assistant"
+      },
+      {
+        "aria": null,
+        "href": null,
+        "i": 19,
+        "rect": {
+          "h": 238,
+          "w": 208,
+          "x": 239,
+          "y": 332
+        },
+        "role": "dialog",
+        "tag": "div",
+        "text": "Brands New Team Audit Usage Billing Settings"
+      },
+      {
+        "aria": null,
+        "href": "https://app.cyndra.ai/dashboard/brands",
+        "i": 20,
+        "rect": {
+          "h": 36,
+          "w": 196,
+          "x": 245,
+          "y": 338
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Brands New"
+      },
+      {
+        "aria": null,
+        "href": "https://app.cyndra.ai/dashboard/team",
+        "i": 21,
+        "rect": {
+          "h": 36,
+          "w": 196,
+          "x": 245,
+          "y": 376
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Team"
+      },
+      {
+        "aria": null,
+        "href": "https://app.cyndra.ai/dashboard/audit",
+        "i": 22,
+        "rect": {
+          "h": 36,
+          "w": 196,
+          "x": 245,
+          "y": 414
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Audit"
+      },
+      {
+        "aria": null,
+        "href": "https://app.cyndra.ai/dashboard/analytics",
+        "i": 23,
+        "rect": {
+          "h": 36,
+          "w": 196,
+          "x": 245,
+          "y": 452
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Usage"
+      },
+      {
+        "aria": null,
+        "href": "https://app.cyndra.ai/dashboard/billing",
+        "i": 24,
+        "rect": {
+          "h": 36,
+          "w": 196,
+          "x": 245,
+          "y": 490
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Billing"
+      },
+      {
+        "aria": null,
+        "href": "https://app.cyndra.ai/dashboard/settings",
+        "i": 25,
+        "rect": {
+          "h": 36,
+          "w": 196,
+          "x": 245,
+          "y": 528
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Settings"
+      }
+    ]
+  },
+  {
+    "kind": "user",
+    "file": "/Users/jarvispilares/Documents/GitHub/augmentic/research/cyndra-ai-screenshots/12-user-menu.png",
+    "state": [
+      {
+        "aria": null,
+        "href": "https://app.cyndra.ai/dashboard",
+        "i": 0,
+        "rect": {
+          "h": 42,
+          "w": 183,
+          "x": 8,
+          "y": 7
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Cyndra Amp Dev's Workspace"
+      },
+      {
+        "aria": "Collapse sidebar",
+        "href": null,
+        "i": 1,
+        "rect": {
+          "h": 28,
+          "w": 28,
+          "x": 199,
+          "y": 14
+        },
+        "role": null,
+        "tag": "button",
+        "text": "Collapse sidebar"
+      },
+      {
+        "aria": null,
+        "href": null,
+        "i": 2,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 64
+        },
+        "role": null,
+        "tag": "button",
+        "text": "New chat"
+      },
+      {
+        "aria": null,
+        "href": "https://app.cyndra.ai/dashboard",
+        "i": 3,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 104
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Agents"
+      },
+      {
+        "aria": null,
+        "href": "https://app.cyndra.ai/dashboard/integrations",
+        "i": 4,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 142
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Integrations"
+      },
+      {
+        "aria": null,
+        "href": "https://app.cyndra.ai/dashboard/workflows",
+        "i": 5,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 180
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Workflows New"
+      },
+      {
+        "aria": null,
+        "href": "https://app.cyndra.ai/dashboard/skills",
+        "i": 6,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 218
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Skills"
+      },
+      {
+        "aria": null,
+        "href": "https://app.cyndra.ai/dashboard/knowledge",
+        "i": 7,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 256
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Knowledge New"
+      },
+      {
+        "aria": null,
+        "href": "https://app.cyndra.ai/dashboard/scheduled-tasks",
+        "i": 8,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 294
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Schedules"
+      },
+      {
+        "aria": null,
+        "href": null,
+        "i": 9,
+        "rect": {
+          "h": 36,
+          "w": 223,
+          "x": 8,
+          "y": 332
+        },
+        "role": null,
+        "tag": "button",
+        "text": "More"
+      },
+      {
+        "aria": null,
+        "href": "https://app.cyndra.ai/dashboard/billing",
+        "i": 10,
+        "rect": {
+          "h": 62,
+          "w": 215,
+          "x": 12,
+          "y": 524
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Credits Choose plan 200 ≈ $50.00"
+      },
+      {
+        "aria": null,
+        "href": null,
+        "i": 11,
+        "rect": {
+          "h": 28,
+          "w": 28,
+          "x": 159,
+          "y": 598
+        },
+        "role": null,
+        "tag": "button",
+        "text": ""
+      },
+      {
+        "aria": "Close user menu",
+        "href": null,
+        "i": 12,
+        "rect": {
+          "h": 28,
+          "w": 28,
+          "x": 195,
+          "y": 598
+        },
+        "role": null,
+        "tag": "button",
+        "text": "Close user menu"
+      },
+      {
+        "aria": null,
+        "href": "https://app.cyndra.ai/dashboard/agents/new",
+        "i": 13,
+        "rect": {
+          "h": 32,
+          "w": 115,
+          "x": 1053,
+          "y": 63
+        },
+        "role": null,
+        "tag": "a",
+        "text": "New agent"
+      },
+      {
+        "aria": null,
+        "href": "https://app.cyndra.ai/dashboard/agents/jn7efshq32eqhsk857acvgeyrs89wzx3",
+        "i": 14,
+        "rect": {
+          "h": 40,
+          "w": 40,
+          "x": 292,
+          "y": 262
+        },
+        "role": null,
+        "tag": "a",
+        "text": ""
+      },
+      {
+        "aria": null,
+        "href": "https://app.cyndra.ai/dashboard/agents/jn7efshq32eqhsk857acvgeyrs89wzx3",
+        "i": 15,
+        "rect": {
+          "h": 80,
+          "w": 692,
+          "x": 348,
+          "y": 260
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Executive assistant Private Running You are a sharp, proactive executive assistant. Handle a broad range of day-to-day work: triaging email and drafting replies"
+      },
+      {
+        "aria": "Duplicate Executive assistant",
+        "href": null,
+        "i": 16,
+        "rect": {
+          "h": 28,
+          "w": 28,
+          "x": 1056,
+          "y": 262
+        },
+        "role": null,
+        "tag": "button",
+        "text": "Duplicate Executive assistant"
+      },
+      {
+        "aria": "Restart Executive assistant",
+        "href": null,
+        "i": 17,
+        "rect": {
+          "h": 28,
+          "w": 28,
+          "x": 1088,
+          "y": 262
+        },
+        "role": null,
+        "tag": "button",
+        "text": "Restart Executive assistant"
+      },
+      {
+        "aria": "Delete Executive assistant",
+        "href": null,
+        "i": 18,
+        "rect": {
+          "h": 28,
+          "w": 28,
+          "x": 1120,
+          "y": 262
+        },
+        "role": null,
+        "tag": "button",
+        "text": "Delete Executive assistant"
+      },
+      {
+        "aria": "User button popover",
+        "href": null,
+        "i": 19,
+        "rect": {
+          "h": 217,
+          "w": 376,
+          "x": 195,
+          "y": 373
+        },
+        "role": "dialog",
+        "tag": "div",
+        "text": "Amp Dev amp@rethink-tech.com Manage account Sign out Secured by"
+      },
+      {
+        "aria": null,
+        "href": null,
+        "i": 20,
+        "rect": {
+          "h": 102,
+          "w": 378,
+          "x": 194,
+          "y": 440
+        },
+        "role": "menu",
+        "tag": "div",
+        "text": "Manage account Sign out"
+      },
+      {
+        "aria": null,
+        "href": null,
+        "i": 21,
+        "rect": {
+          "h": 50,
+          "w": 378,
+          "x": 194,
+          "y": 441
+        },
+        "role": "menuitem",
+        "tag": "button",
+        "text": "Manage account"
+      },
+      {
+        "aria": null,
+        "href": null,
+        "i": 22,
+        "rect": {
+          "h": 51,
+          "w": 378,
+          "x": 194,
+          "y": 491
+        },
+        "role": "menuitem",
+        "tag": "button",
+        "text": "Sign out"
+      },
+      {
+        "aria": "Clerk logo",
+        "href": "https://go.clerk.com/components",
+        "i": 23,
+        "rect": {
+          "h": 14,
+          "w": 48,
+          "x": 393,
+          "y": 559
+        },
+        "role": null,
+        "tag": "a",
+        "text": "Clerk logo"
+      }
+    ]
+  }
+]

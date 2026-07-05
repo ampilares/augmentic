@@ -1,0 +1,110 @@
+[
+  {
+    "fileKey": "31-new-agent-custom-next",
+    "label": "Custom wizard next",
+    "count": 1,
+    "clicked": true,
+    "error": null,
+    "file": "/Users/jarvispilares/Documents/GitHub/augmentic/research/cyndra-ai-screenshots/31-new-agent-custom-next.png",
+    "state": {
+      "controls": [
+        {
+          "disabled": false,
+          "href": null,
+          "i": 0,
+          "tag": "button",
+          "text": "Cancel",
+          "type": null
+        },
+        {
+          "disabled": false,
+          "href": null,
+          "i": 1,
+          "tag": "input",
+          "text": "e.g. Ops assistant",
+          "type": null
+        },
+        {
+          "disabled": false,
+          "href": null,
+          "i": 2,
+          "tag": "textarea",
+          "text": "What should this agent do? Describe its job, the tasks it handles, how it should communicate, and any rules it must follow. Plain language works best.",
+          "type": null
+        },
+        {
+          "disabled": false,
+          "href": null,
+          "i": 3,
+          "tag": "button",
+          "text": "Back",
+          "type": null
+        },
+        {
+          "disabled": true,
+          "href": null,
+          "i": 4,
+          "tag": "button",
+          "text": "Continue",
+          "type": null
+        }
+      ],
+      "text": "Cyndra Your data is private and secure Cancel Step 3 of 4 Describe your agent Give it a name and tell it what to do, in plain language. You can refine this anytime. Name Shown to your team and anyone the agent chats with. Job description Write it like you would explain the job to a new team member. Back Continue YOUR AGENT In progress Assistant Custom agent Apps None yet Skills Learns in chat Scheduled work None Safety Asks before acting",
+      "url": "https://app.cyndra.ai/dashboard/agents/new"
+    }
+  },
+  {
+    "fileKey": "32-new-agent-custom-final-preview",
+    "label": "Custom wizard final preview",
+    "count": 1,
+    "clicked": false,
+    "error": "Error: Playwright selector deadline exceeded\nwaiting on click for selector button >> internal:has-text=\"Continue\"i >> visible=true",
+    "file": "/Users/jarvispilares/Documents/GitHub/augmentic/research/cyndra-ai-screenshots/32-new-agent-custom-final-preview.png",
+    "state": {
+      "controls": [
+        {
+          "disabled": false,
+          "href": null,
+          "i": 0,
+          "tag": "button",
+          "text": "Cancel",
+          "type": null
+        },
+        {
+          "disabled": false,
+          "href": null,
+          "i": 1,
+          "tag": "input",
+          "text": "e.g. Ops assistant",
+          "type": null
+        },
+        {
+          "disabled": false,
+          "href": null,
+          "i": 2,
+          "tag": "textarea",
+          "text": "What should this agent do? Describe its job, the tasks it handles, how it should communicate, and any rules it must follow. Plain language works best.",
+          "type": null
+        },
+        {
+          "disabled": false,
+          "href": null,
+          "i": 3,
+          "tag": "button",
+          "text": "Back",
+          "type": null
+        },
+        {
+          "disabled": true,
+          "href": null,
+          "i": 4,
+          "tag": "button",
+          "text": "Continue",
+          "type": null
+        }
+      ],
+      "text": "Cyndra Your data is private and secure Cancel Step 3 of 4 Describe your agent Give it a name and tell it what to do, in plain language. You can refine this anytime. Name Shown to your team and anyone the agent chats with. Job description Write it like you would explain the job to a new team member. Back Continue YOUR AGENT In progress Assistant Custom agent Apps None yet Skills Learns in chat Scheduled work None Safety Asks before acting",
+      "url": "https://app.cyndra.ai/dashboard/agents/new"
+    }
+  }
+]
