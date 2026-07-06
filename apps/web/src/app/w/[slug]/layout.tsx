@@ -12,6 +12,7 @@ const NAV = [
   { href: "/runs", label: "Runs", icon: "▸" },
   { href: "/notifications", label: "Notifications", icon: "◎" },
   { href: "/integrations", label: "Integrations", icon: "⌘" },
+  { href: "/skills", label: "Skills", icon: "◆" },
   { href: "/knowledge", label: "Knowledge", icon: "▤" },
   { href: "/brand", label: "Brand", icon: "◈" },
   { href: "/roi", label: "ROI", icon: "↗" },

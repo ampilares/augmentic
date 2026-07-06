@@ -7,17 +7,16 @@ import {
   agentTemplates,
   agents,
   memoryItems,
-  toolDefinitions,
   toolPermissionPolicies,
 } from "@augmentic/db";
 import {
   hireAgentSchema,
   memoryItemSchema,
   updateToolPermissionSchema,
-  TOOL_PERMISSION_SETTINGS,
 } from "@augmentic/shared";
 import { recordActivationMetric, recordAudit } from "@augmentic/engine";
 import { requireWorkspace } from "../context";
+import { applyTemplateDefaults } from "../services/agent-provisioning";
 
 export async function hireAgentAction(
   workspaceSlug: string,
@@ -51,27 +50,14 @@ export async function hireAgentAction(
     })
     .returning({ id: agents.id });
 
-  // Apply template approval-policy defaults as per-agent tool permissions.
+  // Apply template defaults: enabled skills + per-agent tool permissions.
   if (parsed.templateId) {
     const [template] = await ctx.db
       .select()
       .from(agentTemplates)
       .where(eq(agentTemplates.id, parsed.templateId));
-    const defaults = (template?.approvalPolicyDefaults ?? {}) as Record<string, string>;
-    for (const [toolName, setting] of Object.entries(defaults)) {
-      if (!(TOOL_PERMISSION_SETTINGS as readonly string[]).includes(setting)) continue;
-      const [def] = await ctx.db
-        .select({ id: toolDefinitions.id })
-        .from(toolDefinitions)
-        .where(eq(toolDefinitions.name, toolName));
-      if (def) {
-        await ctx.db.insert(toolPermissionPolicies).values({
-          workspaceId: ctx.workspace.id,
-          agentId: agent!.id,
-          toolDefinitionId: def.id,
-          setting: setting as never,
-        });
-      }
+    if (template) {
+      await applyTemplateDefaults(ctx.db, ctx.workspace.id, agent!.id, template);
     }
   }
 

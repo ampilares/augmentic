@@ -9,6 +9,8 @@ import {
   knowledgeItems,
   memoryItems,
   runSteps,
+  agentSkills,
+  skills,
   secretRefs,
   toolCalls,
   toolDefinitions,
@@ -343,6 +345,19 @@ async function executePipeline(db: Db, run: RunRow): Promise<void> {
       ),
     );
 
+  // Enabled skills contribute their know-how to prompt assembly (Spec §6).
+  const enabledSkills = await db
+    .select({ name: skills.name, instructions: skills.instructions })
+    .from(agentSkills)
+    .innerJoin(skills, eq(agentSkills.skillId, skills.id))
+    .where(
+      and(
+        eq(agentSkills.workspaceId, run.workspaceId),
+        eq(agentSkills.agentId, run.agentId),
+        eq(agentSkills.enabled, true),
+      ),
+    );
+
   const delivery = (workflow?.deliveryConfig ?? { target: "run_log" }) as {
     target?: string;
     slackChannel?: string;
@@ -367,7 +382,7 @@ async function executePipeline(db: Db, run: RunRow): Promise<void> {
         }
       : null,
     memories: memories.map((m) => m.content),
-    skills: [],
+    skills: enabledSkills,
     workflowInstructions: instructions,
     deliveryHint:
       delivery.target === "slack_channel"

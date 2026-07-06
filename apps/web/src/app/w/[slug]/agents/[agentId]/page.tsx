@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { and, desc, eq } from "drizzle-orm";
+import { and, desc, eq, isNull, or } from "drizzle-orm";
 import {
   agents,
+  agentSkills,
   agentTemplates,
   auditEvents,
+  skills,
   chatMessages,
   chatThreads,
   integrationConnections,
@@ -27,6 +29,7 @@ import {
   updateAgentAction,
 } from "@/lib/actions/agent-actions";
 import { sendChatMessageAction } from "@/lib/actions/chat-actions";
+import { toggleAgentSkillAction } from "@/lib/actions/skill-actions";
 import {
   Button,
   Card,
@@ -45,6 +48,7 @@ const TABS = [
   "chat",
   "workflows",
   "tools",
+  "skills",
   "knowledge",
   "memory",
   "settings",
@@ -105,6 +109,7 @@ export default async function AgentDetailPage({
       {tab === "chat" && <ChatTab ctx={ctx} agent={agent} slug={slug} />}
       {tab === "workflows" && <WorkflowsTab ctx={ctx} agent={agent} slug={slug} />}
       {tab === "tools" && <ToolsTab ctx={ctx} agent={agent} slug={slug} />}
+      {tab === "skills" && <SkillsTab ctx={ctx} agent={agent} slug={slug} />}
       {tab === "knowledge" && <KnowledgeTab ctx={ctx} agent={agent} slug={slug} />}
       {tab === "memory" && <MemoryTab ctx={ctx} agent={agent} slug={slug} />}
       {tab === "settings" && <SettingsTab ctx={ctx} agent={agent} slug={slug} />}
@@ -407,6 +412,66 @@ async function ToolsTab({ ctx, agent, slug }: { ctx: Ctx; agent: Agent; slug: st
         </tbody>
       </table>
     </Card>
+  );
+}
+
+async function SkillsTab({ ctx, agent, slug }: { ctx: Ctx; agent: Agent; slug: string }) {
+  const [allSkills, enabledRows] = await Promise.all([
+    ctx.db
+      .select()
+      .from(skills)
+      .where(or(isNull(skills.workspaceId), eq(skills.workspaceId, ctx.workspace.id))),
+    ctx.db
+      .select()
+      .from(agentSkills)
+      .where(
+        and(
+          eq(agentSkills.workspaceId, ctx.workspace.id),
+          eq(agentSkills.agentId, agent.id),
+        ),
+      ),
+  ]);
+  const enabledBySkill = new Map(enabledRows.map((r) => [r.skillId, r.enabled]));
+  const canEdit = roleAtLeast(ctx.role, "operator");
+
+  return (
+    <div className="space-y-3">
+      <p className="text-sm text-slate-500">
+        Enabled skills are injected into {agent.name}'s prompt as know-how on every run.{" "}
+        <Link href={`/w/${slug}/skills`} className="text-brand-600 hover:underline">
+          Manage the skill library →
+        </Link>
+      </p>
+      <div className="grid grid-cols-2 gap-3">
+        {allSkills.map((s) => {
+          const enabled = enabledBySkill.get(s.id) ?? false;
+          return (
+            <Card key={s.id} className={enabled ? "border-brand-300" : ""}>
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <p className="font-medium text-slate-900">
+                    {s.name}
+                    {s.workspaceId !== null && (
+                      <span className="ml-2 rounded bg-purple-50 px-1.5 py-0.5 text-[11px] text-purple-700">
+                        custom
+                      </span>
+                    )}
+                  </p>
+                  <p className="mt-0.5 text-sm text-slate-500">{s.description}</p>
+                </div>
+                {canEdit && (
+                  <form action={toggleAgentSkillAction.bind(null, slug, agent.id, s.id)}>
+                    <Button variant={enabled ? "primary" : "secondary"} type="submit">
+                      {enabled ? "Enabled" : "Enable"}
+                    </Button>
+                  </form>
+                )}
+              </div>
+            </Card>
+          );
+        })}
+      </div>
+    </div>
   );
 }
 
