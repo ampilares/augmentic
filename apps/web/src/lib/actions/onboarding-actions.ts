@@ -12,6 +12,7 @@ import {
 } from "@augmentic/db";
 import { recordAudit } from "@augmentic/engine";
 import { requireWorkspace } from "../context";
+import { applyTemplateDefaults } from "../services/agent-provisioning";
 
 // Maps onboarding "top manual tasks" answers to role templates (Journey A).
 const TASK_TO_TEMPLATE: Record<string, string> = {
@@ -90,6 +91,7 @@ export async function applyOnboardingAction(
         supervisorUserId: ctx.user.id,
       })
       .returning({ id: agents.id });
+    await applyTemplateDefaults(ctx.db, ctx.workspace.id, agent!.id, template);
     createdAgents.push({ id: agent!.id, templateSlug: slug });
   }
 

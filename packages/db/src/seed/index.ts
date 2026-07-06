@@ -1,9 +1,10 @@
-import { eq } from "drizzle-orm";
+import { and, eq, isNull } from "drizzle-orm";
 import { TOOL_CATALOG } from "@augmentic/shared";
 import type { Db } from "../client";
-import { agentTemplates, toolDefinitions, workflowTemplates } from "../schema";
+import { agentTemplates, skills, toolDefinitions, workflowTemplates } from "../schema";
 import { AGENT_TEMPLATE_SEEDS } from "./agent-templates";
 import { WORKFLOW_TEMPLATE_SEEDS } from "./workflow-templates";
+import { SKILL_SEEDS } from "./skills";
 
 // Idempotent: upserts built-in templates and tool definitions by slug/name.
 // Safe to run on every boot.
@@ -86,6 +87,30 @@ export async function seedBuiltins(db: Db) {
         .where(eq(workflowTemplates.slug, w.slug));
     }
   }
+
+  for (const s of SKILL_SEEDS) {
+    const existing = await db
+      .select({ id: skills.id })
+      .from(skills)
+      .where(and(eq(skills.slug, s.slug), isNull(skills.workspaceId)));
+    const values = {
+      name: s.name,
+      description: s.description,
+      instructions: s.instructions,
+      allowedTools: s.allowedTools,
+    };
+    if (existing.length === 0) {
+      await db.insert(skills).values({ slug: s.slug, workspaceId: null, ...values });
+    } else {
+      await db.update(skills).set(values).where(eq(skills.id, existing[0]!.id));
+    }
+  }
 }
 
-export { AGENT_TEMPLATE_SEEDS, WORKFLOW_TEMPLATE_SEEDS };
+export { AGENT_TEMPLATE_SEEDS, WORKFLOW_TEMPLATE_SEEDS, SKILL_SEEDS };
+export {
+  VERTICAL_PACKS,
+  AGENCY_PACK,
+  type VerticalPackSeed,
+  type PackWorkflowSpec,
+} from "./vertical-packs";

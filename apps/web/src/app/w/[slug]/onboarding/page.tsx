@@ -1,5 +1,7 @@
+import { AGENCY_PACK } from "@augmentic/db/seed";
 import { requireWorkspace } from "@/lib/context";
 import { applyOnboardingAction } from "@/lib/actions/onboarding-actions";
+import { installPackAction } from "@/lib/actions/pack-actions";
 import { Button, Card, Input, Label, PageHeader, Select } from "@/components/ui";
 
 const TASK_OPTIONS = [
@@ -33,6 +35,30 @@ export default async function OnboardingPage({
         title="Set up your AI workforce"
         subtitle="Five quick questions — we'll propose your first AI employees and their workflows. Nothing runs without your say-so."
       />
+      <Card className="mb-6 border-brand-300 bg-brand-50">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <p className="font-semibold text-slate-900">
+              ⚡ {AGENCY_PACK.name} — one-click install
+            </p>
+            <p className="mt-1 text-sm text-slate-600">{AGENCY_PACK.pitch}</p>
+            <p className="mt-2 text-xs text-slate-500">
+              Includes {AGENCY_PACK.agentTemplateSlugs.length} AI employees,{" "}
+              {AGENCY_PACK.workflows.length} scheduled workflows, {AGENCY_PACK.sops.length}{" "}
+              agency SOPs, and safety defaults. Everything starts draft-first — nothing runs
+              until you activate it.
+            </p>
+          </div>
+          <form action={installPackAction.bind(null, slug, AGENCY_PACK.slug)}>
+            <Button type="submit">Install pack</Button>
+          </form>
+        </div>
+      </Card>
+
+      <p className="mb-4 text-center text-xs uppercase tracking-wider text-slate-400">
+        or answer a few questions for a tailored proposal
+      </p>
+
       <form action={applyOnboardingAction.bind(null, slug)} className="space-y-6">
         <Card className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
