@@ -4,7 +4,9 @@ import {
   DEMO_EMAILS,
   DEMO_EVENTS,
   DEMO_FILES,
+  DEMO_MONDAY_BOARDS,
   DEMO_SLACK_MESSAGES,
+  DEMO_XERO_INVOICES,
 } from "./demo-data";
 
 const tierRank = (tier: string) => RISK_TIERS.indexOf(tier as never);
@@ -192,6 +194,84 @@ async function executeDemo(
         demo: true,
         note: "Demo connection: message recorded in run log only.",
       };
+    case "monday.list_boards":
+      return {
+        boards: DEMO_MONDAY_BOARDS.map((b) => ({ id: b.id, name: b.name })),
+      };
+    case "monday.get_items": {
+      const board = DEMO_MONDAY_BOARDS.find((b) => b.id === args.boardId);
+      if (!board) return { error: "board not found" };
+      const limit = Math.min(Number(args.limit ?? 50), 50);
+      return {
+        board: board.name,
+        items: board.items.slice(0, limit).map((i) => ({
+          id: i.id,
+          name: i.name,
+          columns: i.columns,
+          updates: i.updates,
+        })),
+      };
+    }
+    case "monday.create_item":
+      return {
+        itemId: `i-demo-${Date.now()}`,
+        created: true,
+        demo: true,
+        note: "Demo connection: item recorded in run log only.",
+      };
+    case "monday.update_item":
+    case "monday.add_update":
+      return {
+        itemId: args.itemId,
+        updated: true,
+        demo: true,
+        note: "Demo connection: update recorded in run log only.",
+      };
+    case "xero.list_invoices": {
+      const status = String(args.status ?? "").toUpperCase();
+      const limit = Math.min(Number(args.limit ?? 50), 50);
+      let invoices = DEMO_XERO_INVOICES;
+      if (status === "OVERDUE") {
+        invoices = invoices.filter((i) => i.status === "AUTHORISED" && i.dueDaysAgo > 0);
+      } else if (status) {
+        invoices = invoices.filter((i) => i.status === status);
+      }
+      return {
+        invoices: invoices.slice(0, limit).map((i) => ({
+          id: i.id,
+          number: i.number,
+          contact: i.contactName,
+          contactEmail: i.contactEmail,
+          amountDue: i.amountDue,
+          currency: i.currency,
+          dueDate: new Date(Date.now() - i.dueDaysAgo * 86_400_000)
+            .toISOString()
+            .slice(0, 10),
+          overdueDays: Math.max(0, i.dueDaysAgo),
+          status: i.status,
+        })),
+      };
+    }
+    case "xero.get_contact": {
+      const inv = DEMO_XERO_INVOICES.find((i) => i.contactId === args.contactId);
+      if (!inv) return { error: "contact not found" };
+      const outstanding = DEMO_XERO_INVOICES.filter(
+        (i) => i.contactId === args.contactId && i.status === "AUTHORISED",
+      ).reduce((acc, i) => acc + i.amountDue, 0);
+      return {
+        id: inv.contactId,
+        name: inv.contactName,
+        email: inv.contactEmail,
+        outstandingBalance: outstanding,
+      };
+    }
+    case "xero.create_invoice_reminder_note":
+      return {
+        invoiceId: args.invoiceId,
+        noted: true,
+        demo: true,
+        note: "Demo connection: history note recorded in run log only.",
+      };
     case "knowledge.search":
       // Knowledge search is wired by the engine to the workspace KB; this
       // fallback exists so demo agents don't crash when KB is empty.
@@ -285,12 +365,94 @@ async function executeReal(
         throw new ConnectorError(`Slack error: ${json.error}`, "provider_error");
       return json;
     }
+    case "monday.list_boards":
+      return mondayGql(token, `query { boards (limit: 50) { id name } }`);
+    case "monday.get_items":
+      return mondayGql(
+        token,
+        `query { boards (ids: [${JSON.stringify(String(args.boardId))}]) {
+          name items_page (limit: ${Math.min(Number(args.limit ?? 50), 50)}) {
+            items { id name column_values { id text } updates { body } }
+          } } }`,
+      );
+    case "monday.create_item":
+      return mondayGql(
+        token,
+        `mutation { create_item (board_id: ${JSON.stringify(String(args.boardId))}, item_name: ${JSON.stringify(String(args.name))}, column_values: ${JSON.stringify(JSON.stringify(args.columnValues ?? {}))}) { id } }`,
+      );
+    case "monday.update_item":
+      return mondayGql(
+        token,
+        `mutation { change_multiple_column_values (item_id: ${JSON.stringify(String(args.itemId))}, column_values: ${JSON.stringify(JSON.stringify(args.columnValues ?? {}))}) { id } }`,
+      );
+    case "monday.add_update":
+      return mondayGql(
+        token,
+        `mutation { create_update (item_id: ${JSON.stringify(String(args.itemId))}, body: ${JSON.stringify(String(args.body))}) { id } }`,
+      );
+    case "xero.list_invoices": {
+      const where =
+        String(args.status ?? "").toUpperCase() === "OVERDUE"
+          ? `Status=="AUTHORISED" AND DueDate<DateTime(${new Date().getFullYear()},${new Date().getMonth() + 1},${new Date().getDate()})`
+          : args.status
+            ? `Status=="${String(args.status).toUpperCase()}"`
+            : "";
+      const params = new URLSearchParams(where ? { where } : {});
+      return xeroFetch(token, `Invoices?${params}`);
+    }
+    case "xero.get_contact":
+      return xeroFetch(token, `Contacts/${args.contactId}`);
+    case "xero.create_invoice_reminder_note":
+      return xeroFetch(token, `Invoices/${args.invoiceId}/History`, {
+        Details: String(args.note),
+      });
     default:
       throw new ConnectorError(
         `${toolName} is not implemented for real connections yet — use a demo connection or a supported tool.`,
         "not_implemented",
       );
   }
+}
+
+async function mondayGql(token: string, query: string): Promise<unknown> {
+  const res = await fetch("https://api.monday.com/v2", {
+    method: "POST",
+    headers: {
+      Authorization: token,
+      "Content-Type": "application/json",
+      "API-Version": "2024-10",
+    },
+    body: JSON.stringify({ query }),
+  });
+  const json = (await res.json()) as { data?: unknown; errors?: { message: string }[] };
+  if (json.errors?.length) {
+    throw new ConnectorError(`monday.com error: ${json.errors[0]!.message}`, "provider_error");
+  }
+  return json.data;
+}
+
+async function xeroFetch(
+  token: string,
+  path: string,
+  jsonBody?: unknown,
+): Promise<unknown> {
+  const res = await fetch(`https://api.xero.com/api.xro/2.0/${path}`, {
+    method: jsonBody ? "PUT" : "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      Accept: "application/json",
+      ...(jsonBody ? { "Content-Type": "application/json" } : {}),
+    },
+    body: jsonBody ? JSON.stringify(jsonBody) : undefined,
+  });
+  if (!res.ok) {
+    const text = await res.text();
+    throw new ConnectorError(
+      `Xero API ${res.status}: ${text.slice(0, 300)}`,
+      res.status === 401 ? "not_connected" : "provider_error",
+    );
+  }
+  return res.json();
 }
 
 async function executeWebhookDeliver(

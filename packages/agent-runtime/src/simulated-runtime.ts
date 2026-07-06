@@ -82,6 +82,28 @@ function pickReadCalls(ctx: AgentContext): ProposedToolCall[] {
       rationale: "Locate relevant documents.",
     });
   }
+  if (
+    available.has("xero.list_invoices") &&
+    has(ins, "invoice", "overdue", "payment", "cash", "receivable")
+  ) {
+    calls.push({
+      toolName: "xero.list_invoices",
+      args: has(ins, "overdue", "chase", "reminder")
+        ? { status: "OVERDUE", limit: 20 }
+        : { limit: 20 },
+      rationale: "Pull invoice records from Xero.",
+    });
+  }
+  if (
+    available.has("monday.list_boards") &&
+    has(ins, "pipeline", "deal", "lead", "crm", "board", "monday")
+  ) {
+    calls.push({
+      toolName: "monday.list_boards",
+      args: {},
+      rationale: "Find relevant monday.com boards.",
+    });
+  }
   if (available.has("knowledge.search")) {
     calls.push({
       toolName: "knowledge.search",
@@ -199,11 +221,34 @@ export function createSimulatedRuntime(): AgentRuntime {
     async proposeEvidenceCalls(
       ctx: AgentContext,
       _plan: AgentPlan,
-      _evidence: EvidenceItem[],
+      evidence: EvidenceItem[],
       round: number,
     ): Promise<EvidenceProposal> {
-      if (round > 0) return { calls: [], done: true, usage };
-      return { calls: pickReadCalls(ctx), done: true, usage };
+      if (round === 0) {
+        const calls = pickReadCalls(ctx);
+        // If we asked for monday boards, we need a second round to read items.
+        const needsFollowUp = calls.some((c) => c.toolName === "monday.list_boards");
+        return { calls, done: !needsFollowUp, usage };
+      }
+      if (round === 1) {
+        // Follow up: read items from the first board found.
+        const boardsEvidence = evidence.find((e) => e.source === "monday.list_boards");
+        const boardId = boardsEvidence?.content.match(/"id":\s*"([^"]+)"/)?.[1];
+        if (boardId) {
+          return {
+            calls: [
+              {
+                toolName: "monday.get_items",
+                args: { boardId, limit: 25 },
+                rationale: "Read items from the most relevant board.",
+              },
+            ],
+            done: true,
+            usage,
+          };
+        }
+      }
+      return { calls: [], done: true, usage };
     },
 
     async draft(

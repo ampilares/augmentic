@@ -5,3 +5,4 @@ export { decideApproval, type DecisionInput } from "./approvals";
 export { recordAudit, recordUsage, recordActivationMetric, type AuditInput } from "./audit";
 export { checkAgentBudget, type BudgetStatus } from "./budget";
 export { encryptSecret, decryptSecret } from "./secrets";
+export { notifyWorkspace, type NotifyInput } from "./notifications";

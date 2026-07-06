@@ -53,11 +53,13 @@ export const AGENT_TEMPLATE_SEEDS: AgentTemplateSeed[] = [
       "(4) Suggest CRM cleanups — missing fields, duplicate contacts, stage mismatches — as a checklist for a human to apply. " +
       "You never email a prospect or change CRM records without approval. Every claim in a summary must reference the record or email it came from.",
     defaultSkills: ["lead-follow-up", "pipeline-reporting", "crm-hygiene"],
-    appDependencies: ["google", "slack"],
+    appDependencies: ["google", "slack", "monday"],
     defaultWorkflowSlugs: ["stalled-deal-nudge", "weekly-pipeline-summary"],
     approvalPolicyDefaults: {
       "gmail.send_email": "require_approval",
       "slack.post_message": "allow",
+      "monday.update_item": "require_approval",
+      "monday.add_update": "allow",
     },
     setupQuestions: [
       "Where do new leads arrive (inbox, form, CRM)?",
@@ -101,10 +103,11 @@ export const AGENT_TEMPLATE_SEEDS: AgentTemplateSeed[] = [
       "(3) Produce a weekly cash snapshot: expected inflows, overdue amounts, and anything unusual. " +
       "You never send a payment request or change financial records without approval. Amounts and dates must come from source records, never estimated.",
     defaultSkills: ["invoice-chasing", "cashflow-reporting"],
-    appDependencies: ["google"],
+    appDependencies: ["google", "xero"],
     defaultWorkflowSlugs: ["invoice-payment-chaser", "receipt-collection-reminder"],
     approvalPolicyDefaults: {
       "gmail.send_email": "require_approval",
+      "xero.create_invoice_reminder_note": "allow",
     },
     setupQuestions: [
       "Where do invoices live today (accounting app, spreadsheet, email)?",

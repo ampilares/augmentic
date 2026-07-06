@@ -41,6 +41,7 @@ import {
 import { and, eq, inArray } from "drizzle-orm";
 import { recordActivationMetric, recordAudit, recordUsage } from "./audit";
 import { checkAgentBudget } from "./budget";
+import { notifyWorkspace } from "./notifications";
 import { decryptSecret } from "./secrets";
 
 // ---------------------------------------------------------------------------
@@ -130,6 +131,15 @@ export async function processRun(db: Db, runId: string): Promise<void> {
           updatedAt: new Date(),
         })
         .where(eq(workflowRuns.id, run.id));
+      if (run.mode === "live") {
+        await notifyWorkspace(db, {
+          workspaceId: run.workspaceId,
+          kind: "run_blocked",
+          title: "A run was blocked",
+          body: err.reason,
+          href: `/runs/${run.id}`,
+        });
+      }
       return;
     }
     const message = err instanceof Error ? err.message : String(err);
@@ -152,6 +162,15 @@ export async function processRun(db: Db, runId: string): Promise<void> {
       entityId: run.id,
       payload: { error: message.slice(0, 500) },
     });
+    if (run.mode === "live") {
+      await notifyWorkspace(db, {
+        workspaceId: run.workspaceId,
+        kind: "run_failed",
+        title: "A run failed",
+        body: message.slice(0, 200),
+        href: `/runs/${run.id}`,
+      });
+    }
   }
 }
 
@@ -762,6 +781,13 @@ async function executePipeline(db: Db, run: RunRow): Promise<void> {
               payload: { tool: action.call.toolName, riskTier: decision.riskTier },
             });
             await saveState("waiting_approval");
+            await notifyWorkspace(db, {
+              workspaceId: run.workspaceId,
+              kind: "approval_pending",
+              title: `${agent.name} needs approval: ${action.call.toolName}`,
+              body: decision.reason,
+              href: `/approvals`,
+            });
           }
           throw err;
         });
