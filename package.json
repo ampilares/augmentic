@@ -1,0 +1,19 @@
+{
+  "name": "augmentic",
+  "private": true,
+  "version": "0.1.0",
+  "description": "AI workforce orchestration SaaS for SMBs",
+  "packageManager": "pnpm@9.15.9",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @augmentic/web dev",
+    "build": "pnpm -r build",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test",
+    "db:generate": "pnpm --filter @augmentic/db db:generate",
+    "db:migrate": "pnpm --filter @augmentic/db db:migrate",
+    "db:seed": "pnpm --filter @augmentic/db db:seed"
+  }
+}
