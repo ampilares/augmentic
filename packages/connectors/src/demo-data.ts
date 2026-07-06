@@ -157,6 +157,138 @@ export const DEMO_FILES: DemoFile[] = [
   },
 ];
 
+export interface DemoMondayBoard {
+  id: string;
+  name: string;
+  items: {
+    id: string;
+    name: string;
+    columns: Record<string, string>;
+    updates: string[];
+  }[];
+}
+
+export const DEMO_MONDAY_BOARDS: DemoMondayBoard[] = [
+  {
+    id: "b-501",
+    name: "Sales Pipeline",
+    items: [
+      {
+        id: "i-5011",
+        name: "NorthCo — website refresh",
+        columns: {
+          stage: "Proposal sent",
+          value: "$8,200",
+          owner: "Dana",
+          last_contact: "9 days ago",
+          email: "sam@northco.io",
+        },
+        updates: ["Quote sent, awaiting team review."],
+      },
+      {
+        id: "i-5012",
+        name: "BrightLabs — brand refresh",
+        columns: {
+          stage: "Won",
+          value: "$5,500",
+          owner: "Marco",
+          last_contact: "1 day ago",
+          email: "lena@brightlabs.co",
+        },
+        updates: ["Kickoff scheduling in progress."],
+      },
+      {
+        id: "i-5013",
+        name: "Harbor Cafe — menu site",
+        columns: {
+          stage: "New lead",
+          value: "$2,000",
+          owner: "",
+          last_contact: "2 days ago",
+          email: "owner@harborcafe.example",
+        },
+        updates: [],
+      },
+    ],
+  },
+  {
+    id: "b-502",
+    name: "Client Projects",
+    items: [
+      {
+        id: "i-5021",
+        name: "Acme Supply — analytics dashboard",
+        columns: { status: "In progress", due: "in 3 weeks", owner: "Dana" },
+        updates: ["Dashboard v2 on staging, awaiting client feedback."],
+      },
+    ],
+  },
+];
+
+export interface DemoXeroInvoice {
+  id: string;
+  number: string;
+  contactId: string;
+  contactName: string;
+  contactEmail: string;
+  amountDue: number;
+  currency: string;
+  dueDaysAgo: number; // positive = overdue by N days
+  status: "AUTHORISED" | "PAID" | "DRAFT";
+  notes: string[];
+}
+
+export const DEMO_XERO_INVOICES: DemoXeroInvoice[] = [
+  {
+    id: "x-inv-204",
+    number: "INV-204",
+    contactId: "x-c-1",
+    contactName: "Acme Supply",
+    contactEmail: "billing@acmesupply.com",
+    amountDue: 3400,
+    currency: "USD",
+    dueDaysAgo: 12,
+    status: "AUTHORISED",
+    notes: [],
+  },
+  {
+    id: "x-inv-198",
+    number: "INV-198",
+    contactId: "x-c-2",
+    contactName: "BrightLabs",
+    contactEmail: "accounts@brightlabs.co",
+    amountDue: 950,
+    currency: "USD",
+    dueDaysAgo: 4,
+    status: "AUTHORISED",
+    notes: [],
+  },
+  {
+    id: "x-inv-207",
+    number: "INV-207",
+    contactId: "x-c-3",
+    contactName: "NorthCo",
+    contactEmail: "ap@northco.io",
+    amountDue: 1200,
+    currency: "USD",
+    dueDaysAgo: -8,
+    status: "AUTHORISED",
+    notes: [],
+  },
+  {
+    id: "x-inv-190",
+    number: "INV-190",
+    contactId: "x-c-2",
+    contactName: "BrightLabs",
+    contactEmail: "accounts@brightlabs.co",
+    amountDue: 0,
+    currency: "USD",
+    dueDaysAgo: 20,
+    status: "PAID",
+    notes: [],
+  },
+];
+
 export interface DemoSlackMessage {
   channel: string;
   user: string;

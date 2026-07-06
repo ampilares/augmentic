@@ -49,7 +49,7 @@ export async function createWorkspaceAction(formData: FormData): Promise<void> {
     payload: { name: parsed.name },
   });
   await recordActivationMetric(db, ws!.id, "workspace_created");
-  redirect(`/w/${ws!.slug}`);
+  redirect(`/w/${ws!.slug}/onboarding`);
 }
 
 export async function inviteMemberAction(

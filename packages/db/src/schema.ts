@@ -707,6 +707,26 @@ export const notificationSubscriptions = pgTable(
   },
 );
 
+// In-app notifications (FR-021). Slack/email delivery fans out from the same
+// rows; readAt marks dismissal.
+export const notifications = pgTable(
+  "notifications",
+  {
+    id: id(),
+    workspaceId: uuid("workspace_id")
+      .notNull()
+      .references(() => workspaces.id, { onDelete: "cascade" }),
+    userId: uuid("user_id").references(() => users.id, { onDelete: "cascade" }),
+    kind: text("kind").notNull(),
+    title: text("title").notNull(),
+    body: text("body"),
+    href: text("href"),
+    readAt: timestamp("read_at", { withTimezone: true }),
+    createdAt: createdAt(),
+  },
+  (t) => [index("notifications_ws_user_idx").on(t.workspaceId, t.userId)],
+);
+
 export const metricEvents = pgTable(
   "metric_events",
   {

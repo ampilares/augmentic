@@ -156,8 +156,15 @@ export default async function WorkChartPage({
       {agentRows.length === 0 ? (
         <EmptyState
           title="Your work chart is empty"
-          hint="Hire your first AI employee to start mapping work. Templates take about a minute to set up."
-          action={<LinkButton href={`/w/${slug}/agents/hire`}>Hire your first AI employee</LinkButton>}
+          hint="Answer five quick questions and we'll propose your first AI employees — or hire one directly from a template."
+          action={
+            <div className="flex gap-3">
+              <LinkButton href={`/w/${slug}/onboarding`}>Set up my AI team</LinkButton>
+              <LinkButton href={`/w/${slug}/agents/hire`} variant="secondary">
+                Hire from a template
+              </LinkButton>
+            </div>
+          }
         />
       ) : (
         <Card className="overflow-x-auto p-6">

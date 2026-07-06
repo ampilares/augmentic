@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { and, eq } from "drizzle-orm";
-import { approvalRequests } from "@augmentic/db";
+import { and, eq, isNull } from "drizzle-orm";
+import { approvalRequests, notifications } from "@augmentic/db";
 import { requireWorkspace } from "@/lib/context";
 import { signOutAction } from "@/lib/actions/auth-actions";
 
@@ -10,12 +10,16 @@ const NAV = [
   { href: "/workflows", label: "Workflows", icon: "⚙" },
   { href: "/approvals", label: "Approvals", icon: "✓" },
   { href: "/runs", label: "Runs", icon: "▸" },
+  { href: "/notifications", label: "Notifications", icon: "◎" },
   { href: "/integrations", label: "Integrations", icon: "⌘" },
   { href: "/knowledge", label: "Knowledge", icon: "▤" },
   { href: "/brand", label: "Brand", icon: "◈" },
+  { href: "/roi", label: "ROI", icon: "↗" },
   { href: "/usage", label: "Usage", icon: "◔" },
+  { href: "/billing", label: "Billing", icon: "$" },
   { href: "/audit", label: "Audit", icon: "≡" },
   { href: "/team", label: "Team", icon: "☰" },
+  { href: "/settings", label: "Settings", icon: "⚒" },
 ];
 
 export default async function WorkspaceLayout({
@@ -27,15 +31,27 @@ export default async function WorkspaceLayout({
 }) {
   const { slug } = await params;
   const ctx = await requireWorkspace(slug);
-  const pending = await ctx.db
-    .select({ id: approvalRequests.id })
-    .from(approvalRequests)
-    .where(
-      and(
-        eq(approvalRequests.workspaceId, ctx.workspace.id),
-        eq(approvalRequests.status, "pending"),
+  const [pending, unread] = await Promise.all([
+    ctx.db
+      .select({ id: approvalRequests.id })
+      .from(approvalRequests)
+      .where(
+        and(
+          eq(approvalRequests.workspaceId, ctx.workspace.id),
+          eq(approvalRequests.status, "pending"),
+        ),
       ),
-    );
+    ctx.db
+      .select({ id: notifications.id })
+      .from(notifications)
+      .where(
+        and(
+          eq(notifications.workspaceId, ctx.workspace.id),
+          eq(notifications.userId, ctx.user.id),
+          isNull(notifications.readAt),
+        ),
+      ),
+  ]);
 
   return (
     <div className="flex min-h-screen">
@@ -60,6 +76,11 @@ export default async function WorkspaceLayout({
               {item.label === "Approvals" && pending.length > 0 && (
                 <span className="rounded-full bg-amber-100 px-1.5 text-xs font-semibold text-amber-800">
                   {pending.length}
+                </span>
+              )}
+              {item.label === "Notifications" && unread.length > 0 && (
+                <span className="rounded-full bg-brand-100 px-1.5 text-xs font-semibold text-brand-700">
+                  {unread.length}
                 </span>
               )}
             </Link>

@@ -31,6 +31,20 @@ export const OAUTH_PROVIDERS: Record<string, OAuthProviderConfig> = {
     clientIdEnv: "SLACK_CLIENT_ID",
     clientSecretEnv: "SLACK_CLIENT_SECRET",
   },
+  monday: {
+    authorizeUrl: "https://auth.monday.com/oauth2/authorize",
+    tokenUrl: "https://auth.monday.com/oauth2/token",
+    scopes: ["boards:read", "boards:write", "updates:write"],
+    clientIdEnv: "MONDAY_CLIENT_ID",
+    clientSecretEnv: "MONDAY_CLIENT_SECRET",
+  },
+  xero: {
+    authorizeUrl: "https://login.xero.com/identity/connect/authorize",
+    tokenUrl: "https://identity.xero.com/connect/token",
+    scopes: ["accounting.transactions.read", "accounting.contacts.read", "offline_access"],
+    clientIdEnv: "XERO_CLIENT_ID",
+    clientSecretEnv: "XERO_CLIENT_SECRET",
+  },
 };
 
 export function isOAuthConfigured(provider: string): boolean {

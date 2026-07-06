@@ -199,6 +199,131 @@ export const TOOL_CATALOG: ToolSpec[] = [
       additionalProperties: false,
     },
   },
+  // ---- monday.com (CRM / work management) -----------------------------------
+  {
+    provider: "monday",
+    name: "monday.list_boards",
+    description: "List monday.com boards visible to the connected account.",
+    riskTier: "read",
+    inputSchema: {
+      type: "object",
+      properties: {},
+      additionalProperties: false,
+    },
+  },
+  {
+    provider: "monday",
+    name: "monday.get_items",
+    description:
+      "Get items from a monday.com board with their column values (e.g. leads or deals with status, value, last contact).",
+    riskTier: "read",
+    inputSchema: {
+      type: "object",
+      properties: {
+        boardId: str("Board id from monday.list_boards"),
+        limit: { type: "number", description: "Max items (<=50)" },
+      },
+      required: ["boardId"],
+      additionalProperties: false,
+    },
+  },
+  {
+    provider: "monday",
+    name: "monday.create_item",
+    description: "Create an item (e.g. a new lead or task) on a monday.com board.",
+    riskTier: "internal_write",
+    inputSchema: {
+      type: "object",
+      properties: {
+        boardId: str("Target board id"),
+        name: str("Item name"),
+        columnValues: {
+          type: "object",
+          description: "Column values keyed by column id",
+        },
+      },
+      required: ["boardId", "name"],
+      additionalProperties: false,
+    },
+  },
+  {
+    provider: "monday",
+    name: "monday.update_item",
+    description:
+      "Update column values on an existing monday.com item (e.g. change deal stage).",
+    riskTier: "internal_write",
+    inputSchema: {
+      type: "object",
+      properties: {
+        itemId: str("Item id"),
+        columnValues: {
+          type: "object",
+          description: "Column values keyed by column id",
+        },
+      },
+      required: ["itemId", "columnValues"],
+      additionalProperties: false,
+    },
+  },
+  {
+    provider: "monday",
+    name: "monday.add_update",
+    description: "Post an update (comment/note) on a monday.com item.",
+    riskTier: "internal_write",
+    inputSchema: {
+      type: "object",
+      properties: {
+        itemId: str("Item id"),
+        body: str("Update text"),
+      },
+      required: ["itemId", "body"],
+      additionalProperties: false,
+    },
+  },
+  // ---- Xero (finance) ---------------------------------------------------------
+  {
+    provider: "xero",
+    name: "xero.list_invoices",
+    description:
+      "List invoices from Xero with status, amounts, and due dates. Filter by status (DRAFT, AUTHORISED, PAID, OVERDUE).",
+    riskTier: "read",
+    inputSchema: {
+      type: "object",
+      properties: {
+        status: str("Optional status filter, e.g. OVERDUE or AUTHORISED"),
+        limit: { type: "number", description: "Max invoices (<=50)" },
+      },
+      additionalProperties: false,
+    },
+  },
+  {
+    provider: "xero",
+    name: "xero.get_contact",
+    description: "Fetch a Xero contact with billing email and outstanding balance.",
+    riskTier: "read",
+    inputSchema: {
+      type: "object",
+      properties: { contactId: str("Xero contact id") },
+      required: ["contactId"],
+      additionalProperties: false,
+    },
+  },
+  {
+    provider: "xero",
+    name: "xero.create_invoice_reminder_note",
+    description:
+      "Attach an internal history note to a Xero invoice recording a chase/reminder action.",
+    riskTier: "internal_write",
+    inputSchema: {
+      type: "object",
+      properties: {
+        invoiceId: str("Xero invoice id"),
+        note: str("Note text"),
+      },
+      required: ["invoiceId", "note"],
+      additionalProperties: false,
+    },
+  },
   // ---- Internal ---------------------------------------------------------------
   {
     provider: "internal",
@@ -233,6 +358,18 @@ export const CONNECTOR_PROVIDERS = [
     label: "Slack",
     description: "Read channels and post updates to your team.",
     subProviders: ["slack"],
+  },
+  {
+    provider: "monday",
+    label: "monday.com",
+    description: "Boards, leads, and deals — read items and propose updates.",
+    subProviders: ["monday"],
+  },
+  {
+    provider: "xero",
+    label: "Xero",
+    description: "Invoices and contacts for payment chasing and cash snapshots.",
+    subProviders: ["xero"],
   },
   {
     provider: "webhook",
