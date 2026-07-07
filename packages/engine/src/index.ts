@@ -6,3 +6,4 @@ export { recordAudit, recordUsage, recordActivationMetric, type AuditInput } fro
 export { checkAgentBudget, type BudgetStatus } from "./budget";
 export { encryptSecret, decryptSecret } from "./secrets";
 export { notifyWorkspace, type NotifyInput } from "./notifications";
+export { checkPlanLimits, type PlanStatus } from "./plan-limits";

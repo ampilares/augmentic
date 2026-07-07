@@ -36,7 +36,9 @@ import {
   type Usage,
 } from "@augmentic/agent-runtime";
 import {
+  ConnectorError,
   executeTool,
+  refreshAccessToken,
   type ConnectionInfo,
   type ToolExecutionContext,
 } from "@augmentic/connectors";
@@ -44,6 +46,7 @@ import { and, eq, inArray } from "drizzle-orm";
 import { recordActivationMetric, recordAudit, recordUsage } from "./audit";
 import { checkAgentBudget } from "./budget";
 import { notifyWorkspace } from "./notifications";
+import { checkPlanLimits } from "./plan-limits";
 import { decryptSecret } from "./secrets";
 
 // ---------------------------------------------------------------------------
@@ -346,8 +349,13 @@ async function executePipeline(db: Db, run: RunRow): Promise<void> {
     );
 
   // Enabled skills contribute their know-how to prompt assembly (Spec §6).
-  const enabledSkills = await db
-    .select({ name: skills.name, instructions: skills.instructions })
+  const enabledSkillRows = await db
+    .select({
+      name: skills.name,
+      instructions: skills.instructions,
+      inputSchema: skills.inputSchema,
+      outputSchema: skills.outputSchema,
+    })
     .from(agentSkills)
     .innerJoin(skills, eq(agentSkills.skillId, skills.id))
     .where(
@@ -357,6 +365,16 @@ async function executePipeline(db: Db, run: RunRow): Promise<void> {
         eq(agentSkills.enabled, true),
       ),
     );
+  const enabledSkills = enabledSkillRows.map((s) => ({
+    name: s.name,
+    instructions: [
+      s.instructions,
+      s.inputSchema ? `Expected input shape: ${JSON.stringify(s.inputSchema)}` : "",
+      s.outputSchema ? `Required output shape: ${JSON.stringify(s.outputSchema)}` : "",
+    ]
+      .filter(Boolean)
+      .join("\n"),
+  }));
 
   const delivery = (workflow?.deliveryConfig ?? { target: "run_log" }) as {
     target?: string;
@@ -418,6 +436,8 @@ async function executePipeline(db: Db, run: RunRow): Promise<void> {
     if (!spec) throw new Error(`Unknown tool ${call.toolName}`);
     const conn = resolveConnection(spec.provider);
     let connectionInfo: ConnectionInfo | null = null;
+    let storedRefreshToken: string | undefined;
+    let storedTenantId: string | undefined;
     if (conn) {
       let accessToken: string | undefined;
       if (!conn.isDemo && conn.secretRefId) {
@@ -428,8 +448,12 @@ async function executePipeline(db: Db, run: RunRow): Promise<void> {
         if (secret) {
           const parsed = JSON.parse(decryptSecret(secret.ciphertext)) as {
             accessToken?: string;
+            refreshToken?: string;
+            tenantId?: string;
           };
           accessToken = parsed.accessToken;
+          storedRefreshToken = parsed.refreshToken;
+          storedTenantId = parsed.tenantId;
         }
       }
       connectionInfo = {
@@ -438,6 +462,7 @@ async function executePipeline(db: Db, run: RunRow): Promise<void> {
         isDemo: conn.isDemo,
         accountLabel: conn.accountLabel,
         accessToken,
+        tenantId: storedTenantId,
       };
     }
 
@@ -472,7 +497,44 @@ async function executePipeline(db: Db, run: RunRow): Promise<void> {
     if (call.toolName === "knowledge.search") {
       result = await searchKnowledge(db, run.workspaceId, String(call.args.query ?? ""), Number(call.args.limit ?? 5));
     } else {
-      result = await executeTool(call.toolName, call.args, execCtx);
+      try {
+        result = await executeTool(call.toolName, call.args, execCtx);
+      } catch (err) {
+        // Expired OAuth token: refresh once, persist, retry (Plan 2.6).
+        const canRefresh =
+          err instanceof ConnectorError &&
+          err.code === "not_connected" &&
+          connectionInfo &&
+          !connectionInfo.isDemo &&
+          storedRefreshToken &&
+          conn?.secretRefId;
+        if (!canRefresh) throw err;
+        const refreshed = await refreshAccessToken(
+          connectionInfo!.provider === "gmail" ||
+            connectionInfo!.provider === "gcal" ||
+            connectionInfo!.provider === "gdrive"
+            ? "google"
+            : connectionInfo!.provider,
+          storedRefreshToken!,
+        );
+        await db
+          .update(secretRefs)
+          .set({
+            ciphertext: (await import("./secrets")).encryptSecret(
+              JSON.stringify({
+                accessToken: refreshed.accessToken,
+                refreshToken: refreshed.refreshToken,
+                tenantId: storedTenantId,
+              }),
+            ),
+            rotatedAt: new Date(),
+          })
+          .where(eq(secretRefs.id, conn!.secretRefId!));
+        result = await executeTool(call.toolName, call.args, {
+          ...execCtx,
+          connection: { ...connectionInfo!, accessToken: refreshed.accessToken },
+        });
+      }
     }
 
     await db
@@ -520,6 +582,14 @@ async function executePipeline(db: Db, run: RunRow): Promise<void> {
       }
       if (run.mode === "live" && agent.status === "paused") {
         throw new RunBlockedError("Agent is paused.");
+      }
+      if (run.mode === "live") {
+        const planStatus = await checkPlanLimits(db, run.workspaceId);
+        if (planStatus.runLimitReached) {
+          throw new RunBlockedError(
+            `Monthly run limit reached (${planStatus.plan.monthlyRunLimit} on ${planStatus.plan.name}). Upgrade the plan to resume — no work has been lost.`,
+          );
+        }
       }
       const budget = await checkAgentBudget(db, run.workspaceId, run.agentId);
       if (!budget.ok) {

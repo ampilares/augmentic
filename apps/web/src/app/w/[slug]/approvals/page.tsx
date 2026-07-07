@@ -1,8 +1,16 @@
 import Link from "next/link";
 import { desc, eq } from "drizzle-orm";
-import { agents, approvalRequests, integrationConnections } from "@augmentic/db";
+import {
+  agents,
+  approvalLinks,
+  approvalRequests,
+  integrationConnections,
+} from "@augmentic/db";
 import { requireWorkspace, roleAtLeast } from "@/lib/context";
-import { decideApprovalAction } from "@/lib/actions/approval-actions";
+import {
+  createApprovalLinkAction,
+  decideApprovalAction,
+} from "@/lib/actions/approval-actions";
 import {
   Button,
   Card,
@@ -42,6 +50,12 @@ export default async function ApprovalsPage({
     .select()
     .from(integrationConnections)
     .where(eq(integrationConnections.workspaceId, ctx.workspace.id));
+
+  const links = await ctx.db
+    .select()
+    .from(approvalLinks)
+    .where(eq(approvalLinks.workspaceId, ctx.workspace.id));
+  const baseUrl = process.env.AUGMENTIC_BASE_URL ?? "http://localhost:3000";
 
   const pending = rows.filter((r) => r.approval.status === "pending");
   const history = rows.filter((r) => r.approval.status !== "pending");
@@ -115,7 +129,7 @@ export default async function ApprovalsPage({
                   </div>
                 </div>
 
-                <div className="mt-4 grid grid-cols-2 gap-4 text-sm">
+                <div className="mt-4 grid grid-cols-1 gap-4 text-sm sm:grid-cols-2">
                   <div>
                     <p className="text-xs font-medium uppercase text-slate-400">
                       Original instruction
@@ -160,7 +174,7 @@ export default async function ApprovalsPage({
 
                 {a.status === "pending" && canApprove && (
                   <div className="mt-4 border-t border-slate-100 pt-4">
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                       <form
                         action={decideApprovalAction.bind(null, slug, a.id)}
                         className="space-y-2"
@@ -211,6 +225,37 @@ export default async function ApprovalsPage({
                         </div>
                       </form>
                     </div>
+                  </div>
+                )}
+                {a.status === "pending" && canApprove && (
+                  <div className="mt-3 border-t border-slate-100 pt-3">
+                    {links
+                      .filter((l) => l.approvalRequestId === a.id && l.expiresAt > new Date())
+                      .map((l) => (
+                        <p key={l.id} className="mb-1 break-all text-xs text-slate-500">
+                          🔗 Client link{l.label ? ` (${l.label})` : ""}:{" "}
+                          <code className="rounded bg-slate-50 px-1">
+                            {baseUrl}/approve/{l.token}
+                          </code>{" "}
+                          · expires {new Date(l.expiresAt).toLocaleDateString()}
+                        </p>
+                      ))}
+                    <form
+                      action={createApprovalLinkAction.bind(null, slug, a.id)}
+                      className="flex flex-wrap items-center gap-2"
+                    >
+                      <Input
+                        name="label"
+                        placeholder="Client name (optional)"
+                        className="!w-52"
+                      />
+                      <Button variant="secondary" type="submit">
+                        Share for external approval
+                      </Button>
+                      <span className="text-xs text-slate-400">
+                        Approval-only page, no workspace access, expires in 7 days.
+                      </span>
+                    </form>
                   </div>
                 )}
                 {a.status !== "pending" && (

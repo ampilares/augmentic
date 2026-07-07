@@ -607,6 +607,29 @@ export const approvalRequests = pgTable(
   (t) => [index("approvals_ws_status_idx").on(t.workspaceId, t.status)],
 );
 
+// Client-safe approval links (FR-024): tokenized, expiring, approval-only
+// external access — no workspace visibility. External decisions are audited
+// with the link id as the actor reference.
+export const approvalLinks = pgTable(
+  "approval_links",
+  {
+    id: id(),
+    workspaceId: uuid("workspace_id")
+      .notNull()
+      .references(() => workspaces.id, { onDelete: "cascade" }),
+    approvalRequestId: uuid("approval_request_id")
+      .notNull()
+      .references(() => approvalRequests.id, { onDelete: "cascade" }),
+    token: text("token").notNull().unique(),
+    label: text("label"),
+    createdByUserId: uuid("created_by_user_id").references(() => users.id),
+    expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+    usedAt: timestamp("used_at", { withTimezone: true }),
+    createdAt: createdAt(),
+  },
+  (t) => [index("approval_links_req_idx").on(t.approvalRequestId)],
+);
+
 export const artifacts = pgTable("artifacts", {
   id: id(),
   workspaceId: uuid("workspace_id")

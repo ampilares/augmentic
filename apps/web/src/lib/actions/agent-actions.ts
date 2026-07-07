@@ -14,7 +14,7 @@ import {
   memoryItemSchema,
   updateToolPermissionSchema,
 } from "@augmentic/shared";
-import { recordActivationMetric, recordAudit } from "@augmentic/engine";
+import { checkPlanLimits, recordActivationMetric, recordAudit } from "@augmentic/engine";
 import { requireWorkspace } from "../context";
 import { applyTemplateDefaults } from "../services/agent-provisioning";
 
@@ -23,6 +23,12 @@ export async function hireAgentAction(
   formData: FormData,
 ): Promise<void> {
   const ctx = await requireWorkspace(workspaceSlug, "operator");
+  const planStatus = await checkPlanLimits(ctx.db, ctx.workspace.id);
+  if (planStatus.agentLimitReached) {
+    throw new Error(
+      `Your ${planStatus.plan.name} plan allows ${planStatus.plan.agentLimit} AI employee${planStatus.plan.agentLimit === 1 ? "" : "s"}. Upgrade on the Billing page to hire more.`,
+    );
+  }
   const parsed = hireAgentSchema.parse({
     templateId: (formData.get("templateId") as string) || null,
     name: formData.get("name"),

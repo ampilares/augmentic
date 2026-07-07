@@ -74,6 +74,45 @@ export function getAuthorizeUrl(
   return `${cfg.authorizeUrl}?${params}`;
 }
 
+// Refresh an expired access token (Plan 2.6 hardening). Google and Xero
+// tokens are short-lived; the engine retries once with a refreshed token on
+// auth failure and re-encrypts the new secret.
+export async function refreshAccessToken(
+  provider: string,
+  refreshToken: string,
+): Promise<{ accessToken: string; refreshToken?: string }> {
+  const cfg = OAUTH_PROVIDERS[provider];
+  if (!cfg) throw new Error(`Unknown OAuth provider ${provider}`);
+  const res = await fetch(cfg.tokenUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({
+      client_id: process.env[cfg.clientIdEnv] ?? "",
+      client_secret: process.env[cfg.clientSecretEnv] ?? "",
+      grant_type: "refresh_token",
+      refresh_token: refreshToken,
+    }),
+  });
+  const json = (await res.json()) as Record<string, unknown>;
+  if (!json.access_token) {
+    throw new Error(`Token refresh failed for ${provider}: ${JSON.stringify(json).slice(0, 200)}`);
+  }
+  return {
+    accessToken: json.access_token as string,
+    refreshToken: (json.refresh_token as string | undefined) ?? refreshToken,
+  };
+}
+
+// Xero API calls require the tenant (organisation) id alongside the token.
+export async function fetchXeroTenantId(accessToken: string): Promise<string | undefined> {
+  const res = await fetch("https://api.xero.com/connections", {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  });
+  if (!res.ok) return undefined;
+  const json = (await res.json()) as { tenantId?: string }[];
+  return json[0]?.tenantId;
+}
+
 export async function exchangeCode(
   provider: string,
   code: string,

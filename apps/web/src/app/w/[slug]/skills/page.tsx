@@ -120,6 +120,24 @@ export default async function SkillsPage({
                 />
               </div>
               <div>
+                <Label>Input schema (optional JSON)</Label>
+                <Textarea
+                  name="inputSchema"
+                  rows={2}
+                  placeholder='{"type":"object","properties":{"clientName":{"type":"string"}}}'
+                  className="font-mono !text-xs"
+                />
+              </div>
+              <div>
+                <Label>Output schema (optional JSON)</Label>
+                <Textarea
+                  name="outputSchema"
+                  rows={2}
+                  placeholder='{"type":"object","properties":{"summary":{"type":"string"}}}'
+                  className="font-mono !text-xs"
+                />
+              </div>
+              <div>
                 <Label>Tools this skill uses (optional)</Label>
                 <div className="max-h-40 space-y-1 overflow-y-auto rounded-lg border border-slate-200 p-2">
                   {TOOL_CATALOG.map((t) => (
