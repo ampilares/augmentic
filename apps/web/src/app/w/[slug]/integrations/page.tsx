@@ -1,13 +1,22 @@
 import { eq } from "drizzle-orm";
-import { integrationConnections } from "@augmentic/db";
+import { integrationConnections, mcpServers } from "@augmentic/db";
 import { CONNECTOR_PROVIDERS, TOOL_CATALOG } from "@augmentic/shared";
-import { isOAuthConfigured } from "@augmentic/connectors";
+import { isOAuthConfigured, type McpToolInfo } from "@augmentic/connectors";
 import { requireWorkspace, roleAtLeast } from "@/lib/context";
 import {
   connectDemoAction,
   disconnectIntegrationAction,
 } from "@/lib/actions/integration-actions";
-import { Button, Card, PageHeader, RiskBadge, StatusBadge } from "@/components/ui";
+import { addMcpServerAction, removeMcpServerAction } from "@/lib/actions/mcp-actions";
+import {
+  Button,
+  Card,
+  Input,
+  Label,
+  PageHeader,
+  RiskBadge,
+  StatusBadge,
+} from "@/components/ui";
 
 export default async function IntegrationsPage({
   params,
@@ -22,6 +31,10 @@ export default async function IntegrationsPage({
     .from(integrationConnections)
     .where(eq(integrationConnections.workspaceId, ctx.workspace.id));
   const connByProvider = new Map(connections.map((c) => [c.provider, c]));
+  const mcpRows = await ctx.db
+    .select()
+    .from(mcpServers)
+    .where(eq(mcpServers.workspaceId, ctx.workspace.id));
 
   return (
     <div>
@@ -104,6 +117,70 @@ export default async function IntegrationsPage({
             </Card>
           );
         })}
+      </div>
+
+      <div className="mt-10">
+        <h2 className="mb-1 text-lg font-semibold text-slate-900">
+          Trusted MCP servers <span className="text-sm font-normal text-slate-400">(advanced)</span>
+        </h2>
+        <p className="mb-4 text-sm text-slate-500">
+          Allowlist a Model Context Protocol server to open its tools to your agents. Every
+          MCP call requires human approval and the exact payload shared is logged to the
+          audit trail.
+        </p>
+        <div className="grid gap-4 sm:grid-cols-2">
+          {mcpRows.map((server) => (
+            <Card key={server.id}>
+              <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0">
+                  <p className="font-medium text-slate-900">{server.name}</p>
+                  <p className="break-all text-xs text-slate-400">{server.url}</p>
+                </div>
+                <StatusBadge status={server.enabled ? "connected" : "paused"} />
+              </div>
+              <div className="mt-3 flex flex-wrap gap-1.5">
+                {((server.toolsCache ?? []) as McpToolInfo[]).map((t) => (
+                  <span
+                    key={t.name}
+                    className="inline-flex items-center gap-1 rounded bg-slate-50 px-1.5 py-0.5 text-[11px] text-slate-600"
+                    title={t.description}
+                  >
+                    mcp.{server.slug}.{t.name} <RiskBadge tier="external_send" />
+                  </span>
+                ))}
+              </div>
+              {canManage && (
+                <form action={removeMcpServerAction.bind(null, slug, server.id)} className="mt-3">
+                  <Button variant="secondary" type="submit">Remove</Button>
+                </form>
+              )}
+            </Card>
+          ))}
+          {canManage && (
+            <Card>
+              <h3 className="mb-3 font-medium text-slate-900">Add MCP server</h3>
+              <form action={addMcpServerAction.bind(null, slug)} className="space-y-3">
+                <div>
+                  <Label>Name</Label>
+                  <Input name="name" required placeholder="Internal tools" />
+                </div>
+                <div>
+                  <Label>URL (Streamable HTTP endpoint)</Label>
+                  <Input name="url" type="url" required placeholder="https://mcp.example.com/mcp" />
+                </div>
+                <div>
+                  <Label>Bearer token (optional)</Label>
+                  <Input name="authToken" type="password" placeholder="Stored encrypted" />
+                </div>
+                <Button type="submit">Discover tools & allowlist</Button>
+                <p className="text-xs text-slate-400">
+                  Registration calls tools/list as a health check and fails loudly if the
+                  server is unreachable.
+                </p>
+              </form>
+            </Card>
+          )}
+        </div>
       </div>
     </div>
   );
