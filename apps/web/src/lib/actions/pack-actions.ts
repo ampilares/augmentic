@@ -12,7 +12,7 @@ import {
   workflowTriggers,
 } from "@augmentic/db";
 import { VERTICAL_PACKS } from "@augmentic/db/seed";
-import { recordAudit } from "@augmentic/engine";
+import { checkAgentQuota, recordAudit } from "@augmentic/engine";
 import { requireWorkspace } from "../context";
 import { applyTemplateDefaults } from "../services/agent-provisioning";
 
@@ -40,6 +40,17 @@ export async function installPackAction(
     ctx.db.select().from(workflowTemplates),
     ctx.db.select().from(agents).where(eq(agents.workspaceId, ctx.workspace.id)),
   ]);
+
+  // Plan gate (2.5): the pack only creates agents that don't already exist,
+  // so check quota against the net-new count.
+  const netNew = pack.agentTemplateSlugs.filter((slug) => {
+    const template = templates.find((t) => t.slug === slug);
+    return template && !existingAgents.some((a) => a.templateId === template.id);
+  }).length;
+  if (netNew > 0) {
+    const quota = await checkAgentQuota(ctx.db, ctx.workspace.id, netNew);
+    if (!quota.allowed) redirect(`/w/${workspaceSlug}/billing?limit=agents`);
+  }
 
   // Create (or reuse) one agent per pack role.
   const agentByTemplateSlug = new Map<string, string>();

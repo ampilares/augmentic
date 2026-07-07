@@ -221,6 +221,60 @@ export const WORKFLOW_TEMPLATE_SEEDS: WorkflowTemplateSeed[] = [
     successMetric: "≥3 of 5 drafts approved weekly with light edits",
   },
   {
+    slug: "new-lead-intake",
+    category: "Sales",
+    name: "New lead intake",
+    description:
+      "Triage inbound lead emails: log them to the CRM board (with approval) and draft the intro reply.",
+    instructions:
+      "Search the inbox for new inbound leads from the last day (intro requests, demo requests, referrals). For each: extract name, company, and what they're asking for; propose a new item on the CRM leads board with those fields (this goes to approval); and draft a warm intro reply matched to the brand tone. Never send the reply — draft only.",
+    dependencies: ["google", "monday"],
+    sampleOutput:
+      "2 new leads: R. Patel (BrightLabs) demo request → board item proposed, intro drafted · referral from J. Kim → board item proposed, intro drafted",
+    triggerOptions: ["schedule", "app_event", "manual"],
+    defaultRoleSlug: "sales-ops-rep",
+    requiredScopes: ["gmail.read", "gmail.draft", "monday.write"],
+    defaultApprovalPolicy: {
+      "monday.create_item": "require_approval",
+      "gmail.send_email": "require_approval",
+    },
+    successMetric: "Inbound leads logged and answered within 1 business day",
+  },
+  {
+    slug: "weekly-finance-snapshot",
+    category: "Finance",
+    name: "Weekly finance snapshot",
+    description:
+      "Weekly accounts-receivable picture from your books: overdue total, aging buckets, and who to chase.",
+    instructions:
+      "Read invoices from the connected accounting system. Build an AR snapshot: total outstanding, total overdue, aging buckets (1–7, 8–30, 31+ days), and the top overdue accounts with amounts and days late. Recommend which invoices the chaser workflow should target this week. Post the snapshot to the configured Slack channel.",
+    dependencies: ["xero", "slack"],
+    sampleOutput:
+      "*AR snapshot — week 27*\nOutstanding $18,450 · Overdue $6,120\n1–7d: $950 · 8–30d: $3,770 · 31+d: $1,400\nChase first: Acme INV-204 ($3,400, 12d), BrightLabs INV-198 ($950, 4d)",
+    triggerOptions: ["schedule", "manual"],
+    defaultRoleSlug: "finance-admin",
+    requiredScopes: ["xero.read", "slack.write"],
+    defaultApprovalPolicy: {},
+    successMetric: "Owner knows the AR position every Monday without opening the books",
+  },
+  {
+    slug: "client-kickoff-pack",
+    category: "Client success",
+    name: "Client kickoff pack",
+    description:
+      "When a deal closes, assemble the kickoff: welcome email draft, kickoff doc, and internal announcement.",
+    instructions:
+      "Given the new client named in the trigger (or the most recently won deal), prepare the kickoff pack: create a kickoff document from the knowledge-base template with client name, scope, and key contacts filled in; draft a welcome email to the client with next steps and scheduling link; and post a short internal announcement to the configured Slack channel. The welcome email is a draft — never send.",
+    dependencies: ["google", "slack"],
+    sampleOutput:
+      "Kickoff pack for Acme: doc 'Acme — Kickoff' created · welcome draft to j.reyes@acme.com · #wins announcement posted",
+    triggerOptions: ["manual", "webhook"],
+    defaultRoleSlug: "client-success-rep",
+    requiredScopes: ["gdrive.write", "gmail.draft", "slack.write"],
+    defaultApprovalPolicy: { "gmail.send_email": "require_approval" },
+    successMetric: "Every closed deal has a kickoff pack the same day",
+  },
+  {
     slug: "webhook-task-intake",
     category: "Operations",
     name: "Webhook task intake",

@@ -31,7 +31,13 @@ export async function createWorkspaceAction(formData: FormData): Promise<void> {
   const slug = slugify(parsed.name);
   const [ws] = await db
     .insert(workspaces)
-    .values({ name: parsed.name, slug })
+    .values({
+      name: parsed.name,
+      slug,
+      // 14-day Growth trial (plan 2.5): roomy enough for the onboarding pack;
+      // limits drop to Starter when it lapses unless a plan is chosen.
+      settings: { trialEndsAt: new Date(Date.now() + 14 * 86_400_000).toISOString() },
+    })
     .returning({ id: workspaces.id, slug: workspaces.slug });
   await db.insert(memberships).values({
     workspaceId: ws!.id,
@@ -61,6 +67,22 @@ export async function inviteMemberAction(
     email: formData.get("email"),
     role: formData.get("role"),
   });
+  // Allowed-domain policy (plan 3.3): when configured, invites outside the
+  // list are rejected server-side.
+  const [wsRow] = await ctx.db
+    .select({ settings: workspaces.settings })
+    .from(workspaces)
+    .where(eq(workspaces.id, ctx.workspace.id));
+  const allowed = (wsRow?.settings as { allowedEmailDomains?: string[] } | null)
+    ?.allowedEmailDomains;
+  if (allowed && allowed.length > 0) {
+    const domain = parsed.email.split("@")[1]?.toLowerCase() ?? "";
+    if (!allowed.includes(domain)) {
+      throw new Error(
+        `Invites are restricted to: ${allowed.join(", ")}. Ask an admin to update the allowed domains in Settings.`,
+      );
+    }
+  }
   // Existing user: add membership directly. Otherwise create an invitation.
   const [existingUser] = await ctx.db
     .select({ id: users.id })

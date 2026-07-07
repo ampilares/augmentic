@@ -1,16 +1,20 @@
 import {
+  approvalRequests,
   integrationConnections,
   workflowRuns,
   workflows,
   workflowTriggers,
+  workspaces,
   type Db,
 } from "@augmentic/db";
-import { and, eq, isNotNull, lt, lte, sql } from "drizzle-orm";
+import { and, eq, gte, isNotNull, lt, lte, sql } from "drizzle-orm";
 import { Cron } from "croner";
 import crypto from "node:crypto";
 import { executeTool } from "@augmentic/connectors";
 import { enqueueRun } from "./enqueue";
+import { notifyWorkspace } from "./notifications";
 import { processRun } from "./pipeline";
+import { purgeExpiredData } from "./retention";
 
 const WORKER_ID = `worker-${crypto.randomBytes(4).toString("hex")}`;
 const ORPHAN_TIMEOUT_MS = 60_000;
@@ -27,6 +31,7 @@ export function startEngine(db: Db): void {
   started = true;
   let lastAppEventPoll = 0;
   let lastCheckpoint = 0;
+  let lastWeeklySummaryCheck = 0;
   const tick = async () => {
     try {
       await reapOrphans(db);
@@ -34,6 +39,11 @@ export function startEngine(db: Db): void {
       if (Date.now() - lastAppEventPoll > 60_000) {
         lastAppEventPoll = Date.now();
         await pollAppEvents(db);
+      }
+      if (Date.now() - lastWeeklySummaryCheck > 3_600_000) {
+        lastWeeklySummaryCheck = Date.now();
+        await sendWeeklySummaries(db);
+        await purgeExpiredData(db);
       }
       if (Date.now() - lastCheckpoint > 15_000) {
         lastCheckpoint = Date.now();
@@ -176,6 +186,89 @@ async function fireDueSchedules(db: Db): Promise<void> {
       workflowId: trigger.workflowId,
       triggerType: "schedule",
       triggerSnapshot: { firedAt: now.toISOString(), cron },
+    });
+  }
+}
+
+// Weekly value-summary (FR-021): once a week per workspace, digest of work
+// completed, spend, and approval activity. The sent-marker lives in
+// workspace.settings and is advanced before sending (coalescing, same as
+// schedule firing) so concurrent workers can't double-send.
+async function sendWeeklySummaries(db: Db): Promise<void> {
+  const WEEK_MS = 7 * 86_400_000;
+  const now = new Date();
+  const wsRows = await db.select().from(workspaces);
+  for (const ws of wsRows) {
+    const settings = (ws.settings ?? {}) as Record<string, unknown> & {
+      weeklySummarySentAt?: string;
+    };
+    const last = settings.weeklySummarySentAt
+      ? Date.parse(settings.weeklySummarySentAt)
+      : null;
+    if (last !== null && now.getTime() - last < WEEK_MS) continue;
+    // New workspaces get their first summary one week after creation.
+    if (last === null && now.getTime() - new Date(ws.createdAt).getTime() < WEEK_MS) {
+      continue;
+    }
+    const claimed = await db
+      .update(workspaces)
+      .set({
+        settings: { ...settings, weeklySummarySentAt: now.toISOString() },
+        updatedAt: now,
+      })
+      .where(
+        and(
+          eq(workspaces.id, ws.id),
+          // Re-check the marker so a concurrent worker can't also claim.
+          last === null
+            ? sql`(${workspaces.settings} ->> 'weeklySummarySentAt') IS NULL`
+            : sql`(${workspaces.settings} ->> 'weeklySummarySentAt') = ${new Date(last).toISOString()}`,
+        ),
+      )
+      .returning({ id: workspaces.id });
+    if (claimed.length === 0) continue;
+
+    const since = new Date(now.getTime() - WEEK_MS);
+    const runs = await db
+      .select({ status: workflowRuns.status, costCents: workflowRuns.costCents })
+      .from(workflowRuns)
+      .where(
+        and(
+          eq(workflowRuns.workspaceId, ws.id),
+          eq(workflowRuns.mode, "live"),
+          gte(workflowRuns.createdAt, since),
+        ),
+      );
+    const approvals = await db
+      .select({ status: approvalRequests.status })
+      .from(approvalRequests)
+      .where(
+        and(
+          eq(approvalRequests.workspaceId, ws.id),
+          gte(approvalRequests.createdAt, since),
+        ),
+      );
+    if (runs.length === 0 && approvals.length === 0) continue; // nothing to report
+    const completed = runs.filter((r) => r.status === "succeeded").length;
+    const failed = runs.filter(
+      (r) => r.status === "failed" || r.status === "blocked",
+    ).length;
+    const costCents = runs.reduce((acc, r) => acc + r.costCents, 0);
+    const decided = approvals.filter((a) => a.status !== "pending").length;
+    const pending = approvals.filter((a) => a.status === "pending").length;
+    const parts = [
+      `${completed} workflow run${completed === 1 ? "" : "s"} completed`,
+      `${decided} approval${decided === 1 ? "" : "s"} decided`,
+      `$${(costCents / 100).toFixed(2)} spent`,
+    ];
+    if (failed > 0) parts.push(`${failed} failed or blocked`);
+    if (pending > 0) parts.push(`${pending} still waiting on approval`);
+    await notifyWorkspace(db, {
+      workspaceId: ws.id,
+      kind: "weekly_summary",
+      title: `Your AI team this week: ${completed} runs completed`,
+      body: `${parts.join(" · ")}. Open the ROI dashboard for the full picture.`,
+      href: "/roi",
     });
   }
 }

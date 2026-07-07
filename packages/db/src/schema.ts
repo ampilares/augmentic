@@ -607,6 +607,33 @@ export const approvalRequests = pgTable(
   (t) => [index("approvals_ws_status_idx").on(t.workspaceId, t.status)],
 );
 
+// Client-safe approval links (FR-024): a tokenized, approval-only external
+// view of a single approval request. No workspace access; expiring; every
+// external decision is audited with the recipient label.
+export const approvalLinks = pgTable(
+  "approval_links",
+  {
+    id: id(),
+    workspaceId: uuid("workspace_id")
+      .notNull()
+      .references(() => workspaces.id, { onDelete: "cascade" }),
+    approvalRequestId: uuid("approval_request_id")
+      .notNull()
+      .references(() => approvalRequests.id, { onDelete: "cascade" }),
+    token: text("token").notNull().unique(),
+    // Who the link was sent to (client name/email) — shown in the audit trail.
+    recipientLabel: text("recipient_label").notNull(),
+    createdByUserId: uuid("created_by_user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+    revokedAt: timestamp("revoked_at", { withTimezone: true }),
+    usedAt: timestamp("used_at", { withTimezone: true }),
+    createdAt: createdAt(),
+  },
+  (t) => [index("approval_links_request_idx").on(t.approvalRequestId)],
+);
+
 export const artifacts = pgTable("artifacts", {
   id: id(),
   workspaceId: uuid("workspace_id")
@@ -771,7 +798,10 @@ export const chatMessages = pgTable(
       .references(() => chatThreads.id, { onDelete: "cascade" }),
     role: text("role").$type<"user" | "agent">().notNull(),
     content: text("content").notNull(),
-    workflowRunId: uuid("workflow_run_id").references(() => workflowRuns.id),
+    // set null so retention purges of old runs don't strand chat history.
+    workflowRunId: uuid("workflow_run_id").references(() => workflowRuns.id, {
+      onDelete: "set null",
+    }),
     createdAt: createdAt(),
   },
   (t) => [index("chat_messages_thread_idx").on(t.threadId)],

@@ -1,6 +1,6 @@
 import { and, desc, eq } from "drizzle-orm";
 import { auditEvents } from "@augmentic/db";
-import { requireWorkspace } from "@/lib/context";
+import { requireWorkspace, roleAtLeast } from "@/lib/context";
 import { Card, EmptyState, PageHeader } from "@/components/ui";
 
 export default async function AuditPage({
@@ -32,6 +32,24 @@ export default async function AuditPage({
       <PageHeader
         title="Audit log"
         subtitle="Append-only record of every mutation, approval, and external write."
+        action={
+          roleAtLeast(ctx.role, "admin") ? (
+            <div className="flex gap-2 text-xs">
+              <a
+                href={`/api/workspaces/${slug}/audit/export?format=csv`}
+                className="rounded border border-slate-200 px-2.5 py-1.5 font-medium text-slate-600 hover:bg-slate-50"
+              >
+                Export CSV
+              </a>
+              <a
+                href={`/api/workspaces/${slug}/audit/export?format=json`}
+                className="rounded border border-slate-200 px-2.5 py-1.5 font-medium text-slate-600 hover:bg-slate-50"
+              >
+                Export JSON
+              </a>
+            </div>
+          ) : undefined
+        }
       />
       <div className="mb-4 flex flex-wrap gap-2 text-xs">
         <a

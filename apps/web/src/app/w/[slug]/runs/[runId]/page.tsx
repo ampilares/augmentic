@@ -9,9 +9,10 @@ import {
   workflowRuns,
   workflows,
 } from "@augmentic/db";
-import { requireWorkspace } from "@/lib/context";
+import { requireWorkspace, roleAtLeast } from "@/lib/context";
+import { requeueRunAction } from "@/lib/actions/billing-actions";
 import { RunStepsLive } from "@/components/RunStepsLive";
-import { Card, PageHeader, StatusBadge } from "@/components/ui";
+import { Button, Card, PageHeader, StatusBadge } from "@/components/ui";
 
 export default async function RunDetailPage({
   params,
@@ -51,6 +52,26 @@ export default async function RunDetailPage({
         title={wf?.name ?? (run.mode === "chat" ? "Chat task" : "Ad-hoc run")}
         subtitle={`${run.mode} run by ${agent?.name ?? "?"} · triggered via ${run.triggerType} · ${new Date(run.createdAt).toLocaleString()}`}
       />
+
+      {run.status === "blocked" && run.statusReason?.includes("Monthly run limit") && (
+        <Card className="mb-6 border-amber-300 bg-amber-50">
+          <div className="flex items-center justify-between gap-3">
+            <p className="text-sm text-amber-900">
+              ⏸ {run.statusReason}{" "}
+              <Link href={`/w/${slug}/billing`} className="font-medium underline">
+                Open Billing →
+              </Link>
+            </p>
+            {roleAtLeast(ctx.role, "operator") && (
+              <form action={requeueRunAction.bind(null, slug, run.id)}>
+                <Button variant="secondary" type="submit">
+                  Requeue
+                </Button>
+              </form>
+            )}
+          </div>
+        </Card>
+      )}
 
       {run.mode === "simulation" && (
         <Card className="mb-6 border-purple-200 bg-purple-50">
