@@ -42,6 +42,7 @@ export interface ChartData {
   workflows: ChartWorkflow[];
   tools: ChartTool[];
   pendingApprovalsByAgent: Record<string, number>;
+  handoffs: { fromAgentId: string; toAgentId: string }[];
 }
 
 interface EdgeSpec {
@@ -66,6 +67,12 @@ export function WorkChart({ data }: { data: ChartData }) {
     ...data.tools.flatMap((t) =>
       t.agentIds.map((a) => ({ from: `a-${a}`, to: `t-${t.provider}`, color: "#10b981" })),
     ),
+    // Handoff routes: agent → agent (violet, dashed via opacity).
+    ...(data.handoffs ?? []).map((h) => ({
+      from: `a-${h.fromAgentId}`,
+      to: `a-${h.toAgentId}`,
+      color: "#8b5cf6",
+    })),
   ];
 
   useLayoutEffect(() => {

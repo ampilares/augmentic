@@ -327,6 +327,23 @@ export const TOOL_CATALOG: ToolSpec[] = [
   // ---- Internal ---------------------------------------------------------------
   {
     provider: "internal",
+    name: "agent.handoff",
+    description:
+      "Hand a bounded task to another AI employee in this workspace who owns that kind of work. Only allowed along configured handoff routes.",
+    riskTier: "internal_write",
+    inputSchema: {
+      type: "object",
+      properties: {
+        targetAgentName: str("Name of the AI employee to hand off to"),
+        task: str("Plain-language task for the target agent"),
+        context: str("Relevant context/evidence summary to pass along"),
+      },
+      required: ["targetAgentName", "task"],
+      additionalProperties: false,
+    },
+  },
+  {
+    provider: "internal",
     name: "knowledge.search",
     description:
       "Search the workspace knowledge base for relevant documents and facts.",

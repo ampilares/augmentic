@@ -7,7 +7,10 @@ import {
   chatMessages,
   integrationConnections,
   knowledgeItems,
+  mcpServers,
   memoryItems,
+  orgEdges,
+  orgNodes,
   runSteps,
   agentSkills,
   skills,
@@ -22,13 +25,13 @@ import {
 } from "@augmentic/db";
 import {
   TOOL_CATALOG,
-  TOOL_CATALOG_BY_NAME,
   type EvidenceItem,
   type ProposedToolCall,
   type RiskTier,
   type RunMode,
   type RunStepType,
   type ToolPermissionSetting,
+  type ToolSpec,
 } from "@augmentic/shared";
 import { classifyToolCall, sanitizeUntrusted, validateToolArgs } from "@augmentic/policy";
 import {
@@ -37,13 +40,19 @@ import {
   type Usage,
 } from "@augmentic/agent-runtime";
 import {
+  callMcpTool,
+  ConnectorError,
   executeTool,
+  refreshAccessToken,
   type ConnectionInfo,
+  type McpToolInfo,
   type ToolExecutionContext,
 } from "@augmentic/connectors";
-import { and, eq, inArray } from "drizzle-orm";
+import { enqueueRun } from "./enqueue";
+import { aliasedTable, and, eq, inArray } from "drizzle-orm";
 import { recordActivationMetric, recordAudit, recordUsage } from "./audit";
 import { checkAgentBudget } from "./budget";
+import { checkRunQuota } from "./billing";
 import { notifyWorkspace } from "./notifications";
 import { decryptSecret } from "./secrets";
 
@@ -331,13 +340,61 @@ async function executePipeline(db: Db, run: RunRow): Promise<void> {
     return def ? permByToolDefId.get(def.id) : undefined;
   };
 
+  // Multi-agent handoff routes (Phase 4): hands_off org edges are the
+  // deterministic per-hop policy — no edge, no handoff, regardless of what
+  // the model proposes.
+  const fromNode = aliasedTable(orgNodes, "from_node");
+  const toNode = aliasedTable(orgNodes, "to_node");
+  const handoffEdgeRows = await db
+    .select({ fromRef: fromNode.refId, toRef: toNode.refId })
+    .from(orgEdges)
+    .innerJoin(fromNode, eq(fromNode.id, orgEdges.fromNodeId))
+    .innerJoin(toNode, eq(toNode.id, orgEdges.toNodeId))
+    .where(and(eq(orgEdges.workspaceId, run.workspaceId), eq(orgEdges.edgeType, "hands_off")));
+  const handoffTargets = new Set(
+    handoffEdgeRows.filter((e) => e.fromRef === run.agentId).map((e) => e.toRef),
+  );
+  const workspaceAgents = await db
+    .select({ id: agents.id, name: agents.name, roleTitle: agents.roleTitle })
+    .from(agents)
+    .where(eq(agents.workspaceId, run.workspaceId));
+  const handoffTargetAgents = workspaceAgents.filter((a) => handoffTargets.has(a.id));
+
+  // Trusted MCP servers (Phase 4, Spec §7.2): allowlisted per workspace; every
+  // MCP tool is external_send-tier so calls always route through approval, and
+  // payloads are logged as data shared.
+  const mcpRows = await db
+    .select()
+    .from(mcpServers)
+    .where(and(eq(mcpServers.workspaceId, run.workspaceId), eq(mcpServers.enabled, true)));
+  const mcpToolSpecs: ToolSpec[] = mcpRows.flatMap((server) =>
+    ((server.toolsCache ?? []) as McpToolInfo[]).map((t) => ({
+      provider: `mcp:${server.slug}`,
+      name: `mcp.${server.slug}.${t.name}`,
+      description: `[MCP · ${server.name}] ${t.description}`,
+      riskTier: "external_send" as const,
+      inputSchema: t.inputSchema,
+    })),
+  );
+  const mcpServerBySlug = new Map(mcpRows.map((s) => [s.slug, s]));
+
+  // Combined tool universe for this run: static catalog + dynamic MCP tools.
+  const toolSpecByName = new Map<string, ToolSpec>([
+    ...TOOL_CATALOG.map((t) => [t.name, t] as const),
+    ...mcpToolSpecs.map((t) => [t.name, t] as const),
+  ]);
+
   // Tools visible to the agent: connected providers + internal, minus denied.
-  const availableTools = TOOL_CATALOG.filter((t) => {
-    if (t.provider === "internal") return true;
-    if (t.provider === "webhook") return false; // delivery-only in MVP
-    if (!resolveConnection(t.provider)) return false;
-    return permForTool(t.name) !== "deny";
-  });
+  const availableTools = [
+    ...TOOL_CATALOG.filter((t) => {
+      if (t.name === "agent.handoff") return handoffTargetAgents.length > 0;
+      if (t.provider === "internal") return true;
+      if (t.provider === "webhook") return false; // delivery-only in MVP
+      if (!resolveConnection(t.provider)) return false;
+      return permForTool(t.name) !== "deny";
+    }),
+    ...mcpToolSpecs.filter((t) => permForTool(t.name) !== "deny"),
+  ];
 
   const brand = (
     await db
@@ -357,8 +414,13 @@ async function executePipeline(db: Db, run: RunRow): Promise<void> {
     );
 
   // Enabled skills contribute their know-how to prompt assembly (Spec §6).
-  const enabledSkills = await db
-    .select({ name: skills.name, instructions: skills.instructions })
+  const enabledSkillRows = await db
+    .select({
+      name: skills.name,
+      instructions: skills.instructions,
+      inputSchema: skills.inputSchema,
+      outputSchema: skills.outputSchema,
+    })
     .from(agentSkills)
     .innerJoin(skills, eq(agentSkills.skillId, skills.id))
     .where(
@@ -368,6 +430,16 @@ async function executePipeline(db: Db, run: RunRow): Promise<void> {
         eq(agentSkills.enabled, true),
       ),
     );
+  const enabledSkills = enabledSkillRows.map((s) => ({
+    name: s.name,
+    instructions: [
+      s.instructions,
+      s.inputSchema ? `Expected input shape: ${JSON.stringify(s.inputSchema)}` : "",
+      s.outputSchema ? `Required output shape: ${JSON.stringify(s.outputSchema)}` : "",
+    ]
+      .filter(Boolean)
+      .join("\n"),
+  }));
 
   const delivery = (workflow?.deliveryConfig ?? { target: "run_log" }) as {
     target?: string;
@@ -375,11 +447,16 @@ async function executePipeline(db: Db, run: RunRow): Promise<void> {
     emailTo?: string;
   };
 
+  const handoffNote =
+    handoffTargetAgents.length > 0
+      ? `\n\nHandoff routes: you may hand off bounded tasks (via agent.handoff) to: ${handoffTargetAgents.map((a) => `${a.name} (${a.roleTitle})`).join(", ")}. Hand off only work the target clearly owns.`
+      : "";
+
   const ctx: AgentContext = {
     agent: {
       name: agent.name,
       roleTitle: agent.roleTitle,
-      jobDescription: agent.jobDescription,
+      jobDescription: agent.jobDescription + handoffNote,
       autonomyMode: agent.autonomyMode,
     },
     brand: brand
@@ -425,10 +502,12 @@ async function executePipeline(db: Db, run: RunRow): Promise<void> {
     }
 
     const def = toolDefByName.get(call.toolName);
-    const spec = TOOL_CATALOG_BY_NAME[call.toolName];
+    const spec = toolSpecByName.get(call.toolName);
     if (!spec) throw new Error(`Unknown tool ${call.toolName}`);
     const conn = resolveConnection(spec.provider);
     let connectionInfo: ConnectionInfo | null = null;
+    let storedRefreshToken: string | undefined;
+    let storedTenantId: string | undefined;
     if (conn) {
       let accessToken: string | undefined;
       if (!conn.isDemo && conn.secretRefId) {
@@ -439,8 +518,12 @@ async function executePipeline(db: Db, run: RunRow): Promise<void> {
         if (secret) {
           const parsed = JSON.parse(decryptSecret(secret.ciphertext)) as {
             accessToken?: string;
+            refreshToken?: string;
+            tenantId?: string;
           };
           accessToken = parsed.accessToken;
+          storedRefreshToken = parsed.refreshToken;
+          storedTenantId = parsed.tenantId;
         }
       }
       connectionInfo = {
@@ -449,6 +532,7 @@ async function executePipeline(db: Db, run: RunRow): Promise<void> {
         isDemo: conn.isDemo,
         accountLabel: conn.accountLabel,
         accessToken,
+        tenantId: storedTenantId,
       };
     }
 
@@ -482,8 +566,113 @@ async function executePipeline(db: Db, run: RunRow): Promise<void> {
     let result: unknown;
     if (call.toolName === "knowledge.search") {
       result = await searchKnowledge(db, run.workspaceId, String(call.args.query ?? ""), Number(call.args.limit ?? 5));
+    } else if (call.toolName === "agent.handoff") {
+      // Multi-agent handoff (Phase 4): per-hop policy is the configured
+      // hands_off edge — validated here deterministically, never by the model.
+      const targetName = String(call.args.targetAgentName ?? "");
+      const target = workspaceAgents.find(
+        (a) => a.name.toLowerCase() === targetName.toLowerCase(),
+      );
+      if (!target) {
+        throw new Error(`Handoff failed: no AI employee named "${targetName}" in this workspace.`);
+      }
+      if (!handoffTargets.has(target.id)) {
+        throw new Error(
+          `Handoff to ${target.name} is not allowed: no handoff route is configured from ${agent.name}. An admin can add one in ${agent.name}'s settings.`,
+        );
+      }
+      const childRunId = await enqueueRun(db, {
+        workspaceId: run.workspaceId,
+        agentId: target.id,
+        mode: "live",
+        triggerType: "manual",
+        triggerSnapshot: {
+          instructions: `${String(call.args.task)}${call.args.context ? `\n\nContext from ${agent.name}: ${String(call.args.context)}` : ""}`,
+          handoff: { fromAgentId: run.agentId, fromAgentName: agent.name, fromRunId: run.id },
+        },
+      });
+      await recordAudit(db, {
+        workspaceId: run.workspaceId,
+        actorType: "agent",
+        actorId: run.agentId,
+        actorLabel: agent.name,
+        eventType: "agent.handoff",
+        entityType: "workflow_run",
+        entityId: childRunId,
+        payload: { to: target.name, task: String(call.args.task).slice(0, 300) },
+      });
+      result = {
+        handedOffTo: target.name,
+        childRunId,
+        note: `${target.name} picked up the task in run ${childRunId}.`,
+      };
+    } else if (call.toolName.startsWith("mcp.")) {
+      // Trusted MCP tool call (Phase 4, Spec §7.2). The exact payload was
+      // shown at approval and is logged as data shared with a third party.
+      const slug = call.toolName.split(".")[1] ?? "";
+      const server = mcpServerBySlug.get(slug);
+      if (!server) throw new Error(`MCP server "${slug}" is not allowlisted in this workspace.`);
+      let authToken: string | undefined;
+      if (server.secretRefId) {
+        const [secret] = await db
+          .select()
+          .from(secretRefs)
+          .where(eq(secretRefs.id, server.secretRefId));
+        if (secret) {
+          authToken = (JSON.parse(decryptSecret(secret.ciphertext)) as { token?: string }).token;
+        }
+      }
+      const mcpToolName = call.toolName.split(".").slice(2).join(".");
+      result = await callMcpTool(server.url, mcpToolName, call.args, authToken);
+      await recordAudit(db, {
+        workspaceId: run.workspaceId,
+        actorType: "agent",
+        actorId: run.agentId,
+        actorLabel: agent.name,
+        eventType: "mcp.data_shared",
+        entityType: "tool_call",
+        entityId: tcRow!.id,
+        payload: { server: server.name, tool: mcpToolName, dataShared: call.args },
+      });
     } else {
-      result = await executeTool(call.toolName, call.args, execCtx);
+      try {
+        result = await executeTool(call.toolName, call.args, execCtx);
+      } catch (err) {
+        // Expired OAuth token: refresh once, persist, retry (Plan 2.6).
+        const canRefresh =
+          err instanceof ConnectorError &&
+          err.code === "not_connected" &&
+          connectionInfo &&
+          !connectionInfo.isDemo &&
+          storedRefreshToken &&
+          conn?.secretRefId;
+        if (!canRefresh) throw err;
+        const refreshed = await refreshAccessToken(
+          connectionInfo!.provider === "gmail" ||
+            connectionInfo!.provider === "gcal" ||
+            connectionInfo!.provider === "gdrive"
+            ? "google"
+            : connectionInfo!.provider,
+          storedRefreshToken!,
+        );
+        await db
+          .update(secretRefs)
+          .set({
+            ciphertext: (await import("./secrets")).encryptSecret(
+              JSON.stringify({
+                accessToken: refreshed.accessToken,
+                refreshToken: refreshed.refreshToken,
+                tenantId: storedTenantId,
+              }),
+            ),
+            rotatedAt: new Date(),
+          })
+          .where(eq(secretRefs.id, conn!.secretRefId!));
+        result = await executeTool(call.toolName, call.args, {
+          ...execCtx,
+          connection: { ...connectionInfo!, accessToken: refreshed.accessToken },
+        });
+      }
     }
 
     await db
@@ -531,6 +720,16 @@ async function executePipeline(db: Db, run: RunRow): Promise<void> {
       }
       if (run.mode === "live" && agent.status === "paused") {
         throw new RunBlockedError("Agent is paused.");
+      }
+      if (run.mode === "live") {
+        // Defense in depth: enqueueRun already parks over-quota runs, but a
+        // run queued near the boundary (or requeued) is re-checked here.
+        const quota = await checkRunQuota(db, run.workspaceId, run.id);
+        if (!quota.allowed) {
+          throw new RunBlockedError(
+            `Monthly run limit reached (${quota.used}/${quota.limit} on the ${quota.plan.name} plan). Upgrade in Billing, then requeue this run.`,
+          );
+        }
       }
       const budget = await checkAgentBudget(db, run.workspaceId, run.agentId);
       if (!budget.ok) {
@@ -599,7 +798,7 @@ async function executePipeline(db: Db, run: RunRow): Promise<void> {
         { calls: proposal.calls.map((c) => c.toolName) },
         async () => {
           for (const call of proposal.calls) {
-            const spec = TOOL_CATALOG_BY_NAME[call.toolName];
+            const spec = toolSpecByName.get(call.toolName);
             if (!spec || spec.riskTier !== "read") continue; // evidence loop may only read
             const validation = validateToolArgs(spec.inputSchema, call.args);
             if (!validation.ok) continue;
@@ -675,7 +874,7 @@ async function executePipeline(db: Db, run: RunRow): Promise<void> {
       const action = actions[i]!;
       if (["executed", "rejected", "denied", "failed"].includes(action.status)) continue;
 
-      const spec = TOOL_CATALOG_BY_NAME[action.call.toolName];
+      const spec = toolSpecByName.get(action.call.toolName);
       if (!spec) {
         action.status = "denied";
         continue;

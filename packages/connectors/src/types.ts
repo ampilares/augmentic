@@ -7,6 +7,8 @@ export interface ConnectionInfo {
   accountLabel: string;
   // Decrypted OAuth access token for real connections (never persisted here).
   accessToken?: string;
+  // Provider-specific extras (e.g. Xero tenant id).
+  tenantId?: string;
 }
 
 export interface ToolExecutionContext {
