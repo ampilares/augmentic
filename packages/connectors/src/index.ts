@@ -10,6 +10,8 @@ export {
   isOAuthConfigured,
   getAuthorizeUrl,
   exchangeCode,
+  refreshAccessToken,
+  fetchXeroTenantId,
 } from "./oauth";
 export {
   DEMO_EMAILS,

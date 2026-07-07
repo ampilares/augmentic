@@ -61,6 +61,21 @@ export async function inviteMemberAction(
     email: formData.get("email"),
     role: formData.get("role"),
   });
+  // Workspace security setting (Plan 3.3): restrict invites to allowed domains.
+  const [wsRow] = await ctx.db
+    .select({ settings: workspaces.settings })
+    .from(workspaces)
+    .where(eq(workspaces.id, ctx.workspace.id));
+  const allowedDomains = (wsRow?.settings as { allowedInviteDomains?: string[] })
+    ?.allowedInviteDomains;
+  if (allowedDomains && allowedDomains.length > 0) {
+    const domain = parsed.email.split("@")[1] ?? "";
+    if (!allowedDomains.includes(domain)) {
+      throw new Error(
+        `Invites are restricted to: ${allowedDomains.map((d) => `@${d}`).join(", ")} (workspace security setting).`,
+      );
+    }
+  }
   // Existing user: add membership directly. Otherwise create an invitation.
   const [existingUser] = await ctx.db
     .select({ id: users.id })

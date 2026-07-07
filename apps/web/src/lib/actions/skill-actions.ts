@@ -13,7 +13,18 @@ const createSkillSchema = z.object({
   description: z.string().trim().min(1).max(300),
   instructions: z.string().trim().min(1).max(10000),
   allowedTools: z.array(z.string()).max(20),
+  inputSchema: z.string().max(4000).optional(),
+  outputSchema: z.string().max(4000).optional(),
 });
+
+function parseOptionalJson(raw: string | undefined, field: string): unknown {
+  if (!raw || raw.trim() === "") return null;
+  try {
+    return JSON.parse(raw);
+  } catch {
+    throw new Error(`${field} must be valid JSON`);
+  }
+}
 
 function slugify(name: string): string {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 60);
@@ -32,6 +43,8 @@ export async function createSkillAction(
       .getAll("allowedTools")
       .map(String)
       .filter((t) => TOOL_CATALOG_BY_NAME[t]),
+    inputSchema: (formData.get("inputSchema") as string) || undefined,
+    outputSchema: (formData.get("outputSchema") as string) || undefined,
   });
   await ctx.db.insert(skills).values({
     workspaceId: ctx.workspace.id,
@@ -40,6 +53,8 @@ export async function createSkillAction(
     description: parsed.description,
     instructions: parsed.instructions,
     allowedTools: parsed.allowedTools,
+    inputSchema: parseOptionalJson(parsed.inputSchema, "Input schema") as never,
+    outputSchema: parseOptionalJson(parsed.outputSchema, "Output schema") as never,
   });
   await recordAudit(ctx.db, {
     workspaceId: ctx.workspace.id,

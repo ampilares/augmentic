@@ -1,8 +1,11 @@
 import Link from "next/link";
 import { and, desc, eq } from "drizzle-orm";
-import { notifications } from "@augmentic/db";
+import { notifications, notificationSubscriptions } from "@augmentic/db";
 import { requireWorkspace } from "@/lib/context";
-import { markAllNotificationsReadAction } from "@/lib/actions/notification-actions";
+import {
+  markAllNotificationsReadAction,
+  toggleEmailNotificationsAction,
+} from "@/lib/actions/notification-actions";
 import { Button, Card, EmptyState, PageHeader } from "@/components/ui";
 
 const KIND_ICONS: Record<string, string> = {
@@ -20,17 +23,30 @@ export default async function NotificationsPage({
 }) {
   const { slug } = await params;
   const ctx = await requireWorkspace(slug);
-  const rows = await ctx.db
-    .select()
-    .from(notifications)
-    .where(
-      and(
-        eq(notifications.workspaceId, ctx.workspace.id),
-        eq(notifications.userId, ctx.user.id),
+  const [rows, [emailSub]] = await Promise.all([
+    ctx.db
+      .select()
+      .from(notifications)
+      .where(
+        and(
+          eq(notifications.workspaceId, ctx.workspace.id),
+          eq(notifications.userId, ctx.user.id),
+        ),
+      )
+      .orderBy(desc(notifications.createdAt))
+      .limit(100),
+    ctx.db
+      .select()
+      .from(notificationSubscriptions)
+      .where(
+        and(
+          eq(notificationSubscriptions.workspaceId, ctx.workspace.id),
+          eq(notificationSubscriptions.userId, ctx.user.id),
+          eq(notificationSubscriptions.channel, "email"),
+        ),
       ),
-    )
-    .orderBy(desc(notifications.createdAt))
-    .limit(100);
+  ]);
+  const emailConfigured = Boolean(process.env.RESEND_API_KEY);
 
   return (
     <div className="max-w-3xl">
@@ -45,6 +61,24 @@ export default async function NotificationsPage({
           ) : undefined
         }
       />
+      <Card className="mb-4 flex items-center justify-between !p-4">
+        <div>
+          <p className="text-sm font-medium text-slate-800">Email me these alerts</p>
+          <p className="text-xs text-slate-400">
+            {emailConfigured
+              ? emailSub
+                ? `Sending to ${ctx.user.email}`
+                : "Currently in-app only"
+              : "Email delivery needs RESEND_API_KEY configured — preference is saved either way."}
+          </p>
+        </div>
+        <form action={toggleEmailNotificationsAction.bind(null, slug)}>
+          <Button variant={emailSub ? "primary" : "secondary"} type="submit">
+            {emailSub ? "Email on" : "Email off"}
+          </Button>
+        </form>
+      </Card>
+
       {rows.length === 0 ? (
         <EmptyState
           title="Nothing yet"

@@ -10,6 +10,7 @@ import { Cron } from "croner";
 import crypto from "node:crypto";
 import { executeTool } from "@augmentic/connectors";
 import { enqueueRun } from "./enqueue";
+import { emitWeeklySummaries, purgeExpiredData } from "./maintenance";
 import { processRun } from "./pipeline";
 
 const WORKER_ID = `worker-${crypto.randomBytes(4).toString("hex")}`;
@@ -27,6 +28,8 @@ export function startEngine(db: Db): void {
   started = true;
   let lastAppEventPoll = 0;
   let lastCheckpoint = 0;
+  // First maintenance pass ~1min after boot, then hourly.
+  let lastMaintenance = Date.now() - 3_600_000 + 60_000;
   const tick = async () => {
     try {
       await reapOrphans(db);
@@ -34,6 +37,11 @@ export function startEngine(db: Db): void {
       if (Date.now() - lastAppEventPoll > 60_000) {
         lastAppEventPoll = Date.now();
         await pollAppEvents(db);
+      }
+      if (Date.now() - lastMaintenance > 3_600_000) {
+        lastMaintenance = Date.now();
+        await purgeExpiredData(db);
+        await emitWeeklySummaries(db);
       }
       if (Date.now() - lastCheckpoint > 15_000) {
         lastCheckpoint = Date.now();

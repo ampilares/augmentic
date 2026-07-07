@@ -2,6 +2,8 @@ import {
   integrationConnections,
   memberships,
   notifications,
+  notificationSubscriptions,
+  users,
   workspaces,
   type Db,
 } from "@augmentic/db";
@@ -30,8 +32,9 @@ export async function notifyWorkspace(db: Db, input: NotifyInput): Promise<void>
       ? ["owner", "admin", "approver"]
       : ["owner", "admin", "operator"];
   const members = await db
-    .select({ userId: memberships.userId })
+    .select({ userId: memberships.userId, email: users.email })
     .from(memberships)
+    .innerJoin(users, eq(memberships.userId, users.id))
     .where(
       and(
         eq(memberships.workspaceId, input.workspaceId),
@@ -49,6 +52,48 @@ export async function notifyWorkspace(db: Db, input: NotifyInput): Promise<void>
         href: input.href,
       })),
     );
+  }
+
+  // Email fan-out (FR-021): opt-in per user via notification_subscriptions,
+  // delivered through Resend when RESEND_API_KEY is configured.
+  if (process.env.RESEND_API_KEY && members.length > 0) {
+    try {
+      const subs = await db
+        .select()
+        .from(notificationSubscriptions)
+        .where(
+          and(
+            eq(notificationSubscriptions.workspaceId, input.workspaceId),
+            eq(notificationSubscriptions.channel, "email"),
+          ),
+        );
+      const subscribed = new Set(
+        subs
+          .filter((s) => {
+            const types = (s.eventTypes ?? []) as string[];
+            return types.includes("all") || types.includes(input.kind);
+          })
+          .map((s) => s.userId),
+      );
+      const baseUrl = process.env.AUGMENTIC_BASE_URL ?? "http://localhost:3000";
+      for (const m of members.filter((x) => subscribed.has(x.userId))) {
+        await fetch("https://api.resend.com/emails", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            from: process.env.AUGMENTIC_EMAIL_FROM ?? "Augmentic <alerts@augmentic.app>",
+            to: m.email,
+            subject: input.title,
+            text: `${input.title}\n\n${input.body ?? ""}${input.href ? `\n\nOpen: ${baseUrl}${input.href}` : ""}`,
+          }),
+        });
+      }
+    } catch {
+      // Email delivery is best-effort.
+    }
   }
 
   try {

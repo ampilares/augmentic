@@ -12,7 +12,7 @@ import {
   workflowTriggers,
 } from "@augmentic/db";
 import { VERTICAL_PACKS } from "@augmentic/db/seed";
-import { recordAudit } from "@augmentic/engine";
+import { checkPlanLimits, recordAudit } from "@augmentic/engine";
 import { requireWorkspace } from "../context";
 import { applyTemplateDefaults } from "../services/agent-provisioning";
 
@@ -41,7 +41,9 @@ export async function installPackAction(
     ctx.db.select().from(agents).where(eq(agents.workspaceId, ctx.workspace.id)),
   ]);
 
-  // Create (or reuse) one agent per pack role.
+  // Create (or reuse) one agent per pack role, respecting the plan limit.
+  const planStatus = await checkPlanLimits(ctx.db, ctx.workspace.id);
+  let slotsLeft = Math.max(0, planStatus.plan.agentLimit - planStatus.agentCount);
   const agentByTemplateSlug = new Map<string, string>();
   for (const slug of pack.agentTemplateSlugs) {
     const template = templates.find((t) => t.slug === slug);
@@ -51,6 +53,8 @@ export async function installPackAction(
       agentByTemplateSlug.set(slug, existing.id);
       continue;
     }
+    if (slotsLeft <= 0) continue;
+    slotsLeft -= 1;
     const [agent] = await ctx.db
       .insert(agents)
       .values({

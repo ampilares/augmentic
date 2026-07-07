@@ -14,7 +14,9 @@ export interface DecisionInput {
   workspaceId: string;
   approvalRequestId: string;
   action: "approve" | "reject" | "edit" | "request_revision";
-  decidedByUserId: string;
+  // null for external client-safe-link deciders; decidedByLabel then carries
+  // the link label/token reference for the audit trail (FR-024).
+  decidedByUserId: string | null;
   decidedByLabel: string;
   editedPayload?: Record<string, unknown>;
   comment?: string;
