@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { and, eq } from "drizzle-orm";
 import { integrationConnections, secretRefs } from "@augmentic/db";
-import { exchangeCode, OAUTH_PROVIDERS } from "@augmentic/connectors";
+import { exchangeCode, fetchXeroTenantId, OAUTH_PROVIDERS } from "@augmentic/connectors";
 import { encryptSecret, recordActivationMetric, recordAudit } from "@augmentic/engine";
 import { requireWorkspace } from "@/lib/context";
 
@@ -26,6 +26,8 @@ export async function GET(
 
   const redirectUri = `${url.origin}/api/oauth/${provider}/callback`;
   const tokens = await exchangeCode(provider, code, redirectUri);
+  const tenantId =
+    provider === "xero" ? await fetchXeroTenantId(tokens.accessToken) : undefined;
 
   const [secret] = await ctx.db
     .insert(secretRefs)
@@ -35,6 +37,7 @@ export async function GET(
         JSON.stringify({
           accessToken: tokens.accessToken,
           refreshToken: tokens.refreshToken,
+          tenantId,
         }),
       ),
     })

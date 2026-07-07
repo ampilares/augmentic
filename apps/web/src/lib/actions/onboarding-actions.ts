@@ -10,7 +10,7 @@ import {
   workflowTriggers,
   workspaces,
 } from "@augmentic/db";
-import { recordAudit } from "@augmentic/engine";
+import { checkAgentQuota, recordAudit } from "@augmentic/engine";
 import { requireWorkspace } from "../context";
 import { applyTemplateDefaults } from "../services/agent-provisioning";
 
@@ -57,13 +57,15 @@ export async function applyOnboardingAction(
     .where(eq(workspaces.id, ctx.workspace.id));
 
   // Propose 2-3 AI employees from the selected tasks (deduped, capped at 3).
+  const quota = await checkAgentQuota(ctx.db, ctx.workspace.id, 0);
+  const remainingSlots = Math.max(0, quota.limit - quota.used);
   const templateSlugs = [
     ...new Set(
       profile.topTasks
         .map((t) => TASK_TO_TEMPLATE[t])
         .filter((s): s is string => Boolean(s)),
     ),
-  ].slice(0, 3);
+  ].slice(0, Math.min(3, remainingSlots || 1));
   if (templateSlugs.length === 0) templateSlugs.push("executive-assistant");
 
   const templates = await ctx.db

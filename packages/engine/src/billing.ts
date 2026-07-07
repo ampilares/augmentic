@@ -44,7 +44,13 @@ export function currentMonthStart(): Date {
   return start;
 }
 
-export async function checkRunQuota(db: Db, workspaceId: string): Promise<QuotaStatus> {
+export async function checkRunQuota(
+  db: Db,
+  workspaceId: string,
+  // Pass the current run's id when re-checking mid-pipeline so the run
+  // doesn't count itself against the quota it already passed at enqueue.
+  excludeRunId?: string,
+): Promise<QuotaStatus> {
   const plan = await getWorkspacePlan(db, workspaceId);
   const [row] = await db
     .select({ count: sql<number>`count(*)` })
@@ -56,6 +62,7 @@ export async function checkRunQuota(db: Db, workspaceId: string): Promise<QuotaS
         // Blocked-at-the-gate runs never consumed quota.
         ne(workflowRuns.status, "blocked"),
         gte(workflowRuns.createdAt, currentMonthStart()),
+        excludeRunId ? ne(workflowRuns.id, excludeRunId) : undefined,
       ),
     );
   const used = Number(row?.count ?? 0);

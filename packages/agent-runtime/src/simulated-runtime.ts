@@ -180,6 +180,22 @@ function proposeActions(
     });
   }
 
+  if (available.has("agent.handoff")) {
+    // Trusted instructions only: "hand off to <Name>" / "delegate to <Name>".
+    const m = ctx.workflowInstructions.match(/(?:hand (?:it |this )?off to|delegate (?:it |this )?to)\s+([A-Z][a-zA-Z]+)/);
+    if (m) {
+      actions.push({
+        toolName: "agent.handoff",
+        args: {
+          targetAgentName: m[1],
+          task: ctx.workflowInstructions.slice(0, 400),
+          context: `Evidence collected: ${evidence.length} item(s).`,
+        },
+        rationale: `Instructions ask to hand this off to ${m[1]}.`,
+      });
+    }
+  }
+
   return actions;
 }
 

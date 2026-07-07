@@ -559,11 +559,40 @@ async function MemoryTab({ ctx, agent, slug }: { ctx: Ctx; agent: Agent; slug: s
 }
 
 async function SettingsTab({ ctx, agent, slug }: { ctx: Ctx; agent: Agent; slug: string }) {
+  const { orgEdges, orgNodes } = await import("@augmentic/db");
+  const { setHandoffRoutesAction } = await import("@/lib/actions/handoff-actions");
   const members = await ctx.db
     .select({ id: users.id, name: users.name })
     .from(memberships)
     .innerJoin(users, eq(memberships.userId, users.id))
     .where(eq(memberships.workspaceId, ctx.workspace.id));
+  const otherAgents = await ctx.db
+    .select({ id: agents.id, name: agents.name, roleTitle: agents.roleTitle })
+    .from(agents)
+    .where(eq(agents.workspaceId, ctx.workspace.id));
+  const nodes = await ctx.db
+    .select()
+    .from(orgNodes)
+    .where(and(eq(orgNodes.workspaceId, ctx.workspace.id), eq(orgNodes.nodeType, "agent")));
+  const nodeByAgent = new Map(nodes.map((n) => [n.refId, n.id]));
+  const agentByNode = new Map(nodes.map((n) => [n.id, n.refId]));
+  const myNodeId = nodeByAgent.get(agent.id);
+  const edges = myNodeId
+    ? await ctx.db
+        .select()
+        .from(orgEdges)
+        .where(
+          and(
+            eq(orgEdges.workspaceId, ctx.workspace.id),
+            eq(orgEdges.edgeType, "hands_off"),
+            eq(orgEdges.fromNodeId, myNodeId),
+          ),
+        )
+    : [];
+  const currentTargets = new Set(
+    edges.map((e) => agentByNode.get(e.toNodeId)).filter(Boolean),
+  );
+  const canAdmin = roleAtLeast(ctx.role, "admin");
   return (
     <div className="max-w-2xl space-y-6">
       <Card>
@@ -618,6 +647,40 @@ async function SettingsTab({ ctx, agent, slug }: { ctx: Ctx; agent: Agent; slug:
           </p>
           <Button type="submit">Save settings</Button>
         </form>
+      </Card>
+
+      <Card>
+        <h3 className="mb-1 font-medium text-slate-900">Handoff routes</h3>
+        <p className="mb-3 text-sm text-slate-500">
+          Which AI employees may {agent.name} hand bounded tasks to? Handoffs without a
+          route here are rejected by the engine no matter what the model proposes, and each
+          hop is policy-checked and audited.
+        </p>
+        {otherAgents.filter((a) => a.id !== agent.id).length === 0 ? (
+          <p className="text-sm text-slate-400">Hire another AI employee to enable handoffs.</p>
+        ) : (
+          <form action={setHandoffRoutesAction.bind(null, slug, agent.id)} className="space-y-3">
+            {otherAgents
+              .filter((a) => a.id !== agent.id)
+              .map((a) => (
+                <label key={a.id} className="flex items-center gap-2 text-sm text-slate-700">
+                  <input
+                    type="checkbox"
+                    name="targets"
+                    value={a.id}
+                    defaultChecked={currentTargets.has(a.id)}
+                    disabled={!canAdmin}
+                  />
+                  {a.name} — {a.roleTitle}
+                </label>
+              ))}
+            {canAdmin && (
+              <Button variant="secondary" type="submit">
+                Save handoff routes
+              </Button>
+            )}
+          </form>
+        )}
       </Card>
     </div>
   );

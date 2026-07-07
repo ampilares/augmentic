@@ -296,7 +296,93 @@ async function executeReal(
   ctx: ToolExecutionContext,
 ): Promise<unknown> {
   const token = ctx.connection!.accessToken!;
+  const tenantId = ctx.connection!.tenantId;
   switch (toolName) {
+    case "gcal.list_events": {
+      const params = new URLSearchParams({
+        timeMin: new Date(String(args.from)).toISOString(),
+        timeMax: new Date(String(args.to)).toISOString(),
+        singleEvents: "true",
+        orderBy: "startTime",
+        maxResults: "25",
+      });
+      return gfetch(
+        `https://www.googleapis.com/calendar/v3/calendars/primary/events?${params}`,
+        token,
+      );
+    }
+    case "gcal.create_event":
+      return gfetch("https://www.googleapis.com/calendar/v3/calendars/primary/events", token, {
+        summary: args.title,
+        description: args.description,
+        start: { dateTime: new Date(String(args.start)).toISOString() },
+        end: { dateTime: new Date(String(args.end)).toISOString() },
+        attendees: ((args.attendees as string[]) ?? []).map((email) => ({ email })),
+      });
+    case "gdrive.search_files": {
+      const q = String(args.query ?? "").replaceAll("'", "\\'");
+      const params = new URLSearchParams({
+        q: q ? `name contains '${q}' or fullText contains '${q}'` : "trashed = false",
+        pageSize: "20",
+        fields: "files(id,name,mimeType,modifiedTime)",
+      });
+      return gfetch(`https://www.googleapis.com/drive/v3/files?${params}`, token);
+    }
+    case "gdrive.read_file": {
+      // Export Google Docs as text; download other files directly.
+      const meta = (await gfetch(
+        `https://www.googleapis.com/drive/v3/files/${args.fileId}?fields=id,name,mimeType`,
+        token,
+      )) as { id: string; name: string; mimeType: string };
+      const isGoogleDoc = meta.mimeType.startsWith("application/vnd.google-apps");
+      const url = isGoogleDoc
+        ? `https://www.googleapis.com/drive/v3/files/${args.fileId}/export?mimeType=text/plain`
+        : `https://www.googleapis.com/drive/v3/files/${args.fileId}?alt=media`;
+      const res = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
+      if (!res.ok) {
+        throw new ConnectorError(
+          `Drive read ${res.status}`,
+          res.status === 401 ? "not_connected" : "provider_error",
+        );
+      }
+      const content = (await res.text()).slice(0, 20000);
+      return { id: meta.id, name: meta.name, content };
+    }
+    case "gdrive.create_doc": {
+      const boundary = "augmentic-upload";
+      const body = [
+        `--${boundary}`,
+        "Content-Type: application/json; charset=UTF-8",
+        "",
+        JSON.stringify({
+          name: args.title,
+          mimeType: "application/vnd.google-apps.document",
+        }),
+        `--${boundary}`,
+        "Content-Type: text/plain",
+        "",
+        String(args.content ?? ""),
+        `--${boundary}--`,
+      ].join("\r\n");
+      const res = await fetch(
+        "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": `multipart/related; boundary=${boundary}`,
+          },
+          body,
+        },
+      );
+      if (!res.ok) {
+        throw new ConnectorError(
+          `Drive create ${res.status}: ${(await res.text()).slice(0, 200)}`,
+          res.status === 401 ? "not_connected" : "provider_error",
+        );
+      }
+      return res.json();
+    }
     case "gmail.search_messages": {
       const params = new URLSearchParams({
         q: String(args.query ?? ""),
@@ -398,12 +484,12 @@ async function executeReal(
             ? `Status=="${String(args.status).toUpperCase()}"`
             : "";
       const params = new URLSearchParams(where ? { where } : {});
-      return xeroFetch(token, `Invoices?${params}`);
+      return xeroFetch(token, tenantId, `Invoices?${params}`);
     }
     case "xero.get_contact":
-      return xeroFetch(token, `Contacts/${args.contactId}`);
+      return xeroFetch(token, tenantId, `Contacts/${args.contactId}`);
     case "xero.create_invoice_reminder_note":
-      return xeroFetch(token, `Invoices/${args.invoiceId}/History`, {
+      return xeroFetch(token, tenantId, `Invoices/${args.invoiceId}/History`, {
         Details: String(args.note),
       });
     default:
@@ -433,13 +519,21 @@ async function mondayGql(token: string, query: string): Promise<unknown> {
 
 async function xeroFetch(
   token: string,
+  tenantId: string | undefined,
   path: string,
   jsonBody?: unknown,
 ): Promise<unknown> {
+  if (!tenantId) {
+    throw new ConnectorError(
+      "Xero connection missing tenant id — reconnect the integration.",
+      "not_connected",
+    );
+  }
   const res = await fetch(`https://api.xero.com/api.xro/2.0/${path}`, {
     method: jsonBody ? "PUT" : "GET",
     headers: {
       Authorization: `Bearer ${token}`,
+      "xero-tenant-id": tenantId,
       Accept: "application/json",
       ...(jsonBody ? { "Content-Type": "application/json" } : {}),
     },

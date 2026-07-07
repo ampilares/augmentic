@@ -10,6 +10,8 @@ export {
   isOAuthConfigured,
   getAuthorizeUrl,
   exchangeCode,
+  refreshAccessToken,
+  fetchXeroTenantId,
 } from "./oauth";
 export {
   DEMO_EMAILS,
@@ -17,3 +19,4 @@ export {
   DEMO_FILES,
   DEMO_SLACK_MESSAGES,
 } from "./demo-data";
+export { discoverMcpTools, callMcpTool, type McpToolInfo } from "./mcp";
