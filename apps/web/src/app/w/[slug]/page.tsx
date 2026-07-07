@@ -5,6 +5,8 @@ import {
   approvalRequests,
   integrationConnections,
   memberships,
+  orgEdges,
+  orgNodes,
   usageLedgerEntries,
   users,
   workflowRuns,
@@ -82,6 +84,23 @@ export default async function WorkChartPage({
   const triggerByWorkflow = new Map(triggerRows.map((t) => [t.workflowId, t]));
   const connectedProviders = new Set(connRows.map((c) => c.provider));
 
+  // Handoff routes for agent→agent edges.
+  const nodeRows = await ctx.db
+    .select()
+    .from(orgNodes)
+    .where(and(eq(orgNodes.workspaceId, wsId), eq(orgNodes.nodeType, "agent")));
+  const agentByNode = new Map(nodeRows.map((n) => [n.id, n.refId]));
+  const edgeRows = await ctx.db
+    .select()
+    .from(orgEdges)
+    .where(and(eq(orgEdges.workspaceId, wsId), eq(orgEdges.edgeType, "hands_off")));
+  const handoffs = edgeRows
+    .map((e) => ({
+      fromAgentId: agentByNode.get(e.fromNodeId) ?? "",
+      toAgentId: agentByNode.get(e.toNodeId) ?? "",
+    }))
+    .filter((h) => h.fromAgentId && h.toAgentId);
+
   const chartData: ChartData = {
     slug,
     humans: memberRows.map((m) => ({
@@ -128,6 +147,7 @@ export default async function WorkChartPage({
       },
     ),
     pendingApprovalsByAgent: pendingByAgent,
+    handoffs,
   };
 
   const statOf = (s: string) =>

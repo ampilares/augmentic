@@ -22,6 +22,13 @@
       "when": 1783395002638,
       "tag": "0002_large_obadiah_stane",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1783397418416,
+      "tag": "0003_bent_rhino",
+      "breakpoints": true
     }
   ]
 }

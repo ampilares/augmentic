@@ -324,6 +324,30 @@ export const toolPermissionPolicies = pgTable(
   ],
 );
 
+// Trusted MCP servers (Phase 4 / Spec §7.2): workspace-level allowlist.
+// Every call to an MCP tool is approval-gated and its payload logged — adding
+// a server here is the explicit trust decision.
+export const mcpServers = pgTable(
+  "mcp_servers",
+  {
+    id: id(),
+    workspaceId: uuid("workspace_id")
+      .notNull()
+      .references(() => workspaces.id, { onDelete: "cascade" }),
+    slug: text("slug").notNull(),
+    name: text("name").notNull(),
+    url: text("url").notNull(),
+    secretRefId: uuid("secret_ref_id").references(() => secretRefs.id),
+    // Tool list discovered at registration (tools/list); refreshed on edit.
+    toolsCache: jsonb("tools_cache").notNull().default([]),
+    enabled: boolean("enabled").notNull().default(true),
+    addedByUserId: uuid("added_by_user_id").references(() => users.id),
+    createdAt: createdAt(),
+    updatedAt: updatedAt(),
+  },
+  (t) => [uniqueIndex("mcp_servers_ws_slug_idx").on(t.workspaceId, t.slug)],
+);
+
 // ---------------------------------------------------------------------------
 // Knowledge & brand (Spec §4.4)
 // ---------------------------------------------------------------------------
