@@ -48,6 +48,7 @@ export async function getWorkspaceContext(
       wsName: workspaces.name,
       wsSlug: workspaces.slug,
       role: memberships.role,
+      settings: workspaces.settings,
     })
     .from(workspaces)
     .innerJoin(
@@ -57,6 +58,17 @@ export async function getWorkspaceContext(
     .where(eq(workspaces.slug, workspaceSlug));
   const row = rows[0];
   if (!row) return null;
+  // Session-age policy (plan 3.3): a workspace can require sessions younger
+  // than N hours; older sessions must sign in again to access it.
+  const maxHours = (row.settings as { sessionMaxHours?: number } | null)
+    ?.sessionMaxHours;
+  if (
+    maxHours &&
+    maxHours > 0 &&
+    Date.now() - user.sessionCreatedAt.getTime() > maxHours * 3_600_000
+  ) {
+    return null;
+  }
   return {
     db,
     user,

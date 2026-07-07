@@ -18,6 +18,10 @@ export interface ClassifyInput {
   // Explicit per-agent tool_permission_policy row, if one exists.
   agentPermission?: ToolPermissionSetting;
   mode: RunMode;
+  // Workspace-level strict policy (plan 3.3): when set, every tool above
+  // draft tier requires approval regardless of per-agent allow settings.
+  // Admin-controlled; per-agent settings can only tighten, never loosen it.
+  workspaceStrict?: boolean;
 }
 
 const tierRank = (tier: RiskTier) => RISK_TIERS.indexOf(tier);
@@ -26,7 +30,8 @@ const tierRank = (tier: RiskTier) => RISK_TIERS.indexOf(tier);
 // server-side for every model-proposed tool call, in every surface
 // (workflow, chat, simulation). The model has no influence over the outcome.
 export function classifyToolCall(input: ClassifyInput): PolicyDecision {
-  const { toolName, riskTier, autonomyMode, agentPermission, mode } = input;
+  const { toolName, riskTier, autonomyMode, agentPermission, mode, workspaceStrict } =
+    input;
 
   // Hard floors that no per-agent setting can loosen in MVP.
   if (ALWAYS_DENY_TIERS.includes(riskTier)) {
@@ -58,6 +63,16 @@ export function classifyToolCall(input: ClassifyInput): PolicyDecision {
       outcome: "require_approval",
       riskTier,
       reason: `Simulation: ${toolName} (${riskTier}) would ${base === "allow" ? "execute" : "request approval"} in a live run. No side effects in simulation.`,
+    };
+  }
+
+  // Workspace strict mode: anything above draft requires approval, even if
+  // the agent-level setting says allow. Denies above already won.
+  if (workspaceStrict && tierRank(riskTier) > tierRank("draft")) {
+    return {
+      outcome: "require_approval",
+      riskTier,
+      reason: `Workspace strict policy: all ${riskTier}-tier actions require approval.`,
     };
   }
 

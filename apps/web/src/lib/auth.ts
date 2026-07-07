@@ -24,6 +24,9 @@ export interface SessionUser {
   id: string;
   email: string;
   name: string;
+  // When the session was created — workspaces with a session-age policy
+  // (plan 3.3) compare against this.
+  sessionCreatedAt: Date;
 }
 
 export async function createSession(userId: string): Promise<void> {
@@ -64,11 +67,17 @@ export async function getSessionUser(): Promise<SessionUser | null> {
       email: users.email,
       name: users.name,
       expiresAt: sessions.expiresAt,
+      createdAt: sessions.createdAt,
     })
     .from(sessions)
     .innerJoin(users, eq(sessions.userId, users.id))
     .where(eq(sessions.token, token));
   const row = rows[0];
   if (!row || row.expiresAt < new Date()) return null;
-  return { id: row.id, email: row.email, name: row.name };
+  return {
+    id: row.id,
+    email: row.email,
+    name: row.name,
+    sessionCreatedAt: row.createdAt,
+  };
 }

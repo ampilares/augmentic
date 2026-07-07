@@ -14,7 +14,7 @@ import {
   memoryItemSchema,
   updateToolPermissionSchema,
 } from "@augmentic/shared";
-import { recordActivationMetric, recordAudit } from "@augmentic/engine";
+import { checkAgentQuota, recordActivationMetric, recordAudit } from "@augmentic/engine";
 import { requireWorkspace } from "../context";
 import { applyTemplateDefaults } from "../services/agent-provisioning";
 
@@ -23,6 +23,9 @@ export async function hireAgentAction(
   formData: FormData,
 ): Promise<void> {
   const ctx = await requireWorkspace(workspaceSlug, "operator");
+  // Plan gate (2.5): hiring past the plan's agent limit routes to Billing.
+  const quota = await checkAgentQuota(ctx.db, ctx.workspace.id);
+  if (!quota.allowed) redirect(`/w/${workspaceSlug}/billing?limit=agents`);
   const parsed = hireAgentSchema.parse({
     templateId: (formData.get("templateId") as string) || null,
     name: formData.get("name"),

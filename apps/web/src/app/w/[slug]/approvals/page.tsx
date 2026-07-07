@@ -1,8 +1,18 @@
 import Link from "next/link";
 import { desc, eq } from "drizzle-orm";
-import { agents, approvalRequests, integrationConnections } from "@augmentic/db";
+import {
+  agents,
+  approvalLinks,
+  approvalRequests,
+  integrationConnections,
+} from "@augmentic/db";
+import { appUrl } from "@augmentic/engine";
 import { requireWorkspace, roleAtLeast } from "@/lib/context";
-import { decideApprovalAction } from "@/lib/actions/approval-actions";
+import {
+  createApprovalLinkAction,
+  decideApprovalAction,
+  revokeApprovalLinkAction,
+} from "@/lib/actions/approval-actions";
 import {
   Button,
   Card,
@@ -23,10 +33,10 @@ export default async function ApprovalsPage({
   searchParams,
 }: {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ tab?: string }>;
+  searchParams: Promise<{ tab?: string; focus?: string }>;
 }) {
   const { slug } = await params;
-  const { tab } = await searchParams;
+  const { tab, focus } = await searchParams;
   const showHistory = tab === "history";
   const ctx = await requireWorkspace(slug);
   const canApprove = roleAtLeast(ctx.role, "approver");
@@ -43,8 +53,15 @@ export default async function ApprovalsPage({
     .from(integrationConnections)
     .where(eq(integrationConnections.workspaceId, ctx.workspace.id));
 
+  const links = await ctx.db
+    .select()
+    .from(approvalLinks)
+    .where(eq(approvalLinks.workspaceId, ctx.workspace.id));
+
   const pending = rows.filter((r) => r.approval.status === "pending");
   const history = rows.filter((r) => r.approval.status !== "pending");
+  // Deep-linked request (?focus=…, plan 3.4) floats to the top.
+  if (focus) pending.sort((a, b) => Number(b.approval.id === focus) - Number(a.approval.id === focus));
   const shown = showHistory ? history : pending;
 
   return (
@@ -90,7 +107,10 @@ export default async function ApprovalsPage({
               excerpt: string;
             }[];
             return (
-              <Card key={a.id} className="border-l-4 border-l-amber-400">
+              <Card
+                key={a.id}
+                className={`border-l-4 border-l-amber-400 ${a.id === focus ? "ring-2 ring-brand-400" : ""}`}
+              >
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <p className="font-medium text-slate-900">
@@ -115,7 +135,7 @@ export default async function ApprovalsPage({
                   </div>
                 </div>
 
-                <div className="mt-4 grid grid-cols-2 gap-4 text-sm">
+                <div className="mt-4 grid grid-cols-1 gap-4 text-sm md:grid-cols-2">
                   <div>
                     <p className="text-xs font-medium uppercase text-slate-400">
                       Original instruction
@@ -160,7 +180,68 @@ export default async function ApprovalsPage({
 
                 {a.status === "pending" && canApprove && (
                   <div className="mt-4 border-t border-slate-100 pt-4">
-                    <div className="grid grid-cols-2 gap-4">
+                    <details className="mb-4">
+                      <summary className="cursor-pointer text-xs font-medium text-slate-500 hover:text-slate-700">
+                        Client approval link — let an external client approve this without
+                        workspace access
+                      </summary>
+                      <div className="mt-2 space-y-2">
+                        {links
+                          .filter(
+                            (l) =>
+                              l.approvalRequestId === a.id &&
+                              !l.revokedAt &&
+                              l.expiresAt > new Date(),
+                          )
+                          .map((l) => (
+                            <div
+                              key={l.id}
+                              className="flex flex-wrap items-center gap-2 rounded bg-slate-50 p-2 text-xs"
+                            >
+                              <span className="font-medium text-slate-700">
+                                {l.recipientLabel}
+                              </span>
+                              <Input
+                                readOnly
+                                value={appUrl(`/approve/${l.token}`)}
+                                className="!w-auto min-w-0 flex-1 font-mono !text-xs"
+                              />
+                              <span className="text-slate-400">
+                                expires {new Date(l.expiresAt).toLocaleDateString()}
+                              </span>
+                              <form action={revokeApprovalLinkAction.bind(null, slug, l.id)}>
+                                <Button variant="secondary" type="submit">
+                                  Revoke
+                                </Button>
+                              </form>
+                            </div>
+                          ))}
+                        <form
+                          action={createApprovalLinkAction.bind(null, slug, a.id)}
+                          className="flex flex-wrap items-center gap-2"
+                        >
+                          <Input
+                            name="recipientLabel"
+                            placeholder="Client name or email"
+                            required
+                            className="!w-56"
+                          />
+                          <Input
+                            name="expiresDays"
+                            type="number"
+                            min="1"
+                            max="30"
+                            defaultValue="7"
+                            title="Days until the link expires"
+                            className="!w-20"
+                          />
+                          <Button variant="secondary" type="submit">
+                            Create link
+                          </Button>
+                        </form>
+                      </div>
+                    </details>
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                       <form
                         action={decideApprovalAction.bind(null, slug, a.id)}
                         className="space-y-2"

@@ -153,7 +153,7 @@ export const DELIVERY_TARGETS = [
 ] as const;
 export type DeliveryTarget = (typeof DELIVERY_TARGETS)[number];
 
-export const AUDIT_ACTOR_TYPES = ["user", "agent", "system"] as const;
+export const AUDIT_ACTOR_TYPES = ["user", "agent", "system", "external"] as const;
 export type AuditActorType = (typeof AUDIT_ACTOR_TYPES)[number];
 
 export const USAGE_KINDS = [
@@ -183,3 +183,22 @@ export const METRIC_EVENTS = [
   "first_approval_completed",
 ] as const;
 export type MetricEvent = (typeof METRIC_EVENTS)[number];
+
+// Notification kinds fanned out by the engine (FR-021). Order matches the
+// preference checkboxes on the notifications page.
+export const NOTIFICATION_KINDS = [
+  "approval_pending",
+  "run_failed",
+  "run_blocked",
+  "budget_hard_stop",
+  "weekly_summary",
+] as const;
+export type NotificationKind = (typeof NOTIFICATION_KINDS)[number];
+
+export const NOTIFICATION_KIND_LABELS: Record<NotificationKind, string> = {
+  approval_pending: "Approval waiting on you",
+  run_failed: "Workflow run failed",
+  run_blocked: "Workflow run blocked",
+  budget_hard_stop: "Agent hit its spend cap",
+  weekly_summary: "Weekly value summary",
+};

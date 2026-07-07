@@ -14,8 +14,11 @@ export interface DecisionInput {
   workspaceId: string;
   approvalRequestId: string;
   action: "approve" | "reject" | "edit" | "request_revision";
-  decidedByUserId: string;
+  // Null for external (client-link) decisions; the audit trail carries the
+  // recipient label instead (FR-024).
+  decidedByUserId: string | null;
   decidedByLabel: string;
+  actorType?: "user" | "external";
   editedPayload?: Record<string, unknown>;
   comment?: string;
 }
@@ -83,8 +86,8 @@ export async function decideApproval(db: Db, input: DecisionInput): Promise<void
 
   await recordAudit(db, {
     workspaceId: input.workspaceId,
-    actorType: "user",
-    actorId: input.decidedByUserId,
+    actorType: input.actorType ?? "user",
+    actorId: input.decidedByUserId ?? undefined,
     actorLabel: input.decidedByLabel,
     eventType: `approval.${newStatus}`,
     entityType: "approval_request",

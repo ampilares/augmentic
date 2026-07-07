@@ -1,8 +1,13 @@
 import Link from "next/link";
 import { and, desc, eq } from "drizzle-orm";
-import { notifications } from "@augmentic/db";
+import { notificationSubscriptions, notifications } from "@augmentic/db";
+import { NOTIFICATION_KINDS, NOTIFICATION_KIND_LABELS } from "@augmentic/shared";
+import { isEmailConfigured } from "@augmentic/engine";
 import { requireWorkspace } from "@/lib/context";
-import { markAllNotificationsReadAction } from "@/lib/actions/notification-actions";
+import {
+  markAllNotificationsReadAction,
+  saveNotificationPrefsAction,
+} from "@/lib/actions/notification-actions";
 import { Button, Card, EmptyState, PageHeader } from "@/components/ui";
 
 const KIND_ICONS: Record<string, string> = {
@@ -31,6 +36,20 @@ export default async function NotificationsPage({
     )
     .orderBy(desc(notifications.createdAt))
     .limit(100);
+  const [emailSub] = await ctx.db
+    .select()
+    .from(notificationSubscriptions)
+    .where(
+      and(
+        eq(notificationSubscriptions.workspaceId, ctx.workspace.id),
+        eq(notificationSubscriptions.userId, ctx.user.id),
+        eq(notificationSubscriptions.channel, "email"),
+      ),
+    );
+  const enabledKinds = emailSub
+    ? (emailSub.eventTypes as string[])
+    : [...NOTIFICATION_KINDS];
+  const emailLive = isEmailConfigured();
 
   return (
     <div className="max-w-3xl">
@@ -81,6 +100,35 @@ export default async function NotificationsPage({
           ))}
         </div>
       )}
+
+      <Card className="mt-6">
+        <h3 className="font-medium text-slate-900">Email notifications</h3>
+        <p className="mt-0.5 text-xs text-slate-400">
+          {emailLive
+            ? `Sent to ${ctx.user.email}. Uncheck anything you'd rather only see in-app.`
+            : "Email delivery isn't configured on this deployment (set RESEND_API_KEY and EMAIL_FROM). Preferences still apply once it is."}
+        </p>
+        <form
+          action={saveNotificationPrefsAction.bind(null, slug)}
+          className="mt-3 space-y-2"
+        >
+          {NOTIFICATION_KINDS.map((kind) => (
+            <label key={kind} className="flex items-center gap-2 text-sm text-slate-700">
+              <input
+                type="checkbox"
+                name={kind}
+                defaultChecked={enabledKinds.includes(kind)}
+                className="h-4 w-4 rounded border-slate-300 text-brand-600"
+              />
+              <span className="mr-1">{KIND_ICONS[kind] ?? "•"}</span>
+              {NOTIFICATION_KIND_LABELS[kind]}
+            </label>
+          ))}
+          <Button variant="secondary" type="submit" className="mt-2">
+            Save preferences
+          </Button>
+        </form>
+      </Card>
     </div>
   );
 }

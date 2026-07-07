@@ -17,6 +17,7 @@ import {
   toolPermissionPolicies,
   workflowRuns,
   workflows,
+  workspaces,
   type Db,
 } from "@augmentic/db";
 import {
@@ -270,6 +271,16 @@ async function executePipeline(db: Db, run: RunRow): Promise<void> {
     .from(agents)
     .where(and(eq(agents.id, run.agentId), eq(agents.workspaceId, run.workspaceId)));
   if (!agent) throw new RunBlockedError("Agent not found");
+
+  const [wsRow] = await db
+    .select({ settings: workspaces.settings })
+    .from(workspaces)
+    .where(eq(workspaces.id, run.workspaceId));
+  // Workspace strict policy (plan 3.3): admins can force approval on every
+  // above-draft action regardless of per-agent settings.
+  const workspaceStrict = Boolean(
+    (wsRow?.settings as { strictApprovals?: boolean } | null)?.strictApprovals,
+  );
 
   const workflow = run.workflowId
     ? (
@@ -598,6 +609,7 @@ async function executePipeline(db: Db, run: RunRow): Promise<void> {
               autonomyMode: agent.autonomyMode,
               agentPermission: permForTool(call.toolName),
               mode: run.mode,
+              workspaceStrict,
             });
             if (decision.outcome !== "allow") continue;
             const key = `${run.id}:evidence:${round}:${call.toolName}:${JSON.stringify(call.args).slice(0, 60)}`;
@@ -725,6 +737,7 @@ async function executePipeline(db: Db, run: RunRow): Promise<void> {
             autonomyMode: agent.autonomyMode,
             agentPermission: permForTool(action.call.toolName),
             mode: run.mode,
+            workspaceStrict,
           }),
       );
 
@@ -801,7 +814,9 @@ async function executePipeline(db: Db, run: RunRow): Promise<void> {
               kind: "approval_pending",
               title: `${agent.name} needs approval: ${action.call.toolName}`,
               body: decision.reason,
-              href: `/approvals`,
+              // Deep link straight to this request (plan 3.4): one tap from
+              // the email/Slack notification lands on the focused card.
+              href: `/approvals?focus=${approval!.id}`,
             });
           }
           throw err;
