@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { desc, eq } from "drizzle-orm";
+import { and, desc, eq, gt, isNull } from "drizzle-orm";
 import {
   agents,
   approvalLinks,
@@ -53,10 +53,17 @@ export default async function ApprovalsPage({
     .from(integrationConnections)
     .where(eq(integrationConnections.workspaceId, ctx.workspace.id));
 
+  // Only links that can still be acted on — expired/revoked ones are noise.
   const links = await ctx.db
     .select()
     .from(approvalLinks)
-    .where(eq(approvalLinks.workspaceId, ctx.workspace.id));
+    .where(
+      and(
+        eq(approvalLinks.workspaceId, ctx.workspace.id),
+        isNull(approvalLinks.revokedAt),
+        gt(approvalLinks.expiresAt, new Date()),
+      ),
+    );
 
   const pending = rows.filter((r) => r.approval.status === "pending");
   const history = rows.filter((r) => r.approval.status !== "pending");
@@ -187,12 +194,7 @@ export default async function ApprovalsPage({
                       </summary>
                       <div className="mt-2 space-y-2">
                         {links
-                          .filter(
-                            (l) =>
-                              l.approvalRequestId === a.id &&
-                              !l.revokedAt &&
-                              l.expiresAt > new Date(),
-                          )
+                          .filter((l) => l.approvalRequestId === a.id)
                           .map((l) => (
                             <div
                               key={l.id}

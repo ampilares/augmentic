@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { and, eq, gte, inArray } from "drizzle-orm";
+import { and, eq, gte, sql } from "drizzle-orm";
 import {
   agentTemplates,
   agents,
@@ -88,7 +88,7 @@ export default async function HealthPage({
         and(eq(approvalRequests.workspaceId, wsId), eq(approvalRequests.status, "pending")),
       ),
     ctx.db
-      .select({ id: knowledgeItems.id })
+      .select({ count: sql<number>`count(*)` })
       .from(knowledgeItems)
       .where(eq(knowledgeItems.workspaceId, wsId)),
     ctx.db.select().from(brandProfiles).where(eq(brandProfiles.workspaceId, wsId)),
@@ -237,7 +237,7 @@ export default async function HealthPage({
   }
 
   // Knowledge & brand ------------------------------------------------------------
-  if (knowledgeCount.length === 0) {
+  if (Number(knowledgeCount[0]?.count ?? 0) === 0) {
     findings.push({
       severity: "info",
       area: "Knowledge",

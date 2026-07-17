@@ -10,6 +10,9 @@ export interface OAuthProviderConfig {
   clientSecretEnv: string;
 }
 
+// Token exchanges run inside user-facing request handlers — fail fast.
+const OAUTH_TIMEOUT_MS = 15_000;
+
 export const OAUTH_PROVIDERS: Record<string, OAuthProviderConfig> = {
   google: {
     authorizeUrl: "https://accounts.google.com/o/oauth2/v2/auth",
@@ -92,6 +95,7 @@ export async function refreshAccessToken(
       grant_type: "refresh_token",
       refresh_token: refreshToken,
     }),
+    signal: AbortSignal.timeout(OAUTH_TIMEOUT_MS),
   });
   const json = (await res.json()) as Record<string, unknown>;
   if (!json.access_token) {
@@ -107,6 +111,7 @@ export async function refreshAccessToken(
 export async function fetchXeroTenantId(accessToken: string): Promise<string | undefined> {
   const res = await fetch("https://api.xero.com/connections", {
     headers: { Authorization: `Bearer ${accessToken}` },
+    signal: AbortSignal.timeout(OAUTH_TIMEOUT_MS),
   });
   if (!res.ok) return undefined;
   const json = (await res.json()) as { tenantId?: string }[];
@@ -130,6 +135,7 @@ export async function exchangeCode(
       grant_type: "authorization_code",
       redirect_uri: redirectUri,
     }),
+    signal: AbortSignal.timeout(OAUTH_TIMEOUT_MS),
   });
   const json = (await res.json()) as Record<string, unknown>;
   const accessToken =

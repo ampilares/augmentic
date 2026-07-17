@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { and, eq, isNull } from "drizzle-orm";
+import { and, eq, isNull, sql } from "drizzle-orm";
 import { approvalRequests, notifications } from "@augmentic/db";
 import { requireWorkspace } from "@/lib/context";
 import { signOutAction } from "@/lib/actions/auth-actions";
@@ -33,9 +33,10 @@ export default async function WorkspaceLayout({
 }) {
   const { slug } = await params;
   const ctx = await requireWorkspace(slug);
-  const [pending, unread] = await Promise.all([
+  // Badge counts only — count in SQL, don't materialize rows on every request.
+  const [[pendingRow], [unreadRow]] = await Promise.all([
     ctx.db
-      .select({ id: approvalRequests.id })
+      .select({ count: sql<number>`count(*)` })
       .from(approvalRequests)
       .where(
         and(
@@ -44,7 +45,7 @@ export default async function WorkspaceLayout({
         ),
       ),
     ctx.db
-      .select({ id: notifications.id })
+      .select({ count: sql<number>`count(*)` })
       .from(notifications)
       .where(
         and(
@@ -54,6 +55,8 @@ export default async function WorkspaceLayout({
         ),
       ),
   ]);
+  const pendingCount = Number(pendingRow?.count ?? 0);
+  const unreadCount = Number(unreadRow?.count ?? 0);
 
   return (
     <div className="flex min-h-screen flex-col md:flex-row">
@@ -70,9 +73,9 @@ export default async function WorkspaceLayout({
             className="flex items-center gap-1.5 rounded-lg bg-amber-50 px-3 py-2 text-sm font-medium text-amber-800"
           >
             ✓ Approvals
-            {pending.length > 0 && (
+            {pendingCount > 0 && (
               <span className="rounded-full bg-amber-200 px-1.5 text-xs font-semibold">
-                {pending.length}
+                {pendingCount}
               </span>
             )}
           </Link>
@@ -85,8 +88,8 @@ export default async function WorkspaceLayout({
               className="shrink-0 whitespace-nowrap rounded-full bg-slate-100 px-3 py-1.5 text-xs text-slate-700"
             >
               {item.label}
-              {item.label === "Notifications" && unread.length > 0 && (
-                <span className="ml-1 font-semibold text-brand-700">{unread.length}</span>
+              {item.label === "Notifications" && unreadCount > 0 && (
+                <span className="ml-1 font-semibold text-brand-700">{unreadCount}</span>
               )}
             </Link>
           ))}
@@ -111,14 +114,14 @@ export default async function WorkspaceLayout({
                 <span className="w-4 text-center text-slate-400">{item.icon}</span>
                 {item.label}
               </span>
-              {item.label === "Approvals" && pending.length > 0 && (
+              {item.label === "Approvals" && pendingCount > 0 && (
                 <span className="rounded-full bg-amber-100 px-1.5 text-xs font-semibold text-amber-800">
-                  {pending.length}
+                  {pendingCount}
                 </span>
               )}
-              {item.label === "Notifications" && unread.length > 0 && (
+              {item.label === "Notifications" && unreadCount > 0 && (
                 <span className="rounded-full bg-brand-100 px-1.5 text-xs font-semibold text-brand-700">
-                  {unread.length}
+                  {unreadCount}
                 </span>
               )}
             </Link>
