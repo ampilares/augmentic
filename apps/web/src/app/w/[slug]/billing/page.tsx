@@ -192,7 +192,10 @@ async function verifyStripeSession(
   try {
     const res = await fetch(
       `https://api.stripe.com/v1/checkout/sessions/${encodeURIComponent(sessionId)}`,
-      { headers: { Authorization: `Bearer ${process.env.STRIPE_SECRET_KEY}` } },
+      {
+        headers: { Authorization: `Bearer ${process.env.STRIPE_SECRET_KEY}` },
+        signal: AbortSignal.timeout(15_000),
+      },
     );
     if (!res.ok) return null;
     const session = (await res.json()) as {

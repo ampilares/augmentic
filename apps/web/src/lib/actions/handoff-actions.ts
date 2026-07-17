@@ -51,9 +51,8 @@ export async function setHandoffRoutesAction(
   const fromNodeId = await ensureAgentNode(ctx.db, ctx.workspace.id, agentId, source.name);
 
   // Replace this agent's outgoing hands_off edges with the new set.
-  const existingEdges = await ctx.db
-    .select()
-    .from(orgEdges)
+  await ctx.db
+    .delete(orgEdges)
     .where(
       and(
         eq(orgEdges.workspaceId, ctx.workspace.id),
@@ -61,9 +60,6 @@ export async function setHandoffRoutesAction(
         eq(orgEdges.fromNodeId, fromNodeId),
       ),
     );
-  for (const edge of existingEdges) {
-    await ctx.db.delete(orgEdges).where(eq(orgEdges.id, edge.id));
-  }
   const applied: string[] = [];
   for (const targetId of targetIds) {
     if (!validIds.has(targetId) || targetId === agentId) continue;

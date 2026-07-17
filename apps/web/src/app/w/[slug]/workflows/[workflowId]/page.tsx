@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { and, desc, eq } from "drizzle-orm";
 import { agents, workflowRuns, workflows, workflowTriggers } from "@augmentic/db";
+import { appUrl } from "@augmentic/engine";
 import { requireWorkspace } from "@/lib/context";
 import {
   runWorkflowAction,
@@ -37,7 +38,7 @@ export default async function WorkflowDetailPage({
 
   const delivery = wf.deliveryConfig as { target?: string; slackChannel?: string; emailTo?: string };
   const needsSimulation = !wf.lastSimulatedAt && wf.status !== "active";
-  const baseUrl = process.env.AUGMENTIC_BASE_URL ?? "http://localhost:3000";
+  const baseUrl = appUrl("");
 
   return (
     <div>
