@@ -38,9 +38,10 @@ function resolveMigrationsFolder(): string {
 
 async function createDb(): Promise<Db> {
   const url = process.env.DATABASE_URL?.trim();
-  if (!url && process.env.NODE_ENV === "production") {
+  const pgliteDataDir = process.env.PGLITE_DATA_DIR?.trim();
+  if (!url && !pgliteDataDir && process.env.NODE_ENV === "production") {
     throw new Error(
-      "DATABASE_URL is required in production; filesystem-backed PGlite is development-only",
+      "DATABASE_URL or an explicit PGLITE_DATA_DIR is required in production",
     );
   }
   const migrationsFolder = resolveMigrationsFolder();
@@ -58,10 +59,9 @@ async function createDb(): Promise<Db> {
   const { drizzle } = await import("drizzle-orm/pglite");
   const { migrate } = await import("drizzle-orm/pglite/migrator");
   const dataDir =
-    process.env.PGLITE_DATA_DIR === ":memory:"
+    pgliteDataDir === ":memory:"
       ? undefined
-      : (process.env.PGLITE_DATA_DIR ??
-        path.join(pkgRoot, "..", "..", ".pglite", "data"));
+      : (pgliteDataDir ?? path.join(pkgRoot, "..", "..", ".pglite", "data"));
   if (dataDir) fs.mkdirSync(dataDir, { recursive: true });
   const pglite = dataDir ? new PGlite(dataDir) : new PGlite();
   const db = drizzle(pglite, { schema });
