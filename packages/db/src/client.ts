@@ -14,10 +14,36 @@ const globalForDb = globalThis as unknown as {
 const pkgRoot = path.dirname(
   path.dirname(fileURLToPath(import.meta.url)),
 );
-const migrationsFolder = path.join(pkgRoot, "migrations");
+
+function resolveMigrationsFolder(): string {
+  const candidates = [
+    process.env.AUGMENTIC_MIGRATIONS_DIR,
+    // Packaged monorepo deployments preserve traced files from the repo root.
+    path.join(process.cwd(), "packages", "db", "migrations"),
+    // Local commands for this package and the Next.js app run from nested dirs.
+    path.join(process.cwd(), "..", "..", "packages", "db", "migrations"),
+    path.join(pkgRoot, "migrations"),
+  ].filter((candidate): candidate is string => Boolean(candidate));
+
+  const migrationsFolder = candidates.find((candidate) =>
+    fs.existsSync(path.join(candidate, "meta", "_journal.json")),
+  );
+  if (!migrationsFolder) {
+    throw new Error(
+      `Database migrations are missing from the server bundle (checked: ${candidates.join(", ")})`,
+    );
+  }
+  return migrationsFolder;
+}
 
 async function createDb(): Promise<Db> {
-  const url = process.env.DATABASE_URL;
+  const url = process.env.DATABASE_URL?.trim();
+  if (!url && process.env.NODE_ENV === "production") {
+    throw new Error(
+      "DATABASE_URL is required in production; filesystem-backed PGlite is development-only",
+    );
+  }
+  const migrationsFolder = resolveMigrationsFolder();
   if (url) {
     const { drizzle } = await import("drizzle-orm/node-postgres");
     const { migrate } = await import("drizzle-orm/node-postgres/migrator");
