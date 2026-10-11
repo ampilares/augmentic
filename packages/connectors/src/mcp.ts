@@ -12,6 +12,10 @@ export interface McpToolInfo {
 
 let rpcId = 1;
 
+// An unresponsive MCP server must fail the tool call, not hang the run step
+// (the engine retries with idempotency keys; a hang blocks a worker slot).
+const MCP_TIMEOUT_MS = 30_000;
+
 async function mcpRpc(
   url: string,
   method: string,
@@ -26,6 +30,7 @@ async function mcpRpc(
       ...(authToken ? { Authorization: `Bearer ${authToken}` } : {}),
     },
     body: JSON.stringify({ jsonrpc: "2.0", id: rpcId++, method, params }),
+    signal: AbortSignal.timeout(MCP_TIMEOUT_MS),
   });
   if (!res.ok) {
     throw new ConnectorError(

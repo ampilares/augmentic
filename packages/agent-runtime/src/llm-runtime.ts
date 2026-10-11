@@ -44,6 +44,10 @@ function usageFor(
   return { inputTokens, outputTokens, costCents, provider: cfg.provider, model };
 }
 
+// A hung provider call must fail the step (the engine's retry/park logic
+// takes over) rather than pin a worker slot open-ended.
+const LLM_TIMEOUT_MS = 120_000;
+
 async function complete(
   cfg: LlmConfig,
   model: string,
@@ -64,6 +68,7 @@ async function complete(
         system,
         messages: [{ role: "user", content: user }],
       }),
+      signal: AbortSignal.timeout(LLM_TIMEOUT_MS),
     });
     if (!res.ok) throw new Error(`Anthropic API ${res.status}: ${await res.text()}`);
     const json = (await res.json()) as {
@@ -94,6 +99,7 @@ async function complete(
       ],
       max_tokens: 4000,
     }),
+    signal: AbortSignal.timeout(LLM_TIMEOUT_MS),
   });
   if (!res.ok) throw new Error(`OpenAI API ${res.status}: ${await res.text()}`);
   const json = (await res.json()) as {

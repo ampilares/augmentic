@@ -15,6 +15,15 @@ function daysAgoIso(daysAgo: number): string {
   return new Date(Date.now() - daysAgo * 86_400_000).toISOString();
 }
 
+// Every live provider call gets a deadline: a hung upstream fails the tool
+// call (the engine retries with idempotency keys) instead of pinning a
+// worker slot.
+const PROVIDER_TIMEOUT_MS = 30_000;
+
+function providerFetch(url: string, init: RequestInit = {}): Promise<Response> {
+  return fetch(url, { ...init, signal: AbortSignal.timeout(PROVIDER_TIMEOUT_MS) });
+}
+
 // Single entry point the engine calls after policy clearance. Defense in
 // depth: even if the engine mis-gates, simulation mode can never produce a
 // side effect here.
@@ -338,7 +347,7 @@ async function executeReal(
       const url = isGoogleDoc
         ? `https://www.googleapis.com/drive/v3/files/${args.fileId}/export?mimeType=text/plain`
         : `https://www.googleapis.com/drive/v3/files/${args.fileId}?alt=media`;
-      const res = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
+      const res = await providerFetch(url, { headers: { Authorization: `Bearer ${token}` } });
       if (!res.ok) {
         throw new ConnectorError(
           `Drive read ${res.status}`,
@@ -364,7 +373,7 @@ async function executeReal(
         String(args.content ?? ""),
         `--${boundary}--`,
       ].join("\r\n");
-      const res = await fetch(
+      const res = await providerFetch(
         "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart",
         {
           method: "POST",
@@ -424,7 +433,7 @@ async function executeReal(
       );
     }
     case "slack.post_message": {
-      const res = await fetch("https://slack.com/api/chat.postMessage", {
+      const res = await providerFetch("https://slack.com/api/chat.postMessage", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -442,7 +451,7 @@ async function executeReal(
         channel: String(args.channel),
         limit: String(Math.min(Number(args.limit ?? 20), 50)),
       });
-      const res = await fetch(
+      const res = await providerFetch(
         `https://slack.com/api/conversations.history?${params}`,
         { headers: { Authorization: `Bearer ${token}` } },
       );
@@ -501,7 +510,7 @@ async function executeReal(
 }
 
 async function mondayGql(token: string, query: string): Promise<unknown> {
-  const res = await fetch("https://api.monday.com/v2", {
+  const res = await providerFetch("https://api.monday.com/v2", {
     method: "POST",
     headers: {
       Authorization: token,
@@ -529,7 +538,7 @@ async function xeroFetch(
       "not_connected",
     );
   }
-  const res = await fetch(`https://api.xero.com/api.xro/2.0/${path}`, {
+  const res = await providerFetch(`https://api.xero.com/api.xro/2.0/${path}`, {
     method: jsonBody ? "PUT" : "GET",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -557,7 +566,7 @@ async function executeWebhookDeliver(
   if (!/^https?:\/\//.test(url)) {
     throw new ConnectorError("webhook.deliver: invalid url", "provider_error");
   }
-  const res = await fetch(url, {
+  const res = await providerFetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -573,7 +582,7 @@ async function gfetch(
   token: string,
   jsonBody?: unknown,
 ): Promise<unknown> {
-  const res = await fetch(url, {
+  const res = await providerFetch(url, {
     method: jsonBody ? "POST" : "GET",
     headers: {
       Authorization: `Bearer ${token}`,

@@ -14,10 +14,37 @@ const globalForDb = globalThis as unknown as {
 const pkgRoot = path.dirname(
   path.dirname(fileURLToPath(import.meta.url)),
 );
-const migrationsFolder = path.join(pkgRoot, "migrations");
+
+function resolveMigrationsFolder(): string {
+  const candidates = [
+    process.env.AUGMENTIC_MIGRATIONS_DIR,
+    // Packaged monorepo deployments preserve traced files from the repo root.
+    path.join(process.cwd(), "packages", "db", "migrations"),
+    // Local commands for this package and the Next.js app run from nested dirs.
+    path.join(process.cwd(), "..", "..", "packages", "db", "migrations"),
+    path.join(pkgRoot, "migrations"),
+  ].filter((candidate): candidate is string => Boolean(candidate));
+
+  const migrationsFolder = candidates.find((candidate) =>
+    fs.existsSync(path.join(candidate, "meta", "_journal.json")),
+  );
+  if (!migrationsFolder) {
+    throw new Error(
+      `Database migrations are missing from the server bundle (checked: ${candidates.join(", ")})`,
+    );
+  }
+  return migrationsFolder;
+}
 
 async function createDb(): Promise<Db> {
-  const url = process.env.DATABASE_URL;
+  const url = process.env.DATABASE_URL?.trim();
+  const pgliteDataDir = process.env.PGLITE_DATA_DIR?.trim();
+  if (!url && !pgliteDataDir && process.env.NODE_ENV === "production") {
+    throw new Error(
+      "DATABASE_URL or an explicit PGLITE_DATA_DIR is required in production",
+    );
+  }
+  const migrationsFolder = resolveMigrationsFolder();
   if (url) {
     const { drizzle } = await import("drizzle-orm/node-postgres");
     const { migrate } = await import("drizzle-orm/node-postgres/migrator");
@@ -32,10 +59,9 @@ async function createDb(): Promise<Db> {
   const { drizzle } = await import("drizzle-orm/pglite");
   const { migrate } = await import("drizzle-orm/pglite/migrator");
   const dataDir =
-    process.env.PGLITE_DATA_DIR === ":memory:"
+    pgliteDataDir === ":memory:"
       ? undefined
-      : (process.env.PGLITE_DATA_DIR ??
-        path.join(pkgRoot, "..", "..", ".pglite", "data"));
+      : (pgliteDataDir ?? path.join(pkgRoot, "..", "..", ".pglite", "data"));
   if (dataDir) fs.mkdirSync(dataDir, { recursive: true });
   const pglite = dataDir ? new PGlite(dataDir) : new PGlite();
   const db = drizzle(pglite, { schema });

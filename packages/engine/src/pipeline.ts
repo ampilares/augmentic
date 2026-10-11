@@ -49,7 +49,7 @@ import {
   type ToolExecutionContext,
 } from "@augmentic/connectors";
 import { enqueueRun } from "./enqueue";
-import { aliasedTable, and, eq, inArray } from "drizzle-orm";
+import { aliasedTable, and, desc, eq, inArray } from "drizzle-orm";
 import { recordActivationMetric, recordAudit, recordUsage } from "./audit";
 import { checkAgentBudget } from "./budget";
 import { checkRunQuota } from "./billing";
@@ -110,6 +110,10 @@ export class RunBlockedError extends Error {
 
 // ---------------------------------------------------------------------------
 
+// Must beat the worker's ORPHAN_TIMEOUT_MS with comfortable margin: the
+// reaper treats a lockedAt older than that as a dead worker.
+const HEARTBEAT_INTERVAL_MS = 15_000;
+
 export async function processRun(db: Db, runId: string): Promise<void> {
   const [runRow] = await db
     .select()
@@ -127,6 +131,19 @@ export async function processRun(db: Db, runId: string): Promise<void> {
     resumeState: (runRow.resumeState as ResumeState | null) ?? null,
     costCents: runRow.costCents,
   };
+
+  // Lock heartbeat: the orphan reaper reclaims running rows whose lockedAt
+  // goes stale, so a healthy-but-slow run (one long model call is enough)
+  // must keep proving it's alive or a second worker will pick it up and
+  // execute it concurrently.
+  const heartbeat = setInterval(() => {
+    db.update(workflowRuns)
+      .set({ lockedAt: new Date() })
+      .where(and(eq(workflowRuns.id, run.id), eq(workflowRuns.status, "running")))
+      .catch(() => {
+        /* next reaper pass handles a truly dead worker */
+      });
+  }, HEARTBEAT_INTERVAL_MS);
 
   try {
     await executePipeline(db, run);
@@ -183,6 +200,8 @@ export async function processRun(db: Db, runId: string): Promise<void> {
         href: `/runs/${run.id}`,
       });
     }
+  } finally {
+    clearInterval(heartbeat);
   }
 }
 
@@ -275,25 +294,36 @@ async function executePipeline(db: Db, run: RunRow): Promise<void> {
   };
 
   // Load the world -----------------------------------------------------------
+  // The agent row gates everything; the rest of the run context is
+  // independent and loads in one parallel batch (one round trip's latency
+  // instead of ten).
   const [agent] = await db
     .select()
     .from(agents)
     .where(and(eq(agents.id, run.agentId), eq(agents.workspaceId, run.workspaceId)));
   if (!agent) throw new RunBlockedError("Agent not found");
 
-  const [wsRow] = await db
-    .select({ settings: workspaces.settings })
-    .from(workspaces)
-    .where(eq(workspaces.id, run.workspaceId));
-  // Workspace strict policy (plan 3.3): admins can force approval on every
-  // above-draft action regardless of per-agent settings.
-  const workspaceStrict = Boolean(
-    (wsRow?.settings as { strictApprovals?: boolean } | null)?.strictApprovals,
-  );
-
-  const workflow = run.workflowId
-    ? (
-        await db
+  const fromNode = aliasedTable(orgNodes, "from_node");
+  const toNode = aliasedTable(orgNodes, "to_node");
+  const [
+    wsRows,
+    workflowRows,
+    connections,
+    permRows,
+    toolDefRows,
+    handoffEdgeRows,
+    workspaceAgents,
+    mcpRows,
+    brandRows,
+    memories,
+    enabledSkillRows,
+  ] = await Promise.all([
+    db
+      .select({ settings: workspaces.settings })
+      .from(workspaces)
+      .where(eq(workspaces.id, run.workspaceId)),
+    run.workflowId
+      ? db
           .select()
           .from(workflows)
           .where(
@@ -302,17 +332,86 @@ async function executePipeline(db: Db, run: RunRow): Promise<void> {
               eq(workflows.workspaceId, run.workspaceId),
             ),
           )
-      )[0]
-    : null;
+      : Promise.resolve([]),
+    db
+      .select()
+      .from(integrationConnections)
+      .where(eq(integrationConnections.workspaceId, run.workspaceId)),
+    db
+      .select()
+      .from(toolPermissionPolicies)
+      .where(
+        and(
+          eq(toolPermissionPolicies.workspaceId, run.workspaceId),
+          eq(toolPermissionPolicies.agentId, run.agentId),
+        ),
+      ),
+    db.select().from(toolDefinitions),
+    // Multi-agent handoff routes (Phase 4): hands_off org edges are the
+    // deterministic per-hop policy — no edge, no handoff, regardless of what
+    // the model proposes.
+    db
+      .select({ toRef: toNode.refId })
+      .from(orgEdges)
+      .innerJoin(fromNode, eq(fromNode.id, orgEdges.fromNodeId))
+      .innerJoin(toNode, eq(toNode.id, orgEdges.toNodeId))
+      .where(
+        and(
+          eq(orgEdges.workspaceId, run.workspaceId),
+          eq(orgEdges.edgeType, "hands_off"),
+          eq(fromNode.refId, run.agentId),
+        ),
+      ),
+    db
+      .select({ id: agents.id, name: agents.name, roleTitle: agents.roleTitle })
+      .from(agents)
+      .where(eq(agents.workspaceId, run.workspaceId)),
+    // Trusted MCP servers (Phase 4, Spec §7.2): allowlisted per workspace;
+    // every MCP tool is external_send-tier so calls always route through
+    // approval, and payloads are logged as data shared.
+    db
+      .select()
+      .from(mcpServers)
+      .where(and(eq(mcpServers.workspaceId, run.workspaceId), eq(mcpServers.enabled, true))),
+    db.select().from(brandProfiles).where(eq(brandProfiles.workspaceId, run.workspaceId)),
+    db
+      .select({ content: memoryItems.content })
+      .from(memoryItems)
+      .where(
+        and(
+          eq(memoryItems.workspaceId, run.workspaceId),
+          eq(memoryItems.agentId, run.agentId),
+        ),
+      ),
+    // Enabled skills contribute their know-how to prompt assembly (Spec §6).
+    db
+      .select({
+        name: skills.name,
+        instructions: skills.instructions,
+        inputSchema: skills.inputSchema,
+        outputSchema: skills.outputSchema,
+      })
+      .from(agentSkills)
+      .innerJoin(skills, eq(agentSkills.skillId, skills.id))
+      .where(
+        and(
+          eq(agentSkills.workspaceId, run.workspaceId),
+          eq(agentSkills.agentId, run.agentId),
+          eq(agentSkills.enabled, true),
+        ),
+      ),
+  ]);
 
+  // Workspace strict policy (plan 3.3): admins can force approval on every
+  // above-draft action regardless of per-agent settings.
+  const workspaceStrict = Boolean(
+    (wsRows[0]?.settings as { strictApprovals?: boolean } | null)?.strictApprovals,
+  );
+
+  const workflow = workflowRows[0] ?? null;
   const instructions =
     workflow?.instructions ??
     String(run.triggerSnapshot["instructions"] ?? "Complete the requested task.");
-
-  const connections = await db
-    .select()
-    .from(integrationConnections)
-    .where(eq(integrationConnections.workspaceId, run.workspaceId));
 
   const connectionByProvider = new Map(connections.map((c) => [c.provider, c]));
   // Google is one connection covering gmail/gcal/gdrive sub-providers.
@@ -323,16 +422,6 @@ async function executePipeline(db: Db, run: RunRow): Promise<void> {
     return connectionByProvider.get(toolProvider) ?? null;
   };
 
-  const permRows = await db
-    .select()
-    .from(toolPermissionPolicies)
-    .where(
-      and(
-        eq(toolPermissionPolicies.workspaceId, run.workspaceId),
-        eq(toolPermissionPolicies.agentId, run.agentId),
-      ),
-    );
-  const toolDefRows = await db.select().from(toolDefinitions);
   const toolDefByName = new Map(toolDefRows.map((t) => [t.name, t]));
   const permByToolDefId = new Map(permRows.map((p) => [p.toolDefinitionId, p.setting]));
   const permForTool = (toolName: string): ToolPermissionSetting | undefined => {
@@ -340,33 +429,8 @@ async function executePipeline(db: Db, run: RunRow): Promise<void> {
     return def ? permByToolDefId.get(def.id) : undefined;
   };
 
-  // Multi-agent handoff routes (Phase 4): hands_off org edges are the
-  // deterministic per-hop policy — no edge, no handoff, regardless of what
-  // the model proposes.
-  const fromNode = aliasedTable(orgNodes, "from_node");
-  const toNode = aliasedTable(orgNodes, "to_node");
-  const handoffEdgeRows = await db
-    .select({ fromRef: fromNode.refId, toRef: toNode.refId })
-    .from(orgEdges)
-    .innerJoin(fromNode, eq(fromNode.id, orgEdges.fromNodeId))
-    .innerJoin(toNode, eq(toNode.id, orgEdges.toNodeId))
-    .where(and(eq(orgEdges.workspaceId, run.workspaceId), eq(orgEdges.edgeType, "hands_off")));
-  const handoffTargets = new Set(
-    handoffEdgeRows.filter((e) => e.fromRef === run.agentId).map((e) => e.toRef),
-  );
-  const workspaceAgents = await db
-    .select({ id: agents.id, name: agents.name, roleTitle: agents.roleTitle })
-    .from(agents)
-    .where(eq(agents.workspaceId, run.workspaceId));
+  const handoffTargets = new Set(handoffEdgeRows.map((e) => e.toRef));
   const handoffTargetAgents = workspaceAgents.filter((a) => handoffTargets.has(a.id));
-
-  // Trusted MCP servers (Phase 4, Spec §7.2): allowlisted per workspace; every
-  // MCP tool is external_send-tier so calls always route through approval, and
-  // payloads are logged as data shared.
-  const mcpRows = await db
-    .select()
-    .from(mcpServers)
-    .where(and(eq(mcpServers.workspaceId, run.workspaceId), eq(mcpServers.enabled, true)));
   const mcpToolSpecs: ToolSpec[] = mcpRows.flatMap((server) =>
     ((server.toolsCache ?? []) as McpToolInfo[]).map((t) => ({
       provider: `mcp:${server.slug}`,
@@ -396,40 +460,7 @@ async function executePipeline(db: Db, run: RunRow): Promise<void> {
     ...mcpToolSpecs.filter((t) => permForTool(t.name) !== "deny"),
   ];
 
-  const brand = (
-    await db
-      .select()
-      .from(brandProfiles)
-      .where(eq(brandProfiles.workspaceId, run.workspaceId))
-  )[0];
-
-  const memories = await db
-    .select({ content: memoryItems.content })
-    .from(memoryItems)
-    .where(
-      and(
-        eq(memoryItems.workspaceId, run.workspaceId),
-        eq(memoryItems.agentId, run.agentId),
-      ),
-    );
-
-  // Enabled skills contribute their know-how to prompt assembly (Spec §6).
-  const enabledSkillRows = await db
-    .select({
-      name: skills.name,
-      instructions: skills.instructions,
-      inputSchema: skills.inputSchema,
-      outputSchema: skills.outputSchema,
-    })
-    .from(agentSkills)
-    .innerJoin(skills, eq(agentSkills.skillId, skills.id))
-    .where(
-      and(
-        eq(agentSkills.workspaceId, run.workspaceId),
-        eq(agentSkills.agentId, run.agentId),
-        eq(agentSkills.enabled, true),
-      ),
-    );
+  const brand = brandRows[0];
   const enabledSkills = enabledSkillRows.map((s) => ({
     name: s.name,
     instructions: [
@@ -1154,6 +1185,13 @@ async function executePipeline(db: Db, run: RunRow): Promise<void> {
   }
 }
 
+// Keyword-overlap retrieval, scored in JS so it works identically on PGlite
+// and Postgres. Bounded: only the columns scoring needs, newest-first, capped
+// — a large knowledge base must not be streamed into memory per query.
+// pgvector similarity search replaces the scoring here without changing the
+// interface (Spec §3.2 follow-up).
+const KNOWLEDGE_SCAN_CAP = 500;
+
 async function searchKnowledge(
   db: Db,
   workspaceId: string,
@@ -1161,9 +1199,15 @@ async function searchKnowledge(
   limit: number,
 ): Promise<{ results: { id: string; title: string; excerpt: string }[] }> {
   const items = await db
-    .select()
+    .select({
+      id: knowledgeItems.id,
+      title: knowledgeItems.title,
+      content: knowledgeItems.content,
+    })
     .from(knowledgeItems)
-    .where(eq(knowledgeItems.workspaceId, workspaceId));
+    .where(eq(knowledgeItems.workspaceId, workspaceId))
+    .orderBy(desc(knowledgeItems.updatedAt))
+    .limit(KNOWLEDGE_SCAN_CAP);
   const terms = query.toLowerCase().split(/\s+/).filter((t) => t.length > 2);
   const scored = items
     .map((item) => {

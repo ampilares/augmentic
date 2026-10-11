@@ -42,6 +42,7 @@ export async function sendEmail(message: EmailMessage): Promise<boolean> {
         text: message.href ? `${message.text}\n\n${message.href}` : message.text,
         html,
       }),
+      signal: AbortSignal.timeout(15_000),
     });
     return res.ok;
   } catch {

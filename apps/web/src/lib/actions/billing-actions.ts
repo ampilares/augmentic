@@ -106,6 +106,7 @@ async function createStripeCheckout(
         "Content-Type": "application/x-www-form-urlencoded",
       },
       body: params.toString(),
+      signal: AbortSignal.timeout(15_000),
     });
     if (!res.ok) return null;
     const session = (await res.json()) as { url?: string };

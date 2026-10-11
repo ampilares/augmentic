@@ -5,7 +5,7 @@ import {
   workspaces,
   type Db,
 } from "@augmentic/db";
-import { and, eq, inArray, lt } from "drizzle-orm";
+import { and, eq, inArray, lt, or, sql } from "drizzle-orm";
 import { recordAudit } from "./audit";
 
 // Per-workspace data retention (plan 2.6 / PRD open question #8).
@@ -25,9 +25,17 @@ export interface PurgeResult {
 
 export async function purgeExpiredData(db: Db): Promise<Map<string, PurgeResult>> {
   const results = new Map<string, PurgeResult>();
+  // Only workspaces that configured a retention window; most haven't, and
+  // this runs hourly.
   const wsRows = await db
     .select({ id: workspaces.id, settings: workspaces.settings })
-    .from(workspaces);
+    .from(workspaces)
+    .where(
+      or(
+        sql`(${workspaces.settings} ->> 'retentionDays') IS NOT NULL`,
+        sql`(${workspaces.settings} ->> 'auditRetentionDays') IS NOT NULL`,
+      ),
+    );
   for (const ws of wsRows) {
     const settings = (ws.settings ?? {}) as {
       retentionDays?: number;
